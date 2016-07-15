@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<swingtail>
+<settings>
+<rowsToRead>50</rowsToRead>
+<rowsToShow>200</rowsToShow>
+<lineWrap>false</lineWrap>
+<tabSize>5</tabSize>
+<showSplash>true</showSplash>
+<polltime>500</polltime>
+<filters/>
+<font>
+<fontName>ArialMT</fontName>
+<fontStyle>0</fontStyle>
+<fontSize>12</fontSize>
+</font>
+</settings>
+<bookmarks/>
+</swingtail>
