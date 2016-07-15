@@ -123,7 +123,7 @@ Section "Install" SecDummy
   	# Files added here should be removed by the uninstaller (see section "uninstall")
   	file "ourdrive.exe"
   	file "ourdrive.ico"
-  	file /oname=ourdrive.jar "..\target\ourdrive-*-with-dependencies.jar"
+  	file /oname=ourdrive.jar "..\classes\artifacts\ourdrive_jar\ourdrive.jar"
   	file "ourdrive.ini"
   	# Add any other files for the install directory (license files, app data, etc) here
 
