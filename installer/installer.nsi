@@ -44,7 +44,7 @@ Var ourdriveIntrayFolder
 # This is the size (in kB) of all the files copied into "Program Files"
 !define INSTALLSIZE 7233
 
-!define JRE_VERSION "1.6"
+!define JRE_VERSION "1.8"
 !define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=52252"
 !include "JREDyna_Inetc.nsh"
 

@@ -7,13 +7,15 @@ import com.cygnet.ourdrive.gui.SytrayInitializationException;
 import com.cygnet.ourdrive.monitoring.FolderMonitor;
 import com.cygnet.ourdrive.monitoring.FolderMonitorListener;
 import com.cygnet.ourdrive.monitoring.FolderMonitorTask;
-import com.cygnet.ourdrive.monitoring.exceptions.FileVisitException;
+import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.monitoring.exceptions.OurdriveException;
 import com.cygnet.ourdrive.settings.FolderSettings;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.upload.UploadDirectoryHandler;
 import com.cygnet.ourdrive.upload.UploadFileHandler;
 import com.cygnet.ourdrive.upload.UploadServiceException;
+import com.cygnet.ourdrive.websocket.LocalWebServer;
+import com.cygnet.ourdrive.websocket.WebSocketClient;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,10 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.Timer;
 
@@ -30,6 +36,8 @@ import java.util.Timer;
 public final class OurDriveService implements GlobalSettings.SettingsListener<GlobalSettings>, FolderMonitorListener {
 
     public static final String VERSION = "2.0.2";
+
+    private static String ourdriveId = "";
 
     private static final long TIMER_PERIOD = 1000L;
 
@@ -47,6 +55,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     private boolean dialogDismissedForever = false;
 
+    private WebSocketClient socketClient;
+
+
+    private static String download_folder_name = "ourdrive_downloads";
+
     static {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -60,6 +73,21 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             instance = new OurDriveService();
         }
         return instance;
+    }
+
+    /**
+     * @return
+     */
+    private static void createUUID() {
+        String uniqueID = UUID.randomUUID().toString();
+        ourdriveId = uniqueID;
+    }
+
+    /**
+     * @return
+     */
+    public static String getOurdriveId() {
+        return ourdriveId;
     }
 
     /**
@@ -94,7 +122,40 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         } catch (SytrayInitializationException e) {
             logger.warn("Could not initialize systray item", e);
         }
+
+        checkDownloadFolder(globalSettings);
+
         logger.info("OurDrive service started");
+
+        try {
+            // open websocket
+            socketClient = new WebSocketClient();
+            socketClient.connect();
+
+            if (socketClient.getSocketConnection()) {
+                logger.info("Websocket connection is established.");
+                // wait 5 seconds for messages from websocket
+                Thread.sleep(2000);
+            } else {
+                logger.error("Could not connect to SSL socket server: " + socketClient.getSocketUri());
+            }
+
+        } catch (InterruptedException ex) {
+            logger.error("InterruptedException exception: " + ex.getMessage());
+        } catch (URISyntaxException ex) {
+            logger.error("URISyntaxException exception: " + ex.getMessage());
+        } catch (Exception e) {
+            logger.error("Websocket Exception: " + e.getMessage());
+        }
+
+        Path downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
+
+        // add file to watcher
+        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
+        sfw.start();
+
+
+
         if (configure) {
             GeneralSettingsDialog.showDialog();
         }
@@ -123,6 +184,26 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         for (FolderSettings folderSettings : globalSettings.getAllFolderSettings()) {
             //Start timer task for this folder
             startTimer(folderSettings);
+        }
+    }
+
+    /**
+     * @param settings
+     */
+    private void checkDownloadFolder(GlobalSettings settings) {
+        Path downloadPath = Paths.get(settings.getDownloadPath() + "/" + download_folder_name);
+
+        logger.info("Checking download folder path: " + downloadPath.toAbsolutePath().toString());
+
+        if (!Files.exists(downloadPath)) {
+            logger.info("Download path is not existing: " + downloadPath.toAbsolutePath().toString() + ". Trying to generate it.");
+            try {
+                Files.createDirectory(downloadPath);
+                logger.error("Download folder created. ");
+            } catch (IOException e) {
+                logger.error("Error while creating download folder: " + e.getMessage());
+                System.exit(0);
+            }
         }
     }
 
@@ -169,6 +250,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     }
 
     public static void main(String[] args) {
+
+        createUUID();
+        LocalWebServer localWebServer = new LocalWebServer();
+        localWebServer.start();
+
         boolean configure = false;
         boolean start = true;
 
@@ -310,5 +396,12 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             }
 
         }
+    }
+
+    /**
+     * @return
+     */
+    public static String getDownloadFolderName() {
+        return download_folder_name;
     }
 }

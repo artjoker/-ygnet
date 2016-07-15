@@ -5,6 +5,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Map;
@@ -79,8 +81,18 @@ public class AbstractSettings implements Serializable {
         setProperty("uploadUri", String.class, uploadUri);
     }
 
+    public String getDownloadPath() {
+        Path currentRelativePath = Paths.get("");
+        return currentRelativePath.toAbsolutePath().toString();
+    }
+
     public String getApiKey() {
         return getProperty("apiKey", String.class);
+    }
+
+
+    public void setUpdownloadPath(String downloadPath) {
+        setProperty("downloadPath", String.class, downloadPath);
     }
 
     public void setApiKey(String apiKey) {
