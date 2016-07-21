@@ -121,7 +121,10 @@ public class Desktop {
 
         } else if (isWindows() && isWindows9X()) {
 
-            ProcessBuilder pb = new ProcessBuilder("command.com /C start", file.getAbsolutePath());
+            String command = "command.com /C start" + file.getAbsolutePath();
+            System.out.println(command);
+
+            ProcessBuilder pb = new ProcessBuilder(command);
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
@@ -136,7 +139,10 @@ public class Desktop {
 
         } else if (isWindows()) {
 
-            ProcessBuilder pb = new ProcessBuilder("cmd /C start", file.getAbsolutePath());
+            String command = "cmd /C start" + file.getAbsolutePath();
+            System.out.println(command);
+
+            ProcessBuilder pb = new ProcessBuilder(command);
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
