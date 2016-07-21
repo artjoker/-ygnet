@@ -45,7 +45,7 @@ Var ourdriveIntrayFolder
 !define INSTALLSIZE 6970
 
 !define JRE_VERSION "1.8"
-!define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=52252"
+!define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=211996"
 !include "JREDyna_Inetc.nsh"
 
   ;Name and file
