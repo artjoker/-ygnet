@@ -51,7 +51,7 @@ Var ourdriveIntrayFolder
   ;Name and file
   Name "${COMPANYNAME} - ${APPNAME}"
   Icon "ourdrive.ico"
-  OutFile "..\target\ourdrive-setup.exe"
+  OutFile "..\ourdrive-setup.exe"
 
   Caption "${DESCRIPTION}"
   VIProductVersion "${VERSION}.0"
