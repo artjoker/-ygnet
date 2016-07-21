@@ -91,58 +91,99 @@ public class Desktop {
             ProcessBuilder pb = new ProcessBuilder(args);
             Process process = pb.start();
 
+            Processes.CrunchifySystemProcess("linux");
+            try {
+            HashMap processIds = Processes.getProcessIdsByFile(file);
+            this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            this.pwt.run();
+
+        } else if (isMac()) {
+
+            List<String> args = new ArrayList<String>();
+            args.add(properties.getProperty("mac.openAs")); // command name
+            args.add(String.valueOf(file.getAbsoluteFile().toURI())); // optional args added as separate list items
+            ProcessBuilder pb = new ProcessBuilder(args);
+            Process process = pb.start();
+
+            Processes.CrunchifySystemProcess("mac");
+            try {
+                HashMap processIds = Processes.getProcessIdsByFile(file);
+                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            this.pwt.run();
+
+
+//            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("mac.openAs"), file.getAbsoluteFile().toURI()));
+//
 //            try {
-//                process.waitFor();
+//                if (process.waitFor() != 0) {
+//                    logger.warn("Couldn't open file");
+//                }
 //            } catch (InterruptedException e) {
 //                logger.error(e.getMessage());
 //            }
-
-            // start process watcher onto application which opened the file
-            Processes.CrunchifySystemProcess("linux");
-//            try {
-            HashMap processIds = Processes.getProcessIdsByFile(file);
-            this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
-            if (this.pwt.isStopped()) {
-                this.pwt.run();
-            }
-
-
-        } else if (isMac()) {
-            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("mac.openAs"), file.getAbsoluteFile().toURI()));
-
-            try {
-                if (process.waitFor() != 0) {
-                    logger.warn("Couldn't open file");
-                }
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage());
-            }
         } else if (isWindows() && isWindows9X()) {
-//            process = Runtime.getRuntime().exec( String.format("command.com /C start %s", file.getAbsoluteFile()) );
-            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("windows95.openAs"), file.getAbsoluteFile()));
 
+            List<String> args = new ArrayList<String>();
+            args.add(properties.getProperty("windows95.openAs")); // command name
+            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
+            ProcessBuilder pb = new ProcessBuilder(args);
+            Process process = pb.start();
+
+            Processes.CrunchifySystemProcess("windows");
             try {
-                if (process.waitFor() != 0) {
-                    logger.warn("Couldn't open file");
-                }
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage());
+                HashMap processIds = Processes.getProcessIdsByFile(file);
+                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+            this.pwt.run();
+
+
+//            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("windows95.openAs"), file.getAbsoluteFile()));
+
+//            try {
+//                if (process.waitFor() != 0) {
+//                    logger.warn("Couldn't open file");
+//                }
+//            } catch (InterruptedException e) {
+//                logger.error(e.getMessage());
+//            }
         } else if (isWindows()) {
-//            process = Runtime.getRuntime().exec( String.format("cmd /C start %s", file.getAbsoluteFile()) );
-            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile()));
 
+            List<String> args = new ArrayList<String>();
+            args.add(properties.getProperty("windowsNew.openAs")); // command name
+            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
+            ProcessBuilder pb = new ProcessBuilder(args);
+            Process process = pb.start();
+
+            Processes.CrunchifySystemProcess("windows");
             try {
-                if (process.waitFor() != 0) {
-                    logger.warn("Couldn't open file");
-                }
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage());
+                HashMap processIds = Processes.getProcessIdsByFile(file);
+                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
+            this.pwt.run();
+
+//            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile()));
+//
+//            try {
+//                if (process.waitFor() != 0) {
+//                    logger.warn("Couldn't open file");
+//                }
+//            } catch (InterruptedException e) {
+//                logger.error(e.getMessage());
+//            }
         }
 
     }

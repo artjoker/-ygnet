@@ -36,7 +36,7 @@ public class ProcessWatcher extends Thread {
     }
 
     public ProcessWatcher(HashMap processIds, Process process, WebSocketClient socketClient) {
-//        this.processIds = processIds;
+        this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
@@ -49,7 +49,7 @@ public class ProcessWatcher extends Thread {
     private void stopThread() {
         stop.set(true);
         process.destroy();
-        this.interrupt();
+//        this.interrupt();
     }
 
     private boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
@@ -103,7 +103,6 @@ public class ProcessWatcher extends Thread {
     @Override
     public void run() {
 
-        logger.debug("is here something going on??????????????????????");
         while (!isStopped()) {
 
             for (Object o : processIds.entrySet()) {
@@ -129,7 +128,7 @@ public class ProcessWatcher extends Thread {
             }
 
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(500L);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage());
             }
