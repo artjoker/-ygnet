@@ -121,7 +121,7 @@ public class Desktop {
 
         } else if (isWindows() && isWindows9X()) {
 
-            ProcessBuilder pb = new ProcessBuilder("rundll32", "shell32,OpenAs_RunDLL", file.getAbsolutePath());
+            ProcessBuilder pb = new ProcessBuilder("command.com /C start", file.getAbsolutePath());
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
@@ -136,7 +136,7 @@ public class Desktop {
 
         } else if (isWindows()) {
 
-            ProcessBuilder pb = new ProcessBuilder("rundll32", "shell32,OpenAs_RunDLL", file.getAbsolutePath());
+            ProcessBuilder pb = new ProcessBuilder("cmd /C start", file.getAbsolutePath());
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
