@@ -42,7 +42,7 @@ Var ourdriveIntrayFolder
 !define ABOUTURL "http://www.cygnet-ecm.com" # "Publisher" link
 
 # This is the size (in kB) of all the files copied into "Program Files"
-!define INSTALLSIZE 6970
+!define INSTALLSIZE 7598
 
 !define JRE_VERSION "1.8"
 !define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=211996"
