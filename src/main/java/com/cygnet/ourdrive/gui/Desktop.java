@@ -131,10 +131,10 @@ public class Desktop {
 //            }
         } else if (isWindows() && isWindows9X()) {
 
-            List<String> args = new ArrayList<String>();
-            args.add(properties.getProperty("windows95.openAs")); // command name
-            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
-            ProcessBuilder pb = new ProcessBuilder(args);
+//            List<String> args = new ArrayList<String>();
+//            args.add(properties.getProperty("windows95.openAs")); // command name
+//            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
+            ProcessBuilder pb = new ProcessBuilder(properties.getProperty("windows.openAs"), file.getAbsolutePath());
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
@@ -159,12 +159,12 @@ public class Desktop {
 //            }
         } else if (isWindows()) {
 
-            List<String> args = new ArrayList<String>();
-//            args.add(properties.getProperty("windowsNew.openAs")); // command name
-//            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
-            String argument = String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile());
-            logger.debug(argument);
-            ProcessBuilder pb = new ProcessBuilder(argument);
+//            List<String> args = new ArrayList<String>();
+//            args.add(properties.getProperty("windows.openAs")); // command name
+//            args.add(String.valueOf(file.getAbsolutePath())); // optional args added as separate list items
+//            String argument = String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile());
+//            logger.debug(argument);
+            ProcessBuilder pb = new ProcessBuilder(properties.getProperty("windows.openAs"), file.getAbsolutePath());
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
