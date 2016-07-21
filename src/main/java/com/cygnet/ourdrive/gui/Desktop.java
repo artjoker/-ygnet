@@ -119,26 +119,8 @@ public class Desktop {
 
             this.pwt.run();
 
-
-//            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("mac.openAs"), file.getAbsoluteFile().toURI()));
-//
-//            try {
-//                if (process.waitFor() != 0) {
-//                    logger.warn("Couldn't open file");
-//                }
-//            } catch (InterruptedException e) {
-//                logger.error(e.getMessage());
-//            }
         } else if (isWindows() && isWindows9X()) {
 
-//            List<String> args = new ArrayList<String>();
-//            args.add(properties.getProperty("windows95.openAs")); // command name
-//            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
-
-            System.out.println(file.getAbsolutePath());
-            System.out.println(file.getAbsoluteFile());
-            System.out.println(file.getAbsoluteFile().toString());
-
             ProcessBuilder pb = new ProcessBuilder("rundll32", "shell32,OpenAs_RunDLL", file.getAbsolutePath());
             Process process = pb.start();
 
@@ -152,28 +134,8 @@ public class Desktop {
 
             this.pwt.run();
 
-
-//            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("windows95.openAs"), file.getAbsoluteFile()));
-
-//            try {
-//                if (process.waitFor() != 0) {
-//                    logger.warn("Couldn't open file");
-//                }
-//            } catch (InterruptedException e) {
-//                logger.error(e.getMessage());
-//            }
         } else if (isWindows()) {
 
-//            List<String> args = new ArrayList<String>();
-//            args.add(properties.getProperty("windows.openAs")); // command name
-//            args.add(String.valueOf(file.getAbsolutePath())); // optional args added as separate list items
-//            String argument = String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile());
-//            logger.debug(argument);
-
-            System.out.println(file.getAbsolutePath());
-            System.out.println(file.getAbsoluteFile());
-            System.out.println(file.getAbsoluteFile().toString());
-
             ProcessBuilder pb = new ProcessBuilder("rundll32", "shell32,OpenAs_RunDLL", file.getAbsolutePath());
             Process process = pb.start();
 
@@ -186,16 +148,6 @@ public class Desktop {
             }
 
             this.pwt.run();
-
-//            process = Runtime.getRuntime().exec(String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile()));
-//
-//            try {
-//                if (process.waitFor() != 0) {
-//                    logger.warn("Couldn't open file");
-//                }
-//            } catch (InterruptedException e) {
-//                logger.error(e.getMessage());
-//            }
         }
 
     }

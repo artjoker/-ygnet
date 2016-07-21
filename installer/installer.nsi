@@ -42,7 +42,7 @@ Var ourdriveIntrayFolder
 !define ABOUTURL "http://www.cygnet-ecm.com" # "Publisher" link
 
 # This is the size (in kB) of all the files copied into "Program Files"
-!define INSTALLSIZE 7233
+!define INSTALLSIZE 6970
 
 !define JRE_VERSION "1.8"
 !define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=52252"
@@ -51,7 +51,7 @@ Var ourdriveIntrayFolder
   ;Name and file
   Name "${COMPANYNAME} - ${APPNAME}"
   Icon "ourdrive.ico"
-  OutFile "..\ourdrive-setup.exe"
+  OutFile "..\ourdrive-${VERSION}-setup.exe"
 
   Caption "${DESCRIPTION}"
   VIProductVersion "${VERSION}.0"
