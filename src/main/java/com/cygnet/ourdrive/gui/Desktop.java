@@ -160,9 +160,9 @@ public class Desktop {
         } else if (isWindows()) {
 
             List<String> args = new ArrayList<String>();
-            args.add(properties.getProperty("windowsNew.openAs")); // command name
-            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
-            ProcessBuilder pb = new ProcessBuilder(args);
+//            args.add(properties.getProperty("windowsNew.openAs")); // command name
+//            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
+            ProcessBuilder pb = new ProcessBuilder(String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile()));
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
