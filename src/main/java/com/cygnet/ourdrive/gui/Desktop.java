@@ -134,7 +134,12 @@ public class Desktop {
 //            List<String> args = new ArrayList<String>();
 //            args.add(properties.getProperty("windows95.openAs")); // command name
 //            args.add(String.valueOf(file.getAbsoluteFile())); // optional args added as separate list items
-            ProcessBuilder pb = new ProcessBuilder(properties.getProperty("windows.openAs"), file.getAbsolutePath());
+
+            System.out.println(file.getAbsolutePath());
+            System.out.println(file.getAbsoluteFile());
+            System.out.println(file.getAbsoluteFile().toString());
+
+            ProcessBuilder pb = new ProcessBuilder("rundll32", "shell32,OpenAs_RunDLL", file.getAbsolutePath());
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
@@ -164,7 +169,12 @@ public class Desktop {
 //            args.add(String.valueOf(file.getAbsolutePath())); // optional args added as separate list items
 //            String argument = String.format("%s %s", properties.getProperty("windowsNew.openAs"), file.getAbsoluteFile());
 //            logger.debug(argument);
-            ProcessBuilder pb = new ProcessBuilder(properties.getProperty("windows.openAs"), file.getAbsolutePath());
+
+            System.out.println(file.getAbsolutePath());
+            System.out.println(file.getAbsoluteFile());
+            System.out.println(file.getAbsoluteFile().toString());
+
+            ProcessBuilder pb = new ProcessBuilder("rundll32", "shell32,OpenAs_RunDLL", file.getAbsolutePath());
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
