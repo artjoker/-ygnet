@@ -121,7 +121,7 @@ public class Desktop {
 
         } else if (isWindows() && isWindows9X()) {
 
-            String command = "command.com /C start" + file.getAbsolutePath();
+            String command = "command.com /C start " + file.getAbsolutePath();
             System.out.println(command);
 
             ProcessBuilder pb = new ProcessBuilder(command);
@@ -139,7 +139,7 @@ public class Desktop {
 
         } else if (isWindows()) {
 
-            String command = "cmd /C start" + file.getAbsolutePath();
+            String command = "cmd /C start " + file.getAbsolutePath();
             System.out.println(command);
 
             ProcessBuilder pb = new ProcessBuilder(command);
