@@ -297,6 +297,8 @@ public class WebSocketClient {
                     stream.write(valueDecoded);
                     stream.close();
 
+                    wait(1000);
+
                     logger.info("Successfully saved: " + absolutFileName);
 
                     try {
