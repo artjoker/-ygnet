@@ -16,6 +16,7 @@ import com.cygnet.ourdrive.upload.UploadFileHandler;
 import com.cygnet.ourdrive.upload.UploadServiceException;
 import com.cygnet.ourdrive.websocket.LocalWebServer;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
+import io.socket.client.Socket;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -119,6 +120,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         logger.info("Loading systray item");
         try {
             SystrayItem.register(VERSION);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } catch (SytrayInitializationException e) {
             logger.warn("Could not initialize systray item", e);
         }
@@ -132,13 +138,13 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             socketClient = new WebSocketClient();
             socketClient.connect();
 
-            if (socketClient.getSocketConnection()) {
-                logger.info("Websocket connection is established.");
-                // wait 5 seconds for messages from websocket
-                Thread.sleep(2000);
-            } else {
-                logger.error("Could not connect to SSL socket server: " + socketClient.getSocketUri());
-            }
+//            if (socketClient.getSocketConnection()) {
+//                logger.info("Websocket connection is established.");
+//                // wait 5 seconds for messages from websocket
+////                Thread.sleep(2000);
+//            } else {
+//                logger.error("Could not connect to SSL socket server: " + socketClient.getSocketUri());
+//            }
 
         } catch (InterruptedException ex) {
             logger.error("InterruptedException exception: " + ex.getMessage());

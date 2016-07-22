@@ -93,13 +93,14 @@ public class Desktop {
 
             Processes.CrunchifySystemProcess("linux");
             try {
-            HashMap processIds = Processes.getProcessIdsByFile(file);
-            this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                HashMap processIds = Processes.getProcessIdsByFile(file);
+                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            this.pwt.run();
+
 
         } else if (isMac()) {
 
@@ -113,11 +114,10 @@ public class Desktop {
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            this.pwt.run();
 
         } else if (isWindows() && isWindows9X()) {
 
@@ -133,15 +133,15 @@ public class Desktop {
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
-            this.pwt.run();
-
         } else if (isWindows()) {
 
-            String command = "cmd /C start " + file.getAbsolutePath();
+            String command = "notepad";
+//            String command = "cmd /C start " + file.getAbsolutePath();
             System.out.println("--------------------------------------------");
             System.out.println(command);
             System.out.println("--------------------------------------------");
@@ -153,11 +153,10 @@ public class Desktop {
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            this.pwt.run();
         }
 
     }

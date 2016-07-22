@@ -65,6 +65,18 @@ public class Processes {
                     break;
                 case "windows":
                     p = Runtime.getRuntime().exec("tasklist.exe");
+                    if (p != null) {
+                        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                        while ((process = input.readLine()) != null) {
+                            System.out.println(process.toString()); // <-- Print all Process here line
+                            // by line
+                            String arr[] = process.split("\t");
+                            processes.add(arr);
+                        }
+                        input.close();
+
+                        System.out.println(processes);
+                    }
                     break;
 
             }
