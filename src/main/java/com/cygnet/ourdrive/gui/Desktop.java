@@ -140,7 +140,7 @@ public class Desktop {
 
         } else if (isWindows()) {
 
-            String command = "notepad";
+            String command = "notepad -D=" + OurDriveService.getOurdriveId();
 //            String command = "cmd /C start " + file.getAbsolutePath();
             System.out.println("--------------------------------------------");
             System.out.println(command);
