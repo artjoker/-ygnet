@@ -140,10 +140,13 @@ public class Desktop {
 
         } else if (isWindows()) {
 
-            String command = "notepad " + file.getAbsolutePath();
-//            String command = "cmd /C start " + file.getAbsolutePath();
+//            String command = "notepad " + file.getAbsolutePath();
+
+            String command = "cmd /C start c:\\Users\\carsten\\AppData\\Local\\Cygnet\\Ourdrive\\ourdrive_downloads\\invoice.jpg";
+                    // + file.getAbsolutePath();
             System.out.println("--------------------------------------------");
             System.out.println(command);
+            System.out.println(file.getAbsolutePath());
             System.out.println("--------------------------------------------");
 
             ProcessBuilder pb = new ProcessBuilder(command);
