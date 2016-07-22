@@ -64,13 +64,16 @@ public class Processes {
                     }
                     break;
                 case "windows":
-                    p = Runtime.getRuntime().exec("tasklist.exe");
+                    //  tasklist /v /FI "STATUS eq running" /FO "CSV" /NH
+                    p = Runtime.getRuntime().exec("tasklist /v /FI \"STATUS eq running\" /FO \"CSV\" /NH");
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
                             System.out.println(process.toString()); // <-- Print all Process here line
                             // by line
-                            String arr[] = process.split("\t");
+
+                            process = process.replace("\"", "");
+                            String arr[] = process.split(",");
                             processes.add(arr);
                         }
                         input.close();

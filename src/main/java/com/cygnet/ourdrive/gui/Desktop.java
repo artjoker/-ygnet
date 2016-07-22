@@ -107,7 +107,7 @@ public class Desktop {
             ProcessBuilder pb = new ProcessBuilder(args);
             Process process = pb.start();
 
-            Processes.CrunchifySystemProcess("mac");
+//            Processes.CrunchifySystemProcess("mac");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
@@ -118,15 +118,16 @@ public class Desktop {
 
         } else if (isWindows() && isWindows9X()) {
 
-            String command = "command.com /C start " + file.getAbsolutePath();
-            System.out.println("--------------------------------------------");
-            System.out.println(command);
-            System.out.println("--------------------------------------------");
+            String[] Commands = new String[]{
+                    "command.com",
+                    "/c",
+                    "cd "+file.getParent()+" && start "+file.getName()
+            };
 
-            ProcessBuilder pb = new ProcessBuilder(command);
+            ProcessBuilder pb = new ProcessBuilder(Commands);
             Process process = pb.start();
 
-            Processes.CrunchifySystemProcess("windows");
+//            Processes.CrunchifySystemProcess("windows");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
@@ -137,26 +138,17 @@ public class Desktop {
 
         } else if (isWindows()) {
 
-//            String command = "notepad " + file.getAbsolutePath();
-
-            String[] MyCommands = new String[]{
+            String[] Commands = new String[]{
                     "cmd.exe",
                     "/c",
                     "cd "+file.getParent()+" && start "+file.getName()
             };
 
-//            String command = "cmd /C start c:\\Users\\carsten\\AppData\\Local\\Cygnet\\Ourdrive\\ourdrive_downloads\\invoice.jpg";
-                    // + file.getAbsolutePath();
-            System.out.println("--------------------------------------------");
-            System.out.println(Arrays.toString(MyCommands));
-            System.out.println(file.getAbsolutePath());
-            System.out.println("--------------------------------------------");
-
-            ProcessBuilder pb = new ProcessBuilder(MyCommands);
+            ProcessBuilder pb = new ProcessBuilder(Commands);
             pb.redirectErrorStream(true);
             Process process = pb.start();
 
-            Processes.CrunchifySystemProcess("windows");
+//            Processes.CrunchifySystemProcess("windows");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);

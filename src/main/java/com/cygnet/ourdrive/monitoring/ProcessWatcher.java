@@ -118,7 +118,7 @@ public class ProcessWatcher extends Thread {
 
                 if (!allpIds.contains(pair.getKey())) {
                     File file = new File(pair.getValue().toString());
-                    logger.debug("BRO CHEGGA: " + file.toString());
+//                    logger.debug("BRO CHEGGA: " + file.toString());
                     if (hasJsonBro(file)) if (uploadAsNewVersion(file, true)) {
                         this.stopThread();
 //                        socketClient.disconnect();
