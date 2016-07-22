@@ -16,10 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class Desktop {
 
@@ -142,14 +139,22 @@ public class Desktop {
 
 //            String command = "notepad " + file.getAbsolutePath();
 
-            String command = "cmd /C start c:\\Users\\carsten\\AppData\\Local\\Cygnet\\Ourdrive\\ourdrive_downloads\\invoice.jpg";
+            String[] MyCommands = new String[]{
+                    "cmd.exe",
+                    "/c",
+                    "cd "+file.getPath(),
+                    "&& start "+file.getName()
+            };
+
+//            String command = "cmd /C start c:\\Users\\carsten\\AppData\\Local\\Cygnet\\Ourdrive\\ourdrive_downloads\\invoice.jpg";
                     // + file.getAbsolutePath();
             System.out.println("--------------------------------------------");
-            System.out.println(command);
+            System.out.println(Arrays.toString(MyCommands));
             System.out.println(file.getAbsolutePath());
             System.out.println("--------------------------------------------");
 
-            ProcessBuilder pb = new ProcessBuilder(command);
+            ProcessBuilder pb = new ProcessBuilder(MyCommands);
+            pb.redirectErrorStream(true);
             Process process = pb.start();
 
             Processes.CrunchifySystemProcess("windows");
