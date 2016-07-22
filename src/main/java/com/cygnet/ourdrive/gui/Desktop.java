@@ -142,8 +142,7 @@ public class Desktop {
             String[] MyCommands = new String[]{
                     "cmd.exe",
                     "/c",
-                    "cd "+file.getPath(),
-                    "&& start "+file.getName()
+                    "cd "+file.getParent()+" && start "+file.getName()
             };
 
 //            String command = "cmd /C start c:\\Users\\carsten\\AppData\\Local\\Cygnet\\Ourdrive\\ourdrive_downloads\\invoice.jpg";
