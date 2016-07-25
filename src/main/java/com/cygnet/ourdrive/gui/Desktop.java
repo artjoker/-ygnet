@@ -148,6 +148,12 @@ public class Desktop {
             pb.redirectErrorStream(true);
             Process process = pb.start();
 
+            try {
+                Thread.sleep(3000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             Processes.GetSystemProcess("windows");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
