@@ -65,25 +65,36 @@ public class ProcessWatcher extends Thread {
                 isUploaded = this.socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
                 if (isUploaded) {
 
-                    if (modifiedFile.delete()) {
+                    Boolean origFileDeleted = false;
+                    Boolean jsonFileDeleted = false;
+
+                    try {
+                        origFileDeleted = modifiedFile.delete();
+                    } catch(Exception e) {
+                        logger.error(e.getMessage());
+                    }
+
+                    if (origFileDeleted) {
 
                         logger.info(modifiedFile.getName() + " is deleted!");
                         logger.info("Saved and unlocked file: " + modifiedFile.getName());
 
-                        // and now delete the json file
                         try {
                             File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
-//                            File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + modifiedFile.getName() + ".json");
-                            if (jsonFile.delete()) {
+                            logger.debug("Try to delete: " + jsonFile.getAbsolutePath());
+                            jsonFileDeleted = jsonFile.delete();
+
+                            if (jsonFileDeleted) {
                                 logger.info(jsonFile.getName() + " has been deleted!");
-//                                socketClient.disconnect();
                                 isUploaded = true;
                             } else {
                                 logger.error("Delete operation is failed for " + jsonFile.getName());
                             }
-                        } catch (Exception e) {
+
+                        } catch(Exception e) {
                             logger.error(e.getMessage());
                         }
+
                     } else {
                         logger.error("Delete operation is failed for " + modifiedFile.getName());
                     }
