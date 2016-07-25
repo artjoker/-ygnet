@@ -79,7 +79,7 @@ public class ProcessWatcher extends Thread {
                         logger.info(modifiedFile.getName() + " is deleted!");
                         logger.info("Saved and unlocked file: " + modifiedFile.getName());
 
-                        try {
+//                        try {
                             File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
                             logger.debug("Try to delete: " + jsonFile.getAbsolutePath());
                             jsonFileDeleted = jsonFile.delete();
@@ -91,9 +91,9 @@ public class ProcessWatcher extends Thread {
                                 logger.error("Delete operation is failed for " + jsonFile.getName());
                             }
 
-                        } catch(Exception e) {
-                            logger.error(e.getMessage());
-                        }
+//                        } catch(Exception e) {
+//                            logger.error(e.getMessage());
+//                        }
 
                     } else {
                         logger.error("Delete operation is failed for " + modifiedFile.getName());
