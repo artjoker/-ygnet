@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class Processes {
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
-                            System.out.println(process.toString()); // <-- Print all Process here line
+                            System.out.println(process); // <-- Print all Process here line
                             // by line
                             String arr[] = process.split("\t");
                             processes.add(arr);
@@ -74,11 +75,51 @@ public class Processes {
 
                             process = process.replace("\"", "");
                             String arr[] = process.split(",");
-                            processes.add(arr);
+                            String[] preparedProcesses = new String[3];
+
+                            Integer i = 0;
+                            for (String value : arr) {
+                                switch (i) {
+                                    case 0:
+
+                                        break;
+                                    case 1:
+                                        preparedProcesses[1] = value;
+                                        break;
+                                    case 2:
+
+                                        break;
+                                    case 3:
+
+                                        break;
+                                    case 4:
+
+                                        break;
+                                    case 5:
+
+                                        break;
+                                    case 6:
+                                        preparedProcesses[0] = value;
+                                        break;
+                                    case 7:
+
+                                        break;
+                                    case 8:
+                                        preparedProcesses[2] = value;
+                                        break;
+                                }
+
+
+                                i++;
+                            }
+
+                            processes.add(preparedProcesses);
                         }
                         input.close();
 
-                        System.out.println(processes);
+                        for (String[] my_process : processes) {
+                            System.out.println(Arrays.toString(my_process));
+                        }
                     }
                     break;
 
