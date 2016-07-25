@@ -79,8 +79,6 @@ public class ProcessWatcher extends Thread {
                         logger.info("Saved and unlocked file: " + modifiedFile.getName());
 
                         File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
-                        jsonFile.setWritable(true);
-                        System.gc();
 
                         System.out.println(jsonFile.getName()+" exists? "+jsonFile.exists());
                         System.out.println(jsonFile.getName()+" is a file? "+jsonFile.isFile());
