@@ -80,13 +80,7 @@ public class ProcessWatcher extends Thread {
 
                         File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
 
-                        System.out.println(jsonFile.getName()+" exists? "+jsonFile.exists());
-                        System.out.println(jsonFile.getName()+" is a file? "+jsonFile.isFile());
-                        System.out.println(jsonFile.getName()+" is a hidden file? "+jsonFile.isHidden());
-                        System.out.println(jsonFile.getName()+" is readable? "+jsonFile.canRead());
-                        System.out.println(jsonFile.getName()+" is writable? "+jsonFile.canWrite());
-
-                        logger.info("Prepared file for deleting: " + jsonFile.getAbsolutePath());
+                        Thread.sleep(2000L);
 
                         try {
                             logger.info("Try to delete: " + jsonFile.getAbsolutePath());

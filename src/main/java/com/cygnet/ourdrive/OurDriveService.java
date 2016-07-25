@@ -108,8 +108,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      */
     public void stop() {
 
-        logger.info("Closing application and cleanup "+getUserDataDirectory() + "/" + download_folder_name);
-        deleteDownloadFolderContent(new File(getUserDataDirectory() + "/" + download_folder_name));
+//        logger.info("Closing application and cleanup "+getUserDataDirectory() + "/" + download_folder_name);
+//        deleteDownloadFolderContent(new File(getUserDataDirectory() + "/" + download_folder_name));
 
         running = false;
         synchronized (this) {
