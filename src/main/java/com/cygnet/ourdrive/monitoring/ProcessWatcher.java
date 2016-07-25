@@ -65,13 +65,12 @@ public class ProcessWatcher extends Thread {
                 isUploaded = this.socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
                 if (isUploaded) {
 
-                    Boolean origFileDeleted = false;
-                    Boolean jsonFileDeleted = false;
+                    boolean origFileDeleted = false;
 
                     try {
                         origFileDeleted = modifiedFile.delete();
                     } catch(Exception e) {
-                        logger.error(e.getMessage());
+                        logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
                     }
 
                     if (origFileDeleted) {
@@ -79,10 +78,11 @@ public class ProcessWatcher extends Thread {
                         logger.info(modifiedFile.getName() + " is deleted!");
                         logger.info("Saved and unlocked file: " + modifiedFile.getName());
 
-//                        try {
-                            File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
-                            logger.debug("Try to delete: " + jsonFile.getAbsolutePath());
-                            jsonFileDeleted = jsonFile.delete();
+                        File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
+
+                        try {
+                            logger.info("Try to delete: " + jsonFile.getAbsolutePath());
+                            boolean jsonFileDeleted = jsonFile.delete();
 
                             if (jsonFileDeleted) {
                                 logger.info(jsonFile.getName() + " has been deleted!");
@@ -91,9 +91,9 @@ public class ProcessWatcher extends Thread {
                                 logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
                             }
 
-//                        } catch(Exception e) {
-//                            logger.error(e.getMessage());
-//                        }
+                        } catch(Exception e) {
+                            logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
+                        }
 
                     } else {
                         logger.error("Delete operation is failed for " + modifiedFile.getName());
@@ -102,7 +102,7 @@ public class ProcessWatcher extends Thread {
                 }
 
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Try to upload "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
             }
         } else {
             logger.error("ProcessWatcher seems o be stopped");
