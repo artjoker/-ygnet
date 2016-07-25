@@ -88,7 +88,7 @@ public class Desktop {
             ProcessBuilder pb = new ProcessBuilder(args);
             Process process = pb.start();
 
-            Processes.CrunchifySystemProcess("linux");
+            Processes.GetSystemProcess("linux");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
@@ -107,7 +107,7 @@ public class Desktop {
             ProcessBuilder pb = new ProcessBuilder(args);
             Process process = pb.start();
 
-//            Processes.CrunchifySystemProcess("mac");
+            Processes.GetSystemProcess("mac");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
@@ -127,7 +127,7 @@ public class Desktop {
             ProcessBuilder pb = new ProcessBuilder(Commands);
             Process process = pb.start();
 
-//            Processes.CrunchifySystemProcess("windows");
+            Processes.GetSystemProcess("windows");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
@@ -148,7 +148,7 @@ public class Desktop {
             pb.redirectErrorStream(true);
             Process process = pb.start();
 
-//            Processes.CrunchifySystemProcess("windows");
+            Processes.GetSystemProcess("windows");
             try {
                 HashMap processIds = Processes.getProcessIdsByFile(file);
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);

@@ -35,7 +35,7 @@ public class Processes {
         return processIds;
     }
 
-    public static void CrunchifySystemProcess(String OS) {
+    public static void GetSystemProcess(String OS) {
 
         // windows: System.getenv("windir") +"\\system32\\"+"tasklist.exe /fo csv /nh"
 
