@@ -75,17 +75,18 @@ public class ProcessWatcher extends Thread {
 
                     if (origFileDeleted) {
 
-                        logger.info(modifiedFile.getName() + " is deleted!");
+                        logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
                         logger.info("Saved and unlocked file: " + modifiedFile.getName());
 
                         File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
+                        logger.info("Prepared file for deleting: " + jsonFile.getAbsolutePath());
 
                         try {
                             logger.info("Try to delete: " + jsonFile.getAbsolutePath());
                             boolean jsonFileDeleted = jsonFile.delete();
 
                             if (jsonFileDeleted) {
-                                logger.info(jsonFile.getName() + " has been deleted!");
+                                logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
                                 isUploaded = true;
                             } else {
                                 logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
@@ -96,7 +97,7 @@ public class ProcessWatcher extends Thread {
                         }
 
                     } else {
-                        logger.error("Delete operation is failed for " + modifiedFile.getName());
+                        logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
                     }
 
                 }
@@ -130,10 +131,8 @@ public class ProcessWatcher extends Thread {
 
                 if (!allpIds.contains(pair.getKey())) {
                     File file = new File(pair.getValue().toString());
-//                    logger.debug("BRO CHEGGA: " + file.toString());
                     if (hasJsonBro(file)) if (uploadAsNewVersion(file, true)) {
                         this.stopThread();
-//                        socketClient.disconnect();
                     }
                 }
 
