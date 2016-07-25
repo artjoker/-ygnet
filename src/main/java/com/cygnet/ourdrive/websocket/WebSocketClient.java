@@ -227,9 +227,9 @@ public class WebSocketClient {
             try {
 
 
-                String targetFileStr = FileUtils.readFileToString(jsonFile, "UTF-8");
+                String targetFileStr = IOUtils.toString(jsonTargetFile);
+                jsonTargetFile.close();
 
-//                String targetFileStr = IOUtils.toString(jsonTargetFile);
                 byte[] bytes = Files.readAllBytes(Paths.get(downloadPath.toAbsolutePath().toString() + File.separator + file.getName()));
 
                 byte[] dataFileStr = StringDecoder.encode(bytes, StringDecoder.ENCODE_BASE64);
