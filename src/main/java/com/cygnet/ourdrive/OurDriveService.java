@@ -17,6 +17,7 @@ import com.cygnet.ourdrive.upload.UploadServiceException;
 import com.cygnet.ourdrive.websocket.LocalWebServer;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
 import io.socket.client.Socket;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,8 +109,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      */
     public void stop() {
 
-//        logger.info("Closing application and cleanup "+getUserDataDirectory() + "/" + download_folder_name);
-//        deleteDownloadFolderContent(new File(getUserDataDirectory() + "/" + download_folder_name));
+        logger.info("Closing application and cleanup "+getUserDataDirectory() + "/" + download_folder_name);
+        deleteDownloadFolderContent(new File(getUserDataDirectory() + "/" + download_folder_name));
 
         running = false;
         synchronized (this) {
@@ -122,17 +123,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      * @param folder
      */
     private static void deleteDownloadFolderContent(File folder) {
-        File[] files = folder.listFiles();
-        if(files!=null) { //some JVMs return null for empty dirs
-            for(File f: files) {
-                if(f.isDirectory()) {
-                    deleteDownloadFolderContent(f);
-                } else {
-                    f.delete();
-                }
-            }
+        try {
+            FileUtils.deleteDirectory(folder);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        folder.delete();
     }
 
     public void run(boolean configure) {
