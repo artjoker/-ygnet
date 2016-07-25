@@ -22,15 +22,30 @@ public class Processes {
      * @param file the file a process has opened
      * @return HashMap List of process ids
      */
-    public static HashMap getProcessIdsByFile(File file) {
+    public static HashMap getProcessIdsByFile(File file, String OS) {
 
         HashMap<Integer, String> processIds = new HashMap<Integer, String>();
         List<ProcessInfo> processesList = JProcesses.getProcessList();
-        for (ProcessInfo processInfo : processesList) {
 
-            if (processInfo.getCommand().contains(file.getAbsoluteFile().toString())) {
-                processIds.put(Integer.parseInt(processInfo.getPid()), file.getAbsoluteFile().toString());
-            }
+        switch (OS) {
+            case "linux":
+
+                for (ProcessInfo processInfo : processesList) {
+
+                    if (processInfo.getCommand().contains(file.getAbsoluteFile().toString())) {
+                        processIds.put(Integer.parseInt(processInfo.getPid()), file.getAbsoluteFile().toString());
+                    }
+                }
+                break;
+            case "windows":
+
+                for (ProcessInfo processInfo : processesList) {
+
+                    if (processInfo.getCommand().contains(file.getAbsoluteFile().toString())) {
+                        processIds.put(Integer.parseInt(processInfo.getPid()), file.getAbsoluteFile().toString());
+                    }
+                }
+                break;
         }
 
         return processIds;
@@ -70,8 +85,6 @@ public class Processes {
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
-                            System.out.println(process); // <-- Print all Process here line
-                            // by line
 
                             process = process.replace("\"", "");
                             String arr[] = process.split(",");
@@ -81,38 +94,29 @@ public class Processes {
                             for (String value : arr) {
                                 switch (i) {
                                     case 0:
-
                                         break;
                                     case 1:
                                         preparedProcesses[1] = value;
                                         break;
                                     case 2:
-
                                         break;
                                     case 3:
-
                                         break;
                                     case 4:
-
                                         break;
                                     case 5:
-
                                         break;
                                     case 6:
                                         preparedProcesses[0] = value;
                                         break;
                                     case 7:
-
                                         break;
                                     case 8:
                                         preparedProcesses[2] = value;
                                         break;
                                 }
-
-
                                 i++;
                             }
-
                             processes.add(preparedProcesses);
                         }
                         input.close();

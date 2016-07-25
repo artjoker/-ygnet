@@ -90,7 +90,7 @@ public class Desktop {
 
             Processes.GetSystemProcess("linux");
             try {
-                HashMap processIds = Processes.getProcessIdsByFile(file);
+                HashMap processIds = Processes.getProcessIdsByFile(file, "linux");
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
                 this.pwt.run();
             } catch (Exception e) {
@@ -109,7 +109,7 @@ public class Desktop {
 
             Processes.GetSystemProcess("mac");
             try {
-                HashMap processIds = Processes.getProcessIdsByFile(file);
+                HashMap processIds = Processes.getProcessIdsByFile(file, "mac");
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
                 this.pwt.run();
             } catch (Exception e) {
@@ -129,7 +129,7 @@ public class Desktop {
 
             Processes.GetSystemProcess("windows");
             try {
-                HashMap processIds = Processes.getProcessIdsByFile(file);
+                HashMap processIds = Processes.getProcessIdsByFile(file, "windows");
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
                 this.pwt.run();
             } catch (Exception e) {
@@ -148,15 +148,15 @@ public class Desktop {
             pb.redirectErrorStream(true);
             Process process = pb.start();
 
-            try {
-                Thread.sleep(3000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(3000L);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             Processes.GetSystemProcess("windows");
             try {
-                HashMap processIds = Processes.getProcessIdsByFile(file);
+                HashMap processIds = Processes.getProcessIdsByFile(file, "windows");
                 this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
                 this.pwt.run();
             } catch (Exception e) {
