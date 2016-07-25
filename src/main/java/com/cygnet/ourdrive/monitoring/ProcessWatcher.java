@@ -88,7 +88,7 @@ public class ProcessWatcher extends Thread {
                                 logger.info(jsonFile.getName() + " has been deleted!");
                                 isUploaded = true;
                             } else {
-                                logger.error("Delete operation is failed for " + jsonFile.getName());
+                                logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
                             }
 
 //                        } catch(Exception e) {
