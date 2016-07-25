@@ -80,8 +80,6 @@ public class ProcessWatcher extends Thread {
 
                         File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
 
-                        Thread.sleep(2000L);
-
                         try {
                             logger.info("Try to delete: " + jsonFile.getAbsolutePath());
                             boolean jsonFileDeleted = jsonFile.delete();
