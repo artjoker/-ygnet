@@ -25,6 +25,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -154,7 +155,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             logger.error("Websocket Exception: " + e.getMessage());
         }
 
-        Path downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
+//        Path downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
+        Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
 
         // add file to watcher
         SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
@@ -197,17 +199,20 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      * @param settings
      */
     private void checkDownloadFolder(GlobalSettings settings) {
-        Path downloadPath = Paths.get(settings.getDownloadPath() + "/" + download_folder_name);
+//        Path downloadPath = Paths.get(settings.getDownloadPath() + "/" + download_folder_name);
+        Path userDirPath = Paths.get(getUserDataDirectory());
+        Path downloadPath = Paths.get(getUserDataDirectory() + "/" + download_folder_name);
 
         logger.info("Checking download folder path: " + downloadPath.toAbsolutePath().toString());
 
         if (!Files.exists(downloadPath)) {
             logger.info("Download path is not existing: " + downloadPath.toAbsolutePath().toString() + ". Trying to generate it.");
             try {
+                Files.createDirectory(userDirPath);
                 Files.createDirectory(downloadPath);
                 logger.error("Download folder created. ");
             } catch (IOException e) {
-                logger.error("Error while creating download folder: " + e.getMessage());
+                e.printStackTrace();
                 System.exit(0);
             }
         }
@@ -315,7 +320,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     //Private methods
 
-    private static String getUserDataDirectory() {
+    public static String getUserDataDirectory() {
         return System.getProperty("user.home") + File.separator + ".ourdrive" + File.separator;
     }
 

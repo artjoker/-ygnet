@@ -58,7 +58,7 @@ public class ProcessWatcher extends Thread {
         if (!isStopped()) {
             GlobalSettings globalSettings = GlobalSettings.getInstance();
 
-            Path downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
+            Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
 
             try {
 
@@ -165,7 +165,7 @@ public class ProcessWatcher extends Thread {
 
         GlobalSettings globalSettings = GlobalSettings.getInstance();
 
-        Path downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
+        Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
         File testFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + toCheckFile.getName() + ".json");
 
         return testFile.exists();

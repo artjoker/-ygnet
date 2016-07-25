@@ -148,7 +148,7 @@ public class SingleFileWatcher extends Thread {
 
         GlobalSettings globalSettings = GlobalSettings.getInstance();
 
-        Path downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
+        Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
         File testFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + toCheckFile.getName() + ".json");
         logger.debug("check bro with: " + downloadPath.toAbsolutePath().toString() + File.separator + "." + toCheckFile.getName() + ".json");
         return testFile.exists();

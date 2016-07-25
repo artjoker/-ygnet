@@ -71,7 +71,7 @@ public class WebSocketClient {
 
         globalSettings = GlobalSettings.getInstance();
 
-        downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
+        downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
 
         socket_uri = properties.getProperty("socket.protocol") + "://" + properties.getProperty("socket.host") + ":" + properties.getProperty("socket.port");
 
