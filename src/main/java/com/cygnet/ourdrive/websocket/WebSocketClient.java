@@ -297,12 +297,6 @@ public class WebSocketClient {
                     stream.write(valueDecoded);
                     stream.close();
 
-//                    try {
-//                        Thread.sleep(1000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-
                     logger.info("Successfully saved: " + absolutFileName);
 
                     try {
