@@ -107,10 +107,32 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      * Stop this service instance
      */
     public void stop() {
+
+        logger.info("Closing application and cleanup "+getUserDataDirectory() + "/" + download_folder_name);
+        deleteDownloadFolderContent(new File(getUserDataDirectory() + "/" + download_folder_name));
+
         running = false;
         synchronized (this) {
             notify();
         }
+    }
+
+    /**
+     *
+     * @param folder
+     */
+    private static void deleteDownloadFolderContent(File folder) {
+        File[] files = folder.listFiles();
+        if(files!=null) { //some JVMs return null for empty dirs
+            for(File f: files) {
+                if(f.isDirectory()) {
+                    deleteDownloadFolderContent(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+        folder.delete();
     }
 
     public void run(boolean configure) {
@@ -138,14 +160,6 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             // open websocket
             socketClient = new WebSocketClient();
             socketClient.connect();
-
-//            if (socketClient.getSocketConnection()) {
-//                logger.info("Websocket connection is established.");
-//                // wait 5 seconds for messages from websocket
-////                Thread.sleep(2000);
-//            } else {
-//                logger.error("Could not connect to SSL socket server: " + socketClient.getSocketUri());
-//            }
 
         } catch (InterruptedException ex) {
             logger.error("InterruptedException exception: " + ex.getMessage());
@@ -199,21 +213,27 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      * @param settings
      */
     private void checkDownloadFolder(GlobalSettings settings) {
-//        Path downloadPath = Paths.get(settings.getDownloadPath() + "/" + download_folder_name);
         Path userDirPath = Paths.get(getUserDataDirectory());
         Path downloadPath = Paths.get(getUserDataDirectory() + "/" + download_folder_name);
 
         logger.info("Checking download folder path: " + downloadPath.toAbsolutePath().toString());
 
-        if (!Files.exists(downloadPath)) {
-            logger.info("Download path is not existing: " + downloadPath.toAbsolutePath().toString() + ". Trying to generate it.");
+        if (!Files.exists(userDirPath)) {
             try {
                 Files.createDirectory(userDirPath);
                 Files.createDirectory(downloadPath);
-                logger.error("Download folder created. ");
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(0);
+            }
+        } else {
+            if (!Files.exists(downloadPath)) {
+                try {
+                    Files.createDirectory(downloadPath);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(0);
+                }
             }
         }
     }
