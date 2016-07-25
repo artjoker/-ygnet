@@ -72,7 +72,8 @@ public class ProcessWatcher extends Thread {
 
                         // and now delete the json file
                         try {
-                            File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + modifiedFile.getName() + ".json");
+                            File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
+//                            File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + modifiedFile.getName() + ".json");
                             if (jsonFile.delete()) {
                                 logger.info(jsonFile.getName() + " has been deleted!");
 //                                socketClient.disconnect();
