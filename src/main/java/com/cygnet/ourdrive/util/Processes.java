@@ -43,7 +43,7 @@ public class Processes {
                 for (ProcessInfo processInfo : processesList) {
 
                     if (processInfo.getCommand().contains(file.getName())) {
-                        processIds.put(Integer.parseInt(processInfo.getPid()), OurDriveService.getUserDataDirectory()+'/'+OurDriveService.getDownloadFolderName()+'/'+file.getName());
+                        processIds.put(Integer.parseInt(processInfo.getPid()), OurDriveService.getUserDataDirectory()+"/"+OurDriveService.getDownloadFolderName()+"/"+file.getName());
                     }
                 }
                 break;

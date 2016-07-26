@@ -124,6 +124,7 @@ public class ProcessWatcher extends Thread {
                 List<Integer> allpIds = new ArrayList<Integer>();
 
                 for (ProcessInfo processInfo : processesList) {
+                    System.out.println(processInfo.getName()+" -> "+processInfo.getCommand());
                     allpIds.add(Integer.parseInt(processInfo.getPid()));
                 }
 
