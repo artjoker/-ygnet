@@ -42,6 +42,13 @@ public class Processes {
 
                 for (ProcessInfo processInfo : processesList) {
 
+                    System.out.println(processInfo.getCommand());
+                    System.out.println(processInfo.getName());
+                    System.out.println(processInfo.getExtraData());
+                    System.out.println(processInfo.getPid());
+                    System.out.println(processInfo.getUser());
+                    System.out.println("----------------------------------");
+
                     if (processInfo.getCommand().contains(file.getName())) {
                         processIds.put(Integer.parseInt(processInfo.getPid()), OurDriveService.getUserDataDirectory()+"/"+OurDriveService.getDownloadFolderName()+"/"+file.getName());
                     }
