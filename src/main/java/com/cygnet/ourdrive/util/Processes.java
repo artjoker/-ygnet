@@ -1,5 +1,6 @@
 package com.cygnet.ourdrive.util;
 
+import com.cygnet.ourdrive.OurDriveService;
 import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
 
@@ -41,8 +42,8 @@ public class Processes {
 
                 for (ProcessInfo processInfo : processesList) {
 
-                    if (processInfo.getCommand().contains(file.getAbsoluteFile().toString())) {
-                        processIds.put(Integer.parseInt(processInfo.getPid()), file.getAbsoluteFile().toString());
+                    if (processInfo.getCommand().contains(file.getName())) {
+                        processIds.put(Integer.parseInt(processInfo.getPid()), OurDriveService.getUserDataDirectory()+'/'+OurDriveService.getDownloadFolderName()+'/'+file.getName());
                     }
                 }
                 break;
