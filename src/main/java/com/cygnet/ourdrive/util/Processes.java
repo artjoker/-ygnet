@@ -7,10 +7,7 @@ import org.jutils.jprocesses.model.ProcessInfo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by casten on 5/24/16.
@@ -59,28 +56,29 @@ public class Processes {
         return processIds;
     }
 
-    public static void GetSystemProcess(String OS) {
+    public static HashMap GetSystemProcesses(String OS) {
 
         // windows: System.getenv("windir") +"\\system32\\"+"tasklist.exe /fo csv /nh"
+        String process;
+
+        Process p = null;
+
+        // processID, process title (contains the file name)
+        HashMap<Integer, String> processes = new HashMap<Integer, String>();
 
         try {
-            String process;
-            // getRuntime: Returns the runtime object associated with the current Java application.
-            // exec: Executes the specified string command in a separate process.
-
-            Process p = null;
-            ArrayList<String[]> processes = new ArrayList<String[]>();
 
             switch (OS) {
                 case "linux":
-                    p = Runtime.getRuntime().exec("ps -Ao %U%t%a");
+                    // ps -Ao %p%a
+                    p = Runtime.getRuntime().exec("ps -Ao %p%a");
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
                             System.out.println(process); // <-- Print all Process here line
                             // by line
                             String arr[] = process.split("\t");
-                            processes.add(arr);
+                            processes.put(Integer.valueOf(arr[0]), arr[1]);
                         }
                         input.close();
 
@@ -126,12 +124,13 @@ public class Processes {
                                 }
                                 i++;
                             }
-                            processes.add(preparedProcesses);
+
+                            processes.put(Integer.valueOf(preparedProcesses[1]), preparedProcesses[2]);
                         }
                         input.close();
 
-                        for (String[] my_process : processes) {
-                            System.out.println(Arrays.toString(my_process));
+                        for(Map.Entry<Integer, String> processeList : processes.entrySet()){
+                            System.out.println(processeList.getKey() +" :: "+ processeList.getValue());
                         }
                     }
                     break;
@@ -142,5 +141,8 @@ public class Processes {
         } catch (Exception err) {
             err.printStackTrace();
         }
+
+        return processes;
     }
+
 }
