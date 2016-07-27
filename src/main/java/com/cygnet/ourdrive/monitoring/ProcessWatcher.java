@@ -2,6 +2,7 @@ package com.cygnet.ourdrive.monitoring;
 
 import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
+import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
 import org.jutils.jprocesses.JProcesses;
 import org.jutils.jprocesses.model.ProcessInfo;
@@ -27,6 +28,10 @@ public class ProcessWatcher extends Thread {
     //    private final WebSocketClient socketClient;
     private WebSocketClient socketClient = null;
 
+    private String OS = "";
+
+    private File file;
+
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
@@ -35,11 +40,13 @@ public class ProcessWatcher extends Thread {
 
     }
 
-    public ProcessWatcher(HashMap processIds, Process process, WebSocketClient socketClient) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
+        this.OS = OS;
+        this.file = file;
     }
 
     public boolean isStopped() {
@@ -117,25 +124,25 @@ public class ProcessWatcher extends Thread {
 
         while (!isStopped()) {
 
-            for (Object o : processIds.entrySet()) {
+            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, true);
+
+            for (Object o : this.processIds.entrySet()) {
                 Map.Entry pair = (Map.Entry) o;
 
-                List<ProcessInfo> processesList = JProcesses.getProcessList();
-                List<Integer> allpIds = new ArrayList<Integer>();
+                List<String> allpIds = new ArrayList<String>();
 
-                for (ProcessInfo processInfo : processesList) {
-                    System.out.println(processInfo.getName()+" -> "+processInfo.getCommand());
-                    allpIds.add(Integer.parseInt(processInfo.getPid()));
+
+                for (Object processInfo : processesList.entrySet()) {
+                    Map.Entry processPair = (Map.Entry) processInfo;
+                    allpIds.add(processPair.getKey().toString());
                 }
 
-
-                if (!allpIds.contains(pair.getKey())) {
+                if (!allpIds.contains(pair.getKey().toString())) {
                     File file = new File(pair.getValue().toString());
                     if (hasJsonBro(file)) if (uploadAsNewVersion(file, true)) {
                         this.stopThread();
                     }
                 }
-
             }
 
             try {

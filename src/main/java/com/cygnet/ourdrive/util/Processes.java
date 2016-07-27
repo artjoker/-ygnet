@@ -1,9 +1,5 @@
 package com.cygnet.ourdrive.util;
 
-import com.cygnet.ourdrive.OurDriveService;
-import org.jutils.jprocesses.JProcesses;
-import org.jutils.jprocesses.model.ProcessInfo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -15,74 +11,42 @@ import java.util.*;
 public class Processes {
 
     /**
-     * Get all available system process ids according to a given file name
-     *
-     * @param file the file a process has opened
-     * @return HashMap List of process ids
+     * get process ids
+     * @param file
+     * @param OS
+     * @param getall
+     * @return
      */
-    public static HashMap getProcessIdsByFile(File file, String OS) {
+    public static HashMap GetSystemProcesses(File file, String OS, Boolean getall) {
 
-        HashMap<Integer, String> processIds = new HashMap<Integer, String>();
-        List<ProcessInfo> processesList = JProcesses.getProcessList();
-
-        switch (OS) {
-            case "linux":
-
-                for (ProcessInfo processInfo : processesList) {
-
-                    if (processInfo.getCommand().contains(file.getAbsoluteFile().toString())) {
-                        processIds.put(Integer.parseInt(processInfo.getPid()), file.getAbsoluteFile().toString());
-                    }
-                }
-                break;
-            case "windows":
-
-                for (ProcessInfo processInfo : processesList) {
-
-                    System.out.println(processInfo.getCommand());
-                    System.out.println(processInfo.getName());
-                    System.out.println(processInfo.getExtraData());
-                    System.out.println(processInfo.getPid());
-                    System.out.println(processInfo.getUser());
-                    System.out.println("----------------------------------");
-
-                    if (processInfo.getCommand().contains(file.getName())) {
-                        processIds.put(Integer.parseInt(processInfo.getPid()), OurDriveService.getUserDataDirectory()+"/"+OurDriveService.getDownloadFolderName()+"/"+file.getName());
-                    }
-                }
-                break;
-        }
-
-        return processIds;
-    }
-
-    public static HashMap GetSystemProcesses(String OS) {
-
-        // windows: System.getenv("windir") +"\\system32\\"+"tasklist.exe /fo csv /nh"
         String process;
-
         Process p = null;
-
-        // processID, process title (contains the file name)
-        HashMap<Integer, String> processes = new HashMap<Integer, String>();
+        HashMap<String, String> processes = new HashMap<String, String>();
 
         try {
 
             switch (OS) {
                 case "linux":
                     // ps -Ao %p%a
-                    p = Runtime.getRuntime().exec("ps -Ao %p%a");
+                    p = Runtime.getRuntime().exec("ps -Ao %p;%a");
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
                             System.out.println(process); // <-- Print all Process here line
+
                             // by line
-                            String arr[] = process.split("\t");
-                            processes.put(Integer.valueOf(arr[0]), arr[1]);
+                            String arr[] = process.split(";");
+
+                            if(getall) {
+                                processes.put(arr[0].trim(), arr[1].trim());
+                            } else {
+                                if (arr[1].contains(file.getName())) {
+                                    processes.put(arr[0].trim(), file.getAbsoluteFile().toString());
+                                }
+                            }
                         }
                         input.close();
 
-                        System.out.println(processes);
                     }
                     break;
                 case "windows":
@@ -92,6 +56,8 @@ public class Processes {
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
+
+                            System.out.println(process);
 
                             process = process.replace("\"", "");
                             String arr[] = process.split(",");
@@ -125,13 +91,19 @@ public class Processes {
                                 i++;
                             }
 
-                            processes.put(Integer.valueOf(preparedProcesses[1]), preparedProcesses[2]);
+                            if(getall) {
+                                processes.put(preparedProcesses[1].trim(), preparedProcesses[2].trim());
+                            } else {
+                                if (preparedProcesses[2].contains(file.getName())) {
+                                    processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+                                }
+                            }
                         }
                         input.close();
 
-                        for(Map.Entry<Integer, String> processeList : processes.entrySet()){
-                            System.out.println(processeList.getKey() +" :: "+ processeList.getValue());
-                        }
+//                        for(Map.Entry<String, String> processeList : processes.entrySet()){
+//                            System.out.println(processeList.getKey() +" :: "+ processeList.getValue());
+//                        }
                     }
                     break;
 

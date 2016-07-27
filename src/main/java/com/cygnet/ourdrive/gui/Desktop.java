@@ -89,8 +89,14 @@ public class Desktop {
             Process process = pb.start();
 
             try {
-                HashMap processIds = Processes.GetSystemProcesses("linux");// Processes.getProcessIdsByFile(file, "linux");
-                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                Thread.sleep(2000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                HashMap processIds = Processes.GetSystemProcesses(file, "linux", false);// Processes.getProcessIdsByFile(file, "linux");
+                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "linux");
                 this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -106,10 +112,15 @@ public class Desktop {
             ProcessBuilder pb = new ProcessBuilder(args);
             Process process = pb.start();
 
-            Processes.GetSystemProcesses("mac");
             try {
-                HashMap processIds = Processes.getProcessIdsByFile(file, "mac");
-                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                Thread.sleep(2000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                HashMap processIds = Processes.GetSystemProcesses(file, "mac", false); //Processes.getProcessIdsByFile(file, "mac");
+                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "mac");
                 this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -127,8 +138,14 @@ public class Desktop {
             Process process = pb.start();
 
             try {
-                HashMap processIds = Processes.GetSystemProcesses("windows"); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                Thread.sleep(2000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
+                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "windows");
                 this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -153,8 +170,8 @@ public class Desktop {
             }
 
             try {
-                HashMap processIds = Processes.GetSystemProcesses("windows"); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt = new ProcessWatcher(processIds, process, this.socketClient);
+                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
+                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "windows");
                 this.pwt.run();
             } catch (Exception e) {
                 e.printStackTrace();
