@@ -62,14 +62,14 @@ public class ProcessWatcher extends Thread {
     private boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
 
         Boolean isUploaded = false;
-        if (!isStopped()) {
-            GlobalSettings globalSettings = GlobalSettings.getInstance();
+//        if (!isStopped()) {
+//            GlobalSettings globalSettings = GlobalSettings.getInstance();
 
-            Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
+//            Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
 
             try {
 
-                isUploaded = this.socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
+                isUploaded = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
                 if (isUploaded) {
 
                     boolean origFileDeleted = false;
@@ -111,11 +111,17 @@ public class ProcessWatcher extends Thread {
             } catch (Exception e) {
                 logger.error("Try to upload "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
             }
-        } else {
-            logger.error("ProcessWatcher seems o be stopped");
-        }
+//        } else {
+//            logger.error("ProcessWatcher seems o be stopped");
+//        }
 
         return isUploaded;
+    }
+
+    public void setStop()
+    {
+        Thread.currentThread().interrupt();
+        this.process.destroy();
     }
 
 
@@ -139,8 +145,10 @@ public class ProcessWatcher extends Thread {
 
                 if (!allpIds.contains(pair.getKey().toString())) {
                     File file = new File(pair.getValue().toString());
-                    if (hasJsonBro(file)) if (uploadAsNewVersion(file, true)) {
-                        this.stopThread();
+                    if (hasJsonBro(file)) {
+                        if (this.uploadAsNewVersion(file, true)) {
+                            this.stopThread();
+                        }
                     }
                 }
             }

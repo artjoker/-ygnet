@@ -16,7 +16,6 @@ import com.cygnet.ourdrive.upload.UploadFileHandler;
 import com.cygnet.ourdrive.upload.UploadServiceException;
 import com.cygnet.ourdrive.websocket.LocalWebServer;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
-import io.socket.client.Socket;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -26,7 +25,6 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,7 +36,7 @@ import java.util.Timer;
  */
 public final class OurDriveService implements GlobalSettings.SettingsListener<GlobalSettings>, FolderMonitorListener {
 
-    public static final String VERSION = "2.0.2";
+    public static final String VERSION = "3.0.0";
 
     private static String ourdriveId = "";
 
@@ -164,14 +162,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             logger.error("Websocket Exception: " + e.getMessage());
         }
 
-//        Path downloadPath = Paths.get(globalSettings.getDownloadPath() + "/" + OurDriveService.getDownloadFolderName());
         Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
 
         // add file to watcher
         SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
         sfw.start();
-
-
 
         if (configure) {
             GeneralSettingsDialog.showDialog();
@@ -336,7 +331,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     //Private methods
 
     public static String getUserDataDirectory() {
-        return System.getProperty("user.home") + File.separator + ".ourdrive" + File.separator;
+        return System.getProperty("user.home") + File.separator + "ourdrive" + File.separator;
     }
 
     private void startTimer(FolderSettings folderSettings) {

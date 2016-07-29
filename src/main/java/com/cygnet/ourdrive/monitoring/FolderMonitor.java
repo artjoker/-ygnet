@@ -44,6 +44,7 @@ public class FolderMonitor implements FileVisitor {
         ignore = ignore || filename.endsWith(".swap");
         ignore = ignore || filename.endsWith(".tmp");
         ignore = ignore || filename.endsWith(".temp");
+        ignore = ignore || filename.endsWith("#");
         ignore = ignore || filename.indexOf('.') < 0;
         return ignore;
     }
