@@ -130,9 +130,9 @@ public class ProcessWatcher extends Thread {
 
         while (!isStopped()) {
 
-            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, true);
+            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, true); // all current processes
 
-            for (Object o : this.processIds.entrySet()) {
+            for (Object o : this.processIds.entrySet()) { // processIds is teh small array
                 Map.Entry pair = (Map.Entry) o;
 
                 List<String> allpIds = new ArrayList<String>();
@@ -143,7 +143,8 @@ public class ProcessWatcher extends Thread {
                     allpIds.add(processPair.getKey().toString());
                 }
 
-                if (!allpIds.contains(pair.getKey().toString())) {
+                if (!allpIds.contains(this.file.getName())) {
+//                if (!allpIds.contains(pair.getKey().toString())) {
                     File file = new File(pair.getValue().toString());
                     if (hasJsonBro(file)) {
                         if (this.uploadAsNewVersion(file, true)) {
