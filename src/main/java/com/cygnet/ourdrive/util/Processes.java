@@ -52,7 +52,7 @@ public class Processes {
                 case "windows":
                     //  tasklist /v /FI "STATUS eq running" /FO "CSV" /NH
 //                    p = Runtime.getRuntime().exec("tasklist /V /FI \"STATUS eq running\" /FO \"CSV\" /NH");
-                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /NH");
+                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"status eq running\" /NH");
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
