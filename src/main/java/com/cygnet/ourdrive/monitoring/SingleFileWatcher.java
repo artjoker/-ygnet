@@ -118,26 +118,27 @@ public class SingleFileWatcher extends Thread {
 
                 for (WatchEvent<?> event : key.pollEvents()) {
 
-                    System.out.println(event.context() + ", count: "+ event.count() + ", event: "+ event.kind());
+//                    System.out.println(event.context() + ", count: "+ event.count() + ", event: "+ event.kind());
 
                     WatchEvent.Kind<?> kind = event.kind();
 
                     @SuppressWarnings("unchecked")
                     WatchEvent<Path> ev = (WatchEvent<Path>) event;
                     Path filename = ev.context();
+                    File file = new File(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName()+"/"+ev.context());
 
                     if (kind == StandardWatchEventKinds.OVERFLOW) {
                         logger.warn("File listener received an overflow event.  You should probably check into this");
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
-                        logger.info("CHECK THIS FILE: IGNORE/BRO -> " + filename.toFile().getAbsoluteFile().toString());
+                        logger.info("CHECK THIS FILE: IGNORE/BRO -> " + file.getAbsoluteFile().toString());
 
-                        if (!shouldIgnoreFile(filename.toString()) && !isJsonFile(filename.toString())) {
-                            if (hasJsonBro(filename.toFile())) {
+                        if (!shouldIgnoreFile(file.getName()) && !isJsonFile(file.getName())) {
+                            if (hasJsonBro(file)) {
 
-                                logger.info(filename.toFile().getAbsoluteFile().toString() + ": Trying to upload because of save action.");
-                                this.uploadAsNewVersion(filename.toFile(), false);
+                                logger.info(file.getAbsoluteFile().toString() + ": Trying to upload because of save action.");
+                                this.uploadAsNewVersion(file, false);
 
                             }
                         }
