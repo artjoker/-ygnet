@@ -46,7 +46,7 @@ public class Desktop {
      */
     public static boolean isWindows() {
         String os = System.getProperty("os.name").toLowerCase();
-        return os.contains("windows") || os.contains("nt");
+        return os.toLowerCase().contains("windows") || os.toLowerCase().contains("nt");
     }
 
     /**
@@ -54,7 +54,7 @@ public class Desktop {
      */
     public static boolean isMac() {
         String os = System.getProperty("os.name").toLowerCase();
-        return os.contains("mac");
+        return os.toLowerCase().contains("mac");
     }
 
     /**
@@ -62,7 +62,7 @@ public class Desktop {
      */
     public static boolean isLinux() {
         String os = System.getProperty("os.name").toLowerCase();
-        return os.contains("linux");
+        return os.toLowerCase().contains("linux");
     }
 
     /**
@@ -70,7 +70,7 @@ public class Desktop {
      */
     public static boolean isWindows9X() {
         String os = System.getProperty("os.name").toLowerCase();
-        return os.equals("windows 95") || os.equals("windows 98");
+        return os.toLowerCase().equals("windows 95") || os.equals("windows 98");
     }
 
     /**
