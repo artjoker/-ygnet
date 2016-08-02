@@ -145,12 +145,14 @@ public class ProcessWatcher extends Thread {
                     allpIds.add(processPair.getKey().toString());
                 }
 
+                logger.info("OS: "+this.OS);
+                logger.info("contains "+pair.getKey().toString()+": "+allpIds.contains(pair.getKey().toString()));
+                logger.info("allpIds.size(): "+allpIds.size()+" | this.processIds.size(): "+this.processIds.size());
+
+
                 switch(this.OS) {
 
                     case "windows":
-
-                        logger.info("contains "+pair.getKey().toString()+": "+allpIds.contains(pair.getKey().toString()));
-                        logger.info("allpIds.size(): "+allpIds.size()+" | this.processIds.size(): "+this.processIds.size());
 
                         if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
                             File file = new File(pair.getValue().toString());
