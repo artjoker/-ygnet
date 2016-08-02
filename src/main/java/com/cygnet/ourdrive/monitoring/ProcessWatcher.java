@@ -126,7 +126,6 @@ public class ProcessWatcher extends Thread {
     @Override
     public void run() {
 
-
         while (!isStopped()) {
 
             // [pid][detailed title with file name]
