@@ -1,5 +1,9 @@
 package com.cygnet.ourdrive.util;
 
+import com.cygnet.ourdrive.OurDriveService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -9,6 +13,8 @@ import java.util.*;
  * Created by casten on 5/24/16.
  */
 public class Processes {
+
+    private static final Logger logger = LoggerFactory.getLogger(OurDriveService.class);
 
     /**
      * get process ids
@@ -57,7 +63,7 @@ public class Processes {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
 
-                            System.out.println(process);
+//                            System.out.println(process);
 
                             process = process.replace("\"", "");
                             String arr[] = process.split(",");
@@ -96,6 +102,7 @@ public class Processes {
                             } else {
                                 if (preparedProcesses[2].contains(file.getName())) {
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+                                    logger.info(preparedProcesses[1].trim() + " -> " +  file.getAbsoluteFile().toString().trim());
                                 }
                             }
                         }

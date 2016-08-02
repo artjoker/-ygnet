@@ -146,8 +146,8 @@ public class ProcessWatcher extends Thread {
                     allpIds.add(processPair.getKey().toString());
                 }
 
-                System.out.println("all ids size: "+allpIds.size());
-                System.out.println("process ids size: "+this.processIds.size());
+                logger.info("all ids size: "+allpIds.size());
+                logger.info("process ids size: "+this.processIds.size());
 
 
                 if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
