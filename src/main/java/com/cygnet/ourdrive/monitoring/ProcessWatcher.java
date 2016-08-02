@@ -74,34 +74,35 @@ public class ProcessWatcher extends Thread {
 
                     try {
                         origFileDeleted = modifiedFile.delete();
-                    } catch(Exception e) {
-                        logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
-                    }
 
-                    if (origFileDeleted) {
+                        if (origFileDeleted) {
 
-                        logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
-                        logger.info("Saved and unlocked file: " + modifiedFile.getName());
+                            logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
+                            logger.info("Saved and unlocked file: " + modifiedFile.getName());
 
-                        File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
+                            File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
 
-                        try {
-                            logger.info("Try to delete: " + jsonFile.getAbsolutePath());
-                            boolean jsonFileDeleted = jsonFile.delete();
+                            try {
+                                logger.info("Try to delete: " + jsonFile.getAbsolutePath());
+                                boolean jsonFileDeleted = jsonFile.delete();
 
-                            if (jsonFileDeleted) {
-                                logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
-                                isUploaded = true;
-                            } else {
-                                logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
+                                if (jsonFileDeleted) {
+                                    logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
+                                    isUploaded = true;
+                                } else {
+                                    logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
+                                }
+
+                            } catch(Exception e) {
+                                logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
                             }
 
-                        } catch(Exception e) {
-                            logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
+                        } else {
+                            logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
                         }
 
-                    } else {
-                        logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
+                    } catch(Exception e) {
+                        logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
                     }
 
                 }
