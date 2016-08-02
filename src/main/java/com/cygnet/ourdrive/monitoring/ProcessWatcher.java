@@ -131,6 +131,7 @@ public class ProcessWatcher extends Thread {
             // [pid][detailed title with file name]
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
+            logger.info("OS: "+this.OS);
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
@@ -145,7 +146,6 @@ public class ProcessWatcher extends Thread {
                     allpIds.add(processPair.getKey().toString());
                 }
 
-                logger.info("OS: "+this.OS);
                 logger.info("contains "+pair.getKey().toString()+": "+allpIds.contains(pair.getKey().toString()));
                 logger.info("allpIds.size(): "+allpIds.size()+" | this.processIds.size(): "+this.processIds.size());
 
