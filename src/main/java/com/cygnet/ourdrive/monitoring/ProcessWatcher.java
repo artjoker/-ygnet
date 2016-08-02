@@ -74,35 +74,34 @@ public class ProcessWatcher extends Thread {
 
                     try {
                         origFileDeleted = modifiedFile.delete();
-
-                        if (origFileDeleted) {
-
-                            logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
-                            logger.info("Saved and unlocked file: " + modifiedFile.getName());
-
-                            File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
-
-                            try {
-                                logger.info("Try to delete: " + jsonFile.getAbsolutePath());
-                                boolean jsonFileDeleted = jsonFile.delete();
-
-                                if (jsonFileDeleted) {
-                                    logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
-                                    isUploaded = true;
-                                } else {
-                                    logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
-                                }
-
-                            } catch(Exception e) {
-                                logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
-                            }
-
-                        } else {
-                            logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
-                        }
-
                     } catch(Exception e) {
                         logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
+                    }
+
+                    if (origFileDeleted) {
+
+                        logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
+                        logger.info("Saved and unlocked file: " + modifiedFile.getName());
+
+                        File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
+
+                        try {
+                            logger.info("Try to delete: " + jsonFile.getAbsolutePath());
+                            boolean jsonFileDeleted = jsonFile.delete();
+
+                            if (jsonFileDeleted) {
+                                logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
+                                isUploaded = true;
+                            } else {
+                                logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
+                            }
+
+                        } catch(Exception e) {
+                            logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
+                        }
+
+                    } else {
+                        logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
                     }
 
                 }
@@ -146,24 +145,40 @@ public class ProcessWatcher extends Thread {
                     allpIds.add(processPair.getKey().toString());
                 }
 
-                logger.info("all ids size: "+allpIds.size());
-                logger.info("process ids size: "+this.processIds.size());
+                switch(this.OS) {
 
-
-                if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
-
-                    try {
-                        Thread.sleep(500L);
-                    } catch (InterruptedException e) {
-                        logger.error(e.getMessage());
-                    }
-
-                    File file = new File(pair.getValue().toString());
-                    if (hasJsonBro(file)) {
-                        if (this.uploadAsNewVersion(file, true)) {
-                            this.stopThread();
+                    case "windows":
+                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+                            File file = new File(pair.getValue().toString());
+                            if (hasJsonBro(file)) {
+                                if (this.uploadAsNewVersion(file, true)) {
+                                    this.stopThread();
+                                }
+                            }
                         }
-                    }
+                        break;
+
+                    case "mac":
+//                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+//                            File file = new File(pair.getValue().toString());
+//                            if (hasJsonBro(file)) {
+//                                if (this.uploadAsNewVersion(file, true)) {
+//                                    this.stopThread();
+//                                }
+//                            }
+//                        }
+                        break;
+
+                    case "linux":
+                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+                            File file = new File(pair.getValue().toString());
+                            if (hasJsonBro(file)) {
+                                if (this.uploadAsNewVersion(file, true)) {
+                                    this.stopThread();
+                                }
+                            }
+                        }
+                        break;
                 }
             }
 

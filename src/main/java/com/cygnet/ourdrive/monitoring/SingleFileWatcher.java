@@ -133,7 +133,7 @@ public class SingleFileWatcher extends Thread {
 
                         logger.info("CHECK THIS FILE: IGNORE/BRO -> " + filename.toFile().getAbsoluteFile().toString());
 
-                        if (!shouldIgnoreFile(filename.toString()) && ! isJsonFile(filename.toString())) {
+                        if (!shouldIgnoreFile(filename.toString()) && !isJsonFile(filename.toString())) {
                             if (hasJsonBro(filename.toFile())) {
 
                                 logger.info(filename.toFile().getAbsoluteFile().toString() + ": Trying to upload because of save action.");

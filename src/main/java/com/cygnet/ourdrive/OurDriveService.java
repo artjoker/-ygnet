@@ -168,6 +168,20 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
         sfw.start();
 
+        // create and delete tmp file
+        String tmpFileName = "initializer.tmp";
+        File tmpFile = new File(downloadPath+"/"+tmpFileName);
+
+        try {
+            Thread.sleep(500L);
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage());
+        }
+
+        boolean tmpDeleted = tmpFile.delete();
+
+
+        // now configure
         if (configure) {
             GeneralSettingsDialog.showDialog();
         }
