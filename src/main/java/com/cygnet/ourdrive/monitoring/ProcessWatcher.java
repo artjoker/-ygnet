@@ -151,6 +151,13 @@ public class ProcessWatcher extends Thread {
 
 
                 if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+
+                    try {
+                        Thread.sleep(500L);
+                    } catch (InterruptedException e) {
+                        logger.error(e.getMessage());
+                    }
+
                     File file = new File(pair.getValue().toString());
                     if (hasJsonBro(file)) {
                         if (this.uploadAsNewVersion(file, true)) {
