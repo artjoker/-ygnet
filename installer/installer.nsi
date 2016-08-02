@@ -30,9 +30,9 @@ Var ourdriveIntrayFolder
 !define DESCRIPTION "Cygnet ECM Hot folder synchronization"
 
 # These three must be integers
-!define VERSIONMAJOR 2
+!define VERSIONMAJOR 3
 !define VERSIONMINOR 0
-!define VERSIONBUILD 2
+!define VERSIONBUILD 0
 !define VERSION "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}"
 
 # These will be displayed by the "Click here for support information" link in "Add/Remove Programs"

@@ -4,8 +4,6 @@ import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
-import org.jutils.jprocesses.JProcesses;
-import org.jutils.jprocesses.model.ProcessInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,23 +126,31 @@ public class ProcessWatcher extends Thread {
     @Override
     public void run() {
 
+
         while (!isStopped()) {
 
-            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, true); // all current processes
+            // [pid][detailed title with file name]
+            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
-            for (Object o : this.processIds.entrySet()) { // processIds is teh small array
+
+            // [pid][detailed title with file name]
+            for (Object o : this.processIds.entrySet()) { // processIds is the small array
                 Map.Entry pair = (Map.Entry) o;
 
+                // contain only pid
                 List<String> allpIds = new ArrayList<String>();
-
+//                String[] allpIds = new String[2];
 
                 for (Object processInfo : processesList.entrySet()) {
                     Map.Entry processPair = (Map.Entry) processInfo;
                     allpIds.add(processPair.getKey().toString());
                 }
 
-                if (!allpIds.contains(this.file.getName())) {
-//                if (!allpIds.contains(pair.getKey().toString())) {
+                System.out.println("all ids size: "+allpIds.size());
+                System.out.println("process ids size: "+this.processIds.size());
+
+
+                if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
                     File file = new File(pair.getValue().toString());
                     if (hasJsonBro(file)) {
                         if (this.uploadAsNewVersion(file, true)) {
