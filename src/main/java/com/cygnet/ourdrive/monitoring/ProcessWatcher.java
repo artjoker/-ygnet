@@ -132,6 +132,7 @@ public class ProcessWatcher extends Thread {
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
             logger.info("OS: "+this.OS);
+            logger.info("processesList.size(): "+processesList.size()+" | this.processIds.size(): "+this.processIds.size());
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
