@@ -30,6 +30,8 @@ public class Processes {
         Process p = null;
         HashMap<String, String> processes = new HashMap<String, String>();
 
+        logger.info("OS: "+OS);
+
         try {
 
             switch (OS) {
@@ -59,16 +61,19 @@ public class Processes {
                     break;
                 case "windows":
                     //  tasklist /v /FI "STATUS eq running" /FO "CSV" /NH
-//                    p = Runtime.getRuntime().exec("tasklist /V /FI \"STATUS eq running\" /FO \"CSV\" /NH");
-                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
+//                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
+                    p = Runtime.getRuntime().exec("tasklist /V /FO \"TABLE\" /FI \"STATUS eq running\" /NH");
+
+                    logger.info("tasklist: " + p.toString());
+
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
 
                             System.out.println(process);
 
-                            process = process.replace("\"", "");
-                            String arr[] = process.split(",");
+//                            process = process.replace("\"", "");
+                            String arr[] = process.split("\t");
                             String[] preparedProcesses = new String[3];
 
                             Integer i = 0;
