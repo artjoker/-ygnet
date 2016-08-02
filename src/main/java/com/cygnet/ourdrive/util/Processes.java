@@ -1,6 +1,7 @@
 package com.cygnet.ourdrive.util;
 
 import com.cygnet.ourdrive.OurDriveService;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +47,8 @@ public class Processes {
                             if(getall) {
                                 processes.put(arr[0].trim(), arr[1].trim());
                             } else {
-                                if (arr[1].contains(file.getName())) {
+                                String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+                                if (arr[1].contains(filenameWithoutExtension)) {
                                     processes.put(arr[0].trim(), file.getAbsoluteFile().toString());
                                 }
                             }
@@ -100,7 +102,9 @@ public class Processes {
                             if(getall) {
                                 processes.put(preparedProcesses[1].trim(), preparedProcesses[2].trim());
                             } else {
-                                if (preparedProcesses[2].contains(file.getName())) {
+
+                                String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+                                if (preparedProcesses[2].contains(filenameWithoutExtension)) {
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
                                     logger.info(preparedProcesses[1].trim() + " -> " +  file.getAbsoluteFile().toString().trim());
                                 }
