@@ -8,6 +8,7 @@ package com.cygnet.ourdrive.gui;
 
 import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.monitoring.ProcessWatcher;
+import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.settings.ReadProperties;
 import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
@@ -16,6 +17,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Desktop {
@@ -24,7 +27,7 @@ public class Desktop {
 
     private Properties properties;
     private Process process;
-    private ProcessWatcher pwt;
+    private final ThreadLocal<ProcessWatcher> pwt = new ThreadLocal<>();
 
     private final WebSocketClient socketClient;
 
@@ -80,26 +83,37 @@ public class Desktop {
      * @throws IOException
      */
     public void open(File file) throws IOException {
+
+        Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
+        // add file to watcher
+        logger.info("Set file watcher service to: "+downloadPath.toString());
+        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
+        sfw.start();
+        logger.info("Started file watcher service: "+sfw.getName());
+
         if (isLinux()) {
 
             List<String> args = new ArrayList<String>();
             args.add(properties.getProperty("linux.openAs")); // command name
             args.add(file.getAbsoluteFile().toString()); // optional args added as separate list items
-            ProcessBuilder pb = new ProcessBuilder(args);
-            Process process = pb.start();
 
             try {
-                Thread.sleep(2000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.info("Trying to start command: linux.openAs "+file.getAbsolutePath());
+
+                ProcessBuilder pb = new ProcessBuilder(args);
+                Process process = pb.start(); // Start the process.
+                process.waitFor(); // Wait for the process to finish.
+                logger.info("Successfully started and finished");
+            } catch (Exception e) {
+                logger.error(e.getMessage());
             }
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "linux", false);// Processes.getProcessIdsByFile(file, "linux");
-                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "linux");
-                this.pwt.run();
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "linux"));
+                this.pwt.get().run();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
 
 
@@ -109,21 +123,24 @@ public class Desktop {
             List<String> args = new ArrayList<String>();
             args.add(properties.getProperty("mac.openAs")); // command name
             args.add(String.valueOf(file.getAbsoluteFile().toURI())); // optional args added as separate list items
-            ProcessBuilder pb = new ProcessBuilder(args);
-            Process process = pb.start();
 
             try {
-                Thread.sleep(2000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.info("Trying to start command: mac.openAs "+String.valueOf(file.getAbsoluteFile().toURI()));
+
+                ProcessBuilder pb = new ProcessBuilder(args);
+                Process process = pb.start(); // Start the process.
+                process.waitFor(); // Wait for the process to finish.
+                logger.info("Successfully started and finished");
+            } catch (Exception e) {
+                logger.error(e.getMessage());
             }
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "mac", false); //Processes.getProcessIdsByFile(file, "mac");
-                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "mac");
-                this.pwt.run();
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "mac"));
+                this.pwt.get().run();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
 
         } else if (isWindows() && isWindows9X()) {
@@ -134,21 +151,23 @@ public class Desktop {
                     "cd "+file.getParent()+" && start "+file.getName()
             };
 
-            ProcessBuilder pb = new ProcessBuilder(Commands);
-            Process process = pb.start();
-
             try {
-                Thread.sleep(2000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.info("Trying to start command: cmd.exe /c cd "+file.getParent()+" && start "+file.getName());
+
+                ProcessBuilder pb = new ProcessBuilder(Commands);
+                Process process = pb.start(); // Start the process.
+                process.waitFor(); // Wait for the process to finish.
+                logger.info("Successfully started and finished");
+            } catch (Exception e) {
+                logger.error(e.getMessage());
             }
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "windows");
-                this.pwt.run();
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+                this.pwt.get().run();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
 
         } else if (isWindows()) {
@@ -159,25 +178,25 @@ public class Desktop {
                     "cd "+file.getParent()+" && start "+file.getName()
             };
 
-            ProcessBuilder pb = new ProcessBuilder(Commands);
-            pb.redirectErrorStream(true);
-            Process process = pb.start();
-
             try {
-                Thread.sleep(2000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.info("Trying to start command: cmd.exe /c cd "+file.getParent()+" && start "+file.getName());
+
+                ProcessBuilder pb = new ProcessBuilder(Commands);
+                Process process = pb.start(); // Start the process.
+                process.waitFor(); // Wait for the process to finish.
+                logger.info("Successfully started and finished");
+            } catch (Exception e) {
+                logger.error(e.getMessage());
             }
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt = new ProcessWatcher(file, processIds, process, this.socketClient, "windows");
-                this.pwt.run();
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+                this.pwt.get().run();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
-
     }
 
     public Process getProcess() {

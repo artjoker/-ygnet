@@ -136,11 +136,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         logger.info("Loading systray item");
         try {
             SystrayItem.register(VERSION);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         } catch (SytrayInitializationException e) {
             logger.warn("Could not initialize systray item", e);
         }
@@ -161,12 +161,6 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         } catch (Exception e) {
             logger.error("Websocket Exception: " + e.getMessage());
         }
-
-        Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
-
-        // add file to watcher
-        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
-        sfw.start();
 
         // now configure
         if (configure) {

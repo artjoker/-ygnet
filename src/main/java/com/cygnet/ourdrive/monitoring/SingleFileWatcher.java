@@ -103,6 +103,7 @@ public class SingleFileWatcher extends Thread {
 
             path.register(
                     watcher,
+                    StandardWatchEventKinds.ENTRY_CREATE,
                     StandardWatchEventKinds.ENTRY_MODIFY,
                     StandardWatchEventKinds.ENTRY_DELETE
             );
@@ -115,11 +116,7 @@ public class SingleFileWatcher extends Thread {
                     return;
                 }
 
-
                 for (WatchEvent<?> event : key.pollEvents()) {
-
-//                    System.out.println(event.context() + ", count: "+ event.count() + ", event: "+ event.kind());
-
                     WatchEvent.Kind<?> kind = event.kind();
 
                     @SuppressWarnings("unchecked")
@@ -132,76 +129,25 @@ public class SingleFileWatcher extends Thread {
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
-                        logger.info("CHECK THIS FILE: IGNORE/BRO -> " + file.getAbsoluteFile().toString());
-
                         if (!shouldIgnoreFile(file.getName()) && !isJsonFile(file.getName())) {
+                            logger.info("Check if file has a JSON sibling: " + file.getAbsoluteFile().toString());
                             if (hasJsonBro(file)) {
-
-                                logger.info(file.getAbsoluteFile().toString() + ": Trying to upload because of save action.");
-                                this.uploadAsNewVersion(file, false);
-
+                                logger.info("JSON sibling check OK for: " + file.getAbsoluteFile().toString());
+                                logger.info("Trying to upload because of save action: " + file.getAbsoluteFile().toString());
+                                Boolean uploadAsNewVersion = uploadAsNewVersion(file, false);
+                                if(uploadAsNewVersion) {
+                                    logger.info("Upload successful for: " + file.getAbsoluteFile().toString());
+                                }
                             }
+                        } else {
+                            logger.info("No modify action for: " + file.getAbsoluteFile().toString());
                         }
+
+                    } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                        logger.info("Created file: "+file.getAbsoluteFile().toString());
                     } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-
-//                        if (shouldIgnoreFile(filename.toString()) && ! isJsonFile(filename.toString())) {
-//
-//                            String realFilename = getRealFilenameFromTmpFile(filename.toFile().getName());
-//                            Path newFilename = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName()+"/"+realFilename);
-//
-//                            System.out.println("File "+filename.toFile().getAbsolutePath()+" exists: "+filename.toFile().exists());
-//                            System.out.println("File "+newFilename.toFile().getAbsolutePath()+" has bro: "+hasJsonBro(newFilename.toFile()));
-//
-//                            System.out.println("File "+newFilename.toFile()+" has bro: "+hasJsonBro(newFilename.toFile()));
-//
-//                            if (!filename.toFile().exists() && hasJsonBro(newFilename.toFile())) {
-//
-//                                System.exit(0);
-//
-//                                logger.info(newFilename.toFile().getAbsoluteFile().toString() + ": Trying to upload because of save action.");
-//                                Boolean isUploaded = this.uploadAsNewVersion(newFilename.toFile(), true);
-//
-//                                // delete all files, because we assume that the file was closed
-//                                if(isUploaded) {
-//                                    boolean origFileDeleted = false;
-//
-//                                    try {
-//                                        origFileDeleted = newFilename.toFile().delete();
-//                                    } catch(Exception e) {
-//                                        logger.error("Try to delete "+newFilename.toFile().getAbsolutePath()+" with error: "+e.getMessage());
-//                                    }
-//
-//                                    if (origFileDeleted) {
-//
-//                                        logger.info(newFilename.toFile().getAbsolutePath() + " has been deleted!");
-//                                        logger.info("Saved and unlocked file: " + newFilename.toFile().getName());
-//
-//                                        File jsonFile = new File(newFilename.toFile().getParent() + File.separator + "." + newFilename.toFile().getName() + ".json");
-//
-//                                        try {
-//                                            logger.info("Try to delete: " + jsonFile.getAbsolutePath());
-//                                            boolean jsonFileDeleted = jsonFile.delete();
-//
-//                                            if (jsonFileDeleted) {
-//                                                logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
-//                                                isUploaded = true;
-//                                            } else {
-//                                                logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
-//                                            }
-//
-//                                        } catch(Exception e) {
-//                                            logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
-//                                        }
-//
-//                                    } else {
-//                                        logger.error("Delete operation is failed for " + filename.toFile().getAbsolutePath());
-//                                    }
-//                                }
-//
-//                            }
-//                        }
+                        logger.info("Deleted file: "+file.getAbsoluteFile().toString());
                     }
-
                 }
 
                 boolean valid = key.reset();

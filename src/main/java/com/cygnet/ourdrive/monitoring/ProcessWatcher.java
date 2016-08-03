@@ -51,71 +51,75 @@ public class ProcessWatcher extends Thread {
         return stop.get();
     }
 
+    /**
+     *
+     */
     private void stopThread() {
         stop.set(true);
         process.destroy();
-//        this.interrupt();
+        logger.info("Process watcher has been stopped because application has been closed");
     }
 
+    /**
+     *
+     * @param modifiedFile
+     * @param unlock
+     * @return
+     */
     private boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
 
         Boolean isUploaded = false;
-//        if (!isStopped()) {
-//            GlobalSettings globalSettings = GlobalSettings.getInstance();
+        try {
 
-//            Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
+            isUploaded = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
+            if (isUploaded) {
 
-            try {
+                boolean origFileDeleted = false;
 
-                isUploaded = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
-                if (isUploaded) {
-
-                    boolean origFileDeleted = false;
-
-                    try {
-                        origFileDeleted = modifiedFile.delete();
-                    } catch(Exception e) {
-                        logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
-                    }
-
-                    if (origFileDeleted) {
-
-                        logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
-                        logger.info("Saved and unlocked file: " + modifiedFile.getName());
-
-                        File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
-
-                        try {
-                            logger.info("Try to delete: " + jsonFile.getAbsolutePath());
-                            boolean jsonFileDeleted = jsonFile.delete();
-
-                            if (jsonFileDeleted) {
-                                logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
-                                isUploaded = true;
-                            } else {
-                                logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
-                            }
-
-                        } catch(Exception e) {
-                            logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
-                        }
-
-                    } else {
-                        logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
-                    }
-
+                try {
+                    origFileDeleted = modifiedFile.delete();
+                } catch(Exception e) {
+                    logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
                 }
 
-            } catch (Exception e) {
-                logger.error("Try to upload "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
+                if (origFileDeleted) {
+
+                    logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
+                    logger.info("Saved and unlocked file: " + modifiedFile.getName());
+
+                    File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
+
+                    try {
+                        logger.info("Try to delete: " + jsonFile.getAbsolutePath());
+                        boolean jsonFileDeleted = jsonFile.delete();
+
+                        if (jsonFileDeleted) {
+                            logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
+                            isUploaded = true;
+                        } else {
+                            logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
+                        }
+
+                    } catch(Exception e) {
+                        logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
+                    }
+
+                } else {
+                    logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
+                }
+
             }
-//        } else {
-//            logger.error("ProcessWatcher seems o be stopped");
-//        }
+
+        } catch (Exception e) {
+            logger.error("Try to upload "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
+        }
 
         return isUploaded;
     }
 
+    /**
+     *
+     */
     public void setStop()
     {
         Thread.currentThread().interrupt();
@@ -131,30 +135,21 @@ public class ProcessWatcher extends Thread {
             // [pid][detailed title with file name]
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
-            logger.info("OS: "+this.OS);
-            logger.info("processesList.size(): "+processesList.size()+" | this.processIds.size(): "+this.processIds.size());
-
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
                 Map.Entry pair = (Map.Entry) o;
 
                 // contain only pid
                 List<String> allpIds = new ArrayList<String>();
-//                String[] allpIds = new String[2];
 
                 for (Object processInfo : processesList.entrySet()) {
                     Map.Entry processPair = (Map.Entry) processInfo;
                     allpIds.add(processPair.getKey().toString());
                 }
 
-                logger.info("contains "+pair.getKey().toString()+": "+allpIds.contains(pair.getKey().toString()));
-                logger.info("allpIds.size(): "+allpIds.size()+" | this.processIds.size(): "+this.processIds.size());
-
-
                 switch(this.OS) {
-
                     case "windows":
-
+                        logger.info("All Ids: "+allpIds.size()+" | Process Ids: "+this.processIds.size());
                         if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
@@ -190,7 +185,7 @@ public class ProcessWatcher extends Thread {
             }
 
             try {
-                Thread.sleep(500L);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage());
             }
