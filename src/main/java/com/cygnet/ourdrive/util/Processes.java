@@ -62,7 +62,7 @@ public class Processes {
                 case "windows":
                     //  tasklist /v /FI "STATUS eq running" /FO "CSV" /NH
 //                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
-                    p = Runtime.getRuntime().exec("tasklist /V /FO \"TABLE\" /FI \"STATUS eq running\" /NH");
+                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
 
                     logger.info("tasklist: " + p.toString());
 
@@ -72,8 +72,8 @@ public class Processes {
 
                             System.out.println(process);
 
-//                            process = process.replace("\"", "");
-                            String arr[] = process.split("\t");
+                            process = process.substring(1, process.length() - 1);
+                            String arr[] = process.split("\",\"");
                             String[] preparedProcesses = new String[3];
 
                             Integer i = 0;
