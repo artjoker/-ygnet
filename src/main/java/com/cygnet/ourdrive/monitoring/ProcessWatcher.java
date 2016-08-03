@@ -131,8 +131,8 @@ public class ProcessWatcher extends Thread {
             // [pid][detailed title with file name]
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
-//            logger.info("OS: "+this.OS);
-//            logger.info("processesList.size(): "+processesList.size()+" | this.processIds.size(): "+this.processIds.size());
+            logger.info("OS: "+this.OS);
+            logger.info("processesList.size(): "+processesList.size()+" | this.processIds.size(): "+this.processIds.size());
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
@@ -147,8 +147,8 @@ public class ProcessWatcher extends Thread {
                     allpIds.add(processPair.getKey().toString());
                 }
 
-//                logger.info("contains "+pair.getKey().toString()+": "+allpIds.contains(pair.getKey().toString()));
-//                logger.info("allpIds.size(): "+allpIds.size()+" | this.processIds.size(): "+this.processIds.size());
+                logger.info("contains "+pair.getKey().toString()+": "+allpIds.contains(pair.getKey().toString()));
+                logger.info("allpIds.size(): "+allpIds.size()+" | this.processIds.size(): "+this.processIds.size());
 
 
                 switch(this.OS) {
@@ -190,7 +190,7 @@ public class ProcessWatcher extends Thread {
             }
 
             try {
-                Thread.sleep(300L);
+                Thread.sleep(500L);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage());
             }
