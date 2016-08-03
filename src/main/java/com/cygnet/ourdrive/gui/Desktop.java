@@ -164,7 +164,7 @@ public class Desktop {
             Process process = pb.start();
 
             try {
-                Thread.sleep(2000L);
+                Thread.sleep(1500L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
