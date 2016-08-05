@@ -36,6 +36,7 @@ public class Processes {
                 case "linux":
                     // ps -Ao %p%a
                     p = Runtime.getRuntime().exec("ps -Ao %p;%a");
+                    p.waitFor();
 
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -61,6 +62,7 @@ public class Processes {
                 case "windows":
                     p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
 //                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /NH");
+                    p.waitFor();
 
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -107,6 +109,7 @@ public class Processes {
                                 String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
                                 if (preparedProcesses[2].contains(filenameWithoutExtension)) {
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+//                                    processes.put(preparedProcesses[1].trim(), file.getName().trim());
                                 }
                             }
                         }
@@ -126,5 +129,4 @@ public class Processes {
 
         return processes;
     }
-
 }

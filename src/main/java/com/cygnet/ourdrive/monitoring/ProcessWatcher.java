@@ -4,16 +4,14 @@ import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
+import org.jutils.jprocesses.JProcesses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -33,18 +31,20 @@ public class ProcessWatcher extends Thread {
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
+    private Thread sfwThread;
 
     public ProcessWatcher() {
 
     }
 
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, Thread sfwThread, String OS) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
+        this.sfwThread = sfwThread;
     }
 
     public boolean isStopped() {
@@ -55,9 +55,15 @@ public class ProcessWatcher extends Thread {
      *
      */
     private void stopThread() {
+        this.sfwThread.interrupt();
+        if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
+            logger.error("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive. Something went wrong");
+        } else {
+            logger.info("SFW thread has been interrupted");
+        }
+        logger.info("Process watcher has been stopped because application has been closed");
         stop.set(true);
         process.destroy();
-        logger.info("Process watcher has been stopped because application has been closed");
     }
 
     /**
@@ -149,6 +155,7 @@ public class ProcessWatcher extends Thread {
 
                 switch(this.OS) {
                     case "windows":
+                        // 2015_08_04_IMG_0082-uuu
                         logger.info("All Ids: "+allpIds.size()+" | Process Ids: "+this.processIds.size());
                         if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
                             File file = new File(pair.getValue().toString());

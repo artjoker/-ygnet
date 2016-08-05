@@ -87,9 +87,9 @@ public class Desktop {
         Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
         // add file to watcher
         logger.info("Set file watcher service to: "+downloadPath.toString());
-        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
+        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient, file);
         sfw.start();
-        logger.info("Started file watcher service: "+sfw.getName());
+        logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
 
         if (isLinux()) {
 
@@ -110,7 +110,7 @@ public class Desktop {
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "linux", false);// Processes.getProcessIdsByFile(file, "linux");
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "linux"));
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.error(e.getMessage());
@@ -137,7 +137,7 @@ public class Desktop {
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "mac", false); //Processes.getProcessIdsByFile(file, "mac");
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "mac"));
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "mac"));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.error(e.getMessage());
@@ -164,7 +164,7 @@ public class Desktop {
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.error(e.getMessage());
@@ -191,7 +191,7 @@ public class Desktop {
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.error(e.getMessage());

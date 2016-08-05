@@ -13,6 +13,7 @@ import java.nio.file.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -24,15 +25,19 @@ public class SingleFileWatcher extends Thread {
     private AtomicBoolean stop = new AtomicBoolean(false);
     private static final Logger logger = LoggerFactory.getLogger(OurDriveService.class);
 
+    private File downloadedFile;
+
     boolean overflowTriggeredFlag = false;
 
     /**
      * @param downloadPath
      * @param socketClient
      */
-    public SingleFileWatcher(Path downloadPath, WebSocketClient socketClient) {
+    public SingleFileWatcher(Path downloadPath, WebSocketClient socketClient, File downloadedFile) {
         this.downloadPath = downloadPath;
         this.socketClient = socketClient;
+        this.downloadedFile = downloadedFile;
+        this.setName("DownloadFileWatcher");
     }
 
     /**
@@ -129,6 +134,8 @@ public class SingleFileWatcher extends Thread {
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
+//                        if (!shouldIgnoreFile(file.getName()) && !isJsonFile(file.getName())) {
+                        //  && this.downloadedFile.getName().equals(file.getName())
                         if (!shouldIgnoreFile(file.getName()) && !isJsonFile(file.getName())) {
                             logger.info("Check if file has a JSON sibling: " + file.getAbsoluteFile().toString());
                             if (hasJsonBro(file)) {
