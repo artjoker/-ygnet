@@ -151,12 +151,55 @@ public class Desktop {
             };
 
             try {
-                logger.info("Trying to start command: cmd.exe /c cd "+file.getParent()+" && start "+file.getName());
+                logger.info("Trying to start command: command.com /c cd "+file.getParent()+" && start "+file.getName());
 
-                ProcessBuilder pb = new ProcessBuilder(Commands);
+                ProcessBuilder pb = new ProcessBuilder(Commands).redirectErrorStream(true);
                 Process process = pb.start(); // Start the process.
+
+                InputStream stderr = process.getInputStream();
+                InputStreamReader isr = new InputStreamReader(stderr);
+                BufferedReader br = new BufferedReader(isr);
+                String line = null;
+                String errorMsg = null;
+
+                while ((line = br.readLine()) != null) {
+                    System.out.println(line);
+                    errorMsg += line;
+                }
+
                 process.waitFor(); // Wait for the process to finish.
-                logger.info("Successfully started and finished");
+
+                if(process.exitValue() != 0) {
+                    logger.error(errorMsg);
+//                    Thread interruptThis = getThreadByName("ApplicationWatcher");
+                    sfw.stopThread();
+//                    interruptThis.interrupt();
+                    File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
+                    if(jsonFile.exists()) {
+                        Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
+                        if(isJsonDeleted) {
+                            logger.info("Because of previous error, "+jsonFile.getAbsoluteFile()+" has been deleted!");
+                        } else {
+                            logger.error("Could not delete "+jsonFile.getAbsoluteFile()+" because of previous error!");
+                        }
+                    } else {
+                        logger.info("Could not find "+jsonFile.getAbsoluteFile()+"!");
+                    }
+
+                    if(file.exists()) {
+                        Boolean isDeleted = file.getAbsoluteFile().delete();
+                        if(isDeleted) {
+                            logger.info("Because of previous error, "+file.getAbsoluteFile()+" has been deleted!");
+                        } else {
+                            logger.error("Could not delete "+file.getAbsoluteFile()+" because of previous error!");
+                        }
+                    } else {
+                        logger.info("Could not find "+file.getAbsoluteFile()+"!");
+                    }
+                } else {
+                    logger.info("Successfully started and finished");
+                }
+
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
@@ -187,19 +230,47 @@ public class Desktop {
                 InputStreamReader isr = new InputStreamReader(stderr);
                 BufferedReader br = new BufferedReader(isr);
                 String line = null;
+                String errorMsg = null;
 
                 while ((line = br.readLine()) != null) {
                     System.out.println(line);
-
+                    errorMsg += line;
                 }
 
                 process.waitFor(); // Wait for the process to finish.
 
-                System.out.println("Waiting ...");
+                if(process.exitValue() != 0) {
+                    logger.error(errorMsg);
+//                    Thread interruptThis = getThreadByName("ApplicationWatcher");
+                    sfw.stopThread();
+//                    interruptThis.interrupt();
+                    File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
+                    if(jsonFile.exists()) {
+                        Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
+                        if(isJsonDeleted) {
+                            logger.info("Because of previous error, "+jsonFile.getAbsoluteFile()+" has been deleted!");
+                        } else {
+                            logger.error("Could not delete "+jsonFile.getAbsoluteFile()+" because of previous error!");
+                        }
+                    } else {
+                        logger.info("Could not find "+jsonFile.getAbsoluteFile()+"!");
+                    }
 
-                System.out.println("Returned Value :" + process.exitValue());
+                    if(file.exists()) {
+                        Boolean isDeleted = file.getAbsoluteFile().delete();
+                        if(isDeleted) {
+                            logger.info("Because of previous error, "+file.getAbsoluteFile()+" has been deleted!");
+                        } else {
+                            logger.error("Could not delete "+file.getAbsoluteFile()+" because of previous error!");
+                        }
+                    } else {
+                        logger.info("Could not find "+file.getAbsoluteFile()+"!");
+                    }
 
-                logger.info("Successfully started and finished");
+                } else {
+                    logger.info("Successfully started and finished");
+                }
+
             } catch (Exception e) {
                 logger.error(e.getMessage());
             }
@@ -213,6 +284,14 @@ public class Desktop {
             }
         }
     }
+
+    private Thread getThreadByName(String threadName) {
+        for (Thread t : Thread.getAllStackTraces().keySet()) {
+            if (t.getName().equals(threadName)) return t;
+        }
+        return null;
+    }
+
 
     public Process getProcess() {
         return process;
