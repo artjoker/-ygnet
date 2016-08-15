@@ -304,7 +304,7 @@ validate:
   ReadINIStr $ourdriveUsername "$PLUGINSDIR\ourdriveparams.ini" "Field 4" "State"
   ReadINIStr $ourdrivePassword "$PLUGINSDIR\ourdriveparams.ini" "Field 6" "State"
 
-  MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL: " + $ourdriveUrl
+  ; MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL: " + $ourdriveUrl
 
 done:
 
