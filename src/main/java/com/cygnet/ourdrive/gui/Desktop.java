@@ -15,8 +15,7 @@ import com.cygnet.ourdrive.websocket.WebSocketClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -181,9 +180,25 @@ public class Desktop {
             try {
                 logger.info("Trying to start command: cmd.exe /c cd "+file.getParent()+" && start "+file.getName());
 
-                ProcessBuilder pb = new ProcessBuilder(Commands);
+                ProcessBuilder pb = new ProcessBuilder(Commands).redirectErrorStream(true);
                 Process process = pb.start(); // Start the process.
+
+                InputStream stderr = process.getInputStream();
+                InputStreamReader isr = new InputStreamReader(stderr);
+                BufferedReader br = new BufferedReader(isr);
+                String line = null;
+
+                while ((line = br.readLine()) != null) {
+                    System.out.println(line);
+
+                }
+
                 process.waitFor(); // Wait for the process to finish.
+
+                System.out.println("Waiting ...");
+
+                System.out.println("Returned Value :" + process.exitValue());
+
                 logger.info("Successfully started and finished");
             } catch (Exception e) {
                 logger.error(e.getMessage());
