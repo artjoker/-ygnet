@@ -268,7 +268,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     public static void main(String[] args) {
 
-        if(!lock()) {
+        Boolean isLocked = lock();
+        if(!isLocked) {
             createUUID();
             LocalWebServer localWebServer = new LocalWebServer();
             localWebServer.start();
