@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -267,46 +268,52 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     public static void main(String[] args) {
 
-        createUUID();
-        LocalWebServer localWebServer = new LocalWebServer();
-        localWebServer.start();
+        if(!lock()) {
+            createUUID();
+            LocalWebServer localWebServer = new LocalWebServer();
+            localWebServer.start();
 
-        boolean configure = false;
-        boolean start = true;
+            boolean configure = false;
+            boolean start = true;
 
-        String username = null;
-        String password = null;
-        String url = null;
+            String username = null;
+            String password = null;
+            String url = null;
 
-        File importFolder = null;
-        File intrayFolder = null;
+            File importFolder = null;
+            File intrayFolder = null;
 
-        for (int i = 0; i < args.length; ++i) {
-            String arg = args[i];
-            if (arg.equalsIgnoreCase("/C")) {
-                configure = true;
-            } else if (arg.equals("stop")) {
-                start = false;
-            } else if (i < args.length - 1) {
-                if (arg.equalsIgnoreCase("/u")) {
-                    username = args[++i];
-                } else if (arg.equalsIgnoreCase("/p")) {
-                    password = args[++i];
-                } else if (arg.equalsIgnoreCase("/o")) {
-                    url = args[++i];
-                } else if (arg.equalsIgnoreCase("/i")) {
-                    importFolder = new File(args[++i]);
-                } else if (arg.equalsIgnoreCase("/t")) {
-                    intrayFolder = new File(args[++i]);
+            for (int i = 0; i < args.length; ++i) {
+                String arg = args[i];
+                if (arg.equalsIgnoreCase("/C")) {
+                    configure = true;
+                } else if (arg.equals("stop")) {
+                    start = false;
+                } else if (i < args.length - 1) {
+                    if (arg.equalsIgnoreCase("/u")) {
+                        username = args[++i];
+                    } else if (arg.equalsIgnoreCase("/p")) {
+                        password = args[++i];
+                    } else if (arg.equalsIgnoreCase("/o")) {
+                        url = args[++i];
+                    } else if (arg.equalsIgnoreCase("/i")) {
+                        importFolder = new File(args[++i]);
+                    } else if (arg.equalsIgnoreCase("/t")) {
+                        intrayFolder = new File(args[++i]);
+                    }
                 }
             }
-        }
-        getInstance().createInitialSettings(username, password, url, importFolder, intrayFolder);
+            getInstance().createInitialSettings(username, password, url, importFolder, intrayFolder);
 
-        if (start) {
-            getInstance().start(configure);
+            if (start) {
+                getInstance().start(configure);
+            } else {
+                getInstance().stop();
+            }
         } else {
-            getInstance().stop();
+            JOptionPane.showMessageDialog(new Frame(), "An instance of ourdrive is currently running.", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
     }
 
@@ -419,5 +426,27 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      */
     public static String getDownloadFolderName() {
         return download_folder_name;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private static boolean lock()
+    {
+        try
+        {
+            final File file=new File("ourdrive.lock");
+            if (file.createNewFile())
+            {
+                file.deleteOnExit();
+                return true;
+            }
+            return false;
+        }
+        catch (IOException e)
+        {
+            return false;
+        }
     }
 }

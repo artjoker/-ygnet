@@ -172,7 +172,7 @@ public class Desktop {
                 if(process.exitValue() != 0) {
                     logger.error(errorMsg);
 //                    Thread interruptThis = getThreadByName("ApplicationWatcher");
-                    sfw.stopThread();
+//                    sfw.stopThread();
 //                    interruptThis.interrupt();
                     File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
                     if(jsonFile.exists()) {
@@ -242,7 +242,7 @@ public class Desktop {
                 if(process.exitValue() != 0) {
                     logger.error(errorMsg);
 //                    Thread interruptThis = getThreadByName("ApplicationWatcher");
-                    sfw.stopThread();
+//                    sfw.stopThread();
 //                    interruptThis.interrupt();
                     File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
                     if(jsonFile.exists()) {
