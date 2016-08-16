@@ -97,7 +97,7 @@ public class Processes {
                                     case 7:
                                         break;
                                     case 8:
-                                        preparedProcesses[2] = value.replaceAll("[^A-Za-z0-9\\_\\-\\. ]", "");
+                                        preparedProcesses[2] = value;
                                         break;
                                 }
                                 i++;
