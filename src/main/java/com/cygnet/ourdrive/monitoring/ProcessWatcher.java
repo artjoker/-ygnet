@@ -4,7 +4,6 @@ import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
-import org.jutils.jprocesses.JProcesses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -168,14 +167,6 @@ public class ProcessWatcher extends Thread {
                         break;
 
                     case "mac":
-//                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
-//                            File file = new File(pair.getValue().toString());
-//                            if (hasJsonBro(file)) {
-//                                if (this.uploadAsNewVersion(file, true)) {
-//                                    this.stopThread();
-//                                }
-//                            }
-//                        }
                         break;
 
                     case "linux":

@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -58,7 +55,6 @@ public class SingleFileWatcher extends Thread {
     }
 
     /**
-     *
      * @param filename
      * @return
      */
@@ -67,7 +63,6 @@ public class SingleFileWatcher extends Thread {
     }
 
     /**
-     *
      * @return
      */
     public boolean isStopped() {
@@ -127,22 +122,20 @@ public class SingleFileWatcher extends Thread {
                     @SuppressWarnings("unchecked")
                     WatchEvent<Path> ev = (WatchEvent<Path>) event;
                     Path filename = ev.context();
-                    File file = new File(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName()+"/"+ev.context());
+                    File file = new File(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName() + "/" + ev.context());
 
                     if (kind == StandardWatchEventKinds.OVERFLOW) {
                         logger.warn("File listener received an overflow event.  You should probably check into this");
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
-//                        if (!shouldIgnoreFile(file.getName()) && !isJsonFile(file.getName())) {
-                        //  && this.downloadedFile.getName().equals(file.getName())
                         if (!shouldIgnoreFile(file.getName()) && !isJsonFile(file.getName())) {
                             logger.info("Check if file has a JSON sibling: " + file.getAbsoluteFile().toString());
                             if (hasJsonBro(file)) {
                                 logger.info("JSON sibling check OK for: " + file.getAbsoluteFile().toString());
                                 logger.info("Trying to upload because of save action: " + file.getAbsoluteFile().toString());
                                 Boolean uploadAsNewVersion = uploadAsNewVersion(file, false);
-                                if(uploadAsNewVersion) {
+                                if (uploadAsNewVersion) {
                                     logger.info("Upload successful for: " + file.getAbsoluteFile().toString());
                                 }
                             }
@@ -151,9 +144,9 @@ public class SingleFileWatcher extends Thread {
                         }
 
                     } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                        logger.info("Created file: "+file.getAbsoluteFile().toString());
+                        logger.info("Created file: " + file.getAbsoluteFile().toString());
                     } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-                        logger.info("Deleted file: "+file.getAbsoluteFile().toString());
+                        logger.info("Deleted file: " + file.getAbsoluteFile().toString());
                     }
                 }
 
@@ -188,26 +181,25 @@ public class SingleFileWatcher extends Thread {
 
 
     /**
-     *
      * @param filename
      * @return
      */
     private String getRealFilenameFromTmpFile(String filename) {
 
         //array to hold replacements
-        String replacements[] = {"#","~","$",".swp",".swap",".tmp",".temp","lock"};
+        String replacements[] = {"#", "~", "$", ".swp", ".swap", ".tmp", ".temp", "lock"};
 
         //loop over the array and replace
         String replacedFilename = filename;
-        for(String replacement: replacements) {
+        for (String replacement : replacements) {
             replacedFilename = replacedFilename.replace(replacement, "");
         }
 
         String arr[] = replacedFilename.split("\\.");
         ArrayList<String> returnArr = new ArrayList<String>();
 
-        for(int i = 0; i < arr.length; i++) {
-            if(!arr[i].equals("")) {
+        for (int i = 0; i < arr.length; i++) {
+            if (!arr[i].equals("")) {
                 returnArr.add(arr[i]);
             }
         }

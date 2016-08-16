@@ -2,7 +2,6 @@ package com.cygnet.ourdrive.util;
 
 import com.cygnet.ourdrive.OurDriveService;
 import org.apache.commons.io.FilenameUtils;
-import org.jutils.jprocesses.JProcesses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,9 +41,7 @@ public class Processes {
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
-//                            System.out.println(process); // <-- Print all Process here line
 
-                            // by line
                             String arr[] = process.split(";");
 
                             if(getall) {
@@ -62,16 +59,12 @@ public class Processes {
                     break;
                 case "windows":
                     p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
-//                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /NH");
                     p.waitFor();
 
                     if (p != null) {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
 
-//                            System.out.println(process);
-
-//                            process = process.substring(1, process.length() - 1);
                             String arr[] = process.split("\",\"");
                             String[] preparedProcesses = new String[3];
 
@@ -110,13 +103,10 @@ public class Processes {
                                 String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
                                 if (preparedProcesses[2].contains(filenameWithoutExtension)) {
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
-//                                    processes.put(preparedProcesses[1].trim(), file.getName().trim());
                                 }
                             }
                         }
                         input.close();
-
-//                        System.out.println("= = = = process list end = = = = = = = = = = = = = =");
 
                     }
                     break;

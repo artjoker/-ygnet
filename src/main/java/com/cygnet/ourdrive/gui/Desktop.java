@@ -171,9 +171,6 @@ public class Desktop {
 
                 if(process.exitValue() != 0) {
                     logger.error(errorMsg);
-//                    Thread interruptThis = getThreadByName("ApplicationWatcher");
-//                    sfw.stopThread();
-//                    interruptThis.interrupt();
                     File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
                     if(jsonFile.exists()) {
                         Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
@@ -202,6 +199,12 @@ public class Desktop {
 
             } catch (Exception e) {
                 logger.error(e.getMessage());
+            }
+
+            try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             try {
@@ -241,9 +244,6 @@ public class Desktop {
 
                 if(process.exitValue() != 0) {
                     logger.error(errorMsg);
-//                    Thread interruptThis = getThreadByName("ApplicationWatcher");
-//                    sfw.stopThread();
-//                    interruptThis.interrupt();
                     File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
                     if(jsonFile.exists()) {
                         Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();

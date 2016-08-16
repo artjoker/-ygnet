@@ -7,7 +7,6 @@ import com.cygnet.ourdrive.gui.SytrayInitializationException;
 import com.cygnet.ourdrive.monitoring.FolderMonitor;
 import com.cygnet.ourdrive.monitoring.FolderMonitorListener;
 import com.cygnet.ourdrive.monitoring.FolderMonitorTask;
-import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.monitoring.exceptions.OurdriveException;
 import com.cygnet.ourdrive.settings.FolderSettings;
 import com.cygnet.ourdrive.settings.GlobalSettings;
@@ -22,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -108,7 +106,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      */
     public void stop() {
 
-        logger.info("Closing application and cleanup "+getUserDataDirectory() + "/" + download_folder_name);
+        logger.info("Closing application and cleanup " + getUserDataDirectory() + "/" + download_folder_name);
         deleteDownloadFolderContent(new File(getUserDataDirectory() + "/" + download_folder_name));
 
         running = false;
@@ -118,7 +116,6 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     }
 
     /**
-     *
      * @param folder
      */
     private static void deleteDownloadFolderContent(File folder) {
@@ -137,11 +134,6 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         logger.info("Loading systray item");
         try {
             SystrayItem.register(VERSION);
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         } catch (SytrayInitializationException e) {
             logger.warn("Could not initialize systray item", e);
         }
@@ -268,54 +260,47 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     public static void main(String[] args) {
 
-//        Boolean isLocked = lock();
-//        if(!isLocked) {
-            createUUID();
-            LocalWebServer localWebServer = new LocalWebServer();
-            localWebServer.start();
+        createUUID();
+        LocalWebServer localWebServer = new LocalWebServer();
+        localWebServer.start();
 
-            boolean configure = false;
-            boolean start = true;
+        boolean configure = false;
+        boolean start = true;
 
-            String username = null;
-            String password = null;
-            String url = null;
+        String username = null;
+        String password = null;
+        String url = null;
 
-            File importFolder = null;
-            File intrayFolder = null;
+        File importFolder = null;
+        File intrayFolder = null;
 
-            for (int i = 0; i < args.length; ++i) {
-                String arg = args[i];
-                if (arg.equalsIgnoreCase("/C")) {
-                    configure = true;
-                } else if (arg.equals("stop")) {
-                    start = false;
-                } else if (i < args.length - 1) {
-                    if (arg.equalsIgnoreCase("/u")) {
-                        username = args[++i];
-                    } else if (arg.equalsIgnoreCase("/p")) {
-                        password = args[++i];
-                    } else if (arg.equalsIgnoreCase("/o")) {
-                        url = args[++i];
-                    } else if (arg.equalsIgnoreCase("/i")) {
-                        importFolder = new File(args[++i]);
-                    } else if (arg.equalsIgnoreCase("/t")) {
-                        intrayFolder = new File(args[++i]);
-                    }
+        for (int i = 0; i < args.length; ++i) {
+            String arg = args[i];
+            if (arg.equalsIgnoreCase("/C")) {
+                configure = true;
+            } else if (arg.equals("stop")) {
+                start = false;
+            } else if (i < args.length - 1) {
+                if (arg.equalsIgnoreCase("/u")) {
+                    username = args[++i];
+                } else if (arg.equalsIgnoreCase("/p")) {
+                    password = args[++i];
+                } else if (arg.equalsIgnoreCase("/o")) {
+                    url = args[++i];
+                } else if (arg.equalsIgnoreCase("/i")) {
+                    importFolder = new File(args[++i]);
+                } else if (arg.equalsIgnoreCase("/t")) {
+                    intrayFolder = new File(args[++i]);
                 }
             }
-            getInstance().createInitialSettings(username, password, url, importFolder, intrayFolder);
+        }
+        getInstance().createInitialSettings(username, password, url, importFolder, intrayFolder);
 
-            if (start) {
-                getInstance().start(configure);
-            } else {
-                getInstance().stop();
-            }
-//        } else {
-//            JOptionPane.showMessageDialog(new Frame(), "An instance of Ourdrive is currently running.", "Ourdrive Message",
-//                    JOptionPane.ERROR_MESSAGE);
-//            System.exit(0);
-//        }
+        if (start) {
+            getInstance().start(configure);
+        } else {
+            getInstance().stop();
+        }
     }
 
     @Override
@@ -338,7 +323,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     }
 
     private void startTimer(FolderSettings folderSettings) {
-        if(isSettingsValid(folderSettings)) {
+        if (isSettingsValid(folderSettings)) {
             final File folder = folderSettings.getFolder();
             Timer t = timers.get(folder);
             if (t == null && folder != null) {
@@ -382,17 +367,17 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      * @return validation result
      */
     private boolean isSettingsValid(FolderSettings settings) {
-        if(StringUtils.isBlank(settings.getServerBaseUrl())) {
+        if (StringUtils.isBlank(settings.getServerBaseUrl())) {
             showWarningDialog(String.format("Folder '%s' configuration error.\n\"%s\" cannot be empty.", settings.getFolder(), "Server base url"));
             return false;
         }
 
-        if(StringUtils.isBlank(settings.getUsername())) {
+        if (StringUtils.isBlank(settings.getUsername())) {
             showWarningDialog(String.format("Folder '%s' configuration error.\n\"%s\" cannot be empty.", settings.getFolder(), "Username"));
             return false;
         }
 
-        if(StringUtils.isBlank(settings.getPassword())) {
+        if (StringUtils.isBlank(settings.getPassword())) {
             showWarningDialog(String.format("Folder '%s' configuration error.\n\"%s\" cannot be empty.", settings.getFolder(), "Password"));
             return false;
         }
@@ -430,15 +415,12 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     }
 
     /**
-     *
      * @return
      */
-    private static boolean lock()
-    {
-        try
-        {
-            final File file=new File("ourdrive.lock");
-            if(file.exists()) {
+    private static boolean lock() {
+        try {
+            final File file = new File("ourdrive.lock");
+            if (file.exists()) {
                 return true;
             } else {
                 if (file.createNewFile()) {
@@ -447,9 +429,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
                 }
                 return true;
             }
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             return false;
         }
     }
