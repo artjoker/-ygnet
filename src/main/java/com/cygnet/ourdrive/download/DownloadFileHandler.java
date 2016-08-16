@@ -2,7 +2,6 @@ package com.cygnet.ourdrive.download;
 
 import com.cygnet.ourdrive.monitoring.FileHandler;
 import com.cygnet.ourdrive.settings.FolderSettings;
-import com.cygnet.ourdrive.download.DownloadService;
 import com.cygnet.ourdrive.upload.UploadServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

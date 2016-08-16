@@ -256,6 +256,12 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
                 settings.addFolderSettings(folderSettings);
             }
         }
+
+        try {
+            settings.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
