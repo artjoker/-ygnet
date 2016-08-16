@@ -312,7 +312,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
                 getInstance().stop();
             }
         } else {
-            JOptionPane.showMessageDialog(new Frame(), "An instance of ourdrive is currently running.", "Dialog",
+            JOptionPane.showMessageDialog(new Frame(), "An instance of Ourdrive is currently running.", "Ourdrive Message",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
@@ -438,12 +438,15 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         try
         {
             final File file=new File("ourdrive.lock");
-            if (file.createNewFile())
-            {
-                file.deleteOnExit();
+            if(file.exists()) {
+                return true;
+            } else {
+                if (file.createNewFile()) {
+                    file.deleteOnExit();
+                    return false;
+                }
                 return true;
             }
-            return false;
         }
         catch (IOException e)
         {

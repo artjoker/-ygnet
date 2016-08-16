@@ -18,3 +18,287 @@
 2016-08-15 16:08:58,155 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '12074f5f-42bb-49f4-9a4e-0719f44af310'.
 2016-08-15 16:09:13,176 [AWT-EventQueue-0] INFO  com.cygnet.ourdrive.gui.SystrayItem - Show log
 2016-08-15 16:09:13,316 [AWT-EventQueue-0] INFO  com.cygnet.ourdrive.swingTail.SwingTail - Showing swingtail
+2016-08-15 16:17:15,287 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:17:15,505 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:17:15,521 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:17:15,583 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:17:16,415 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: c2b65218-b2bc-40de-b9e1-0ba7c751a539
+2016-08-15 16:17:16,430 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:17:16,461 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#DPj4gj3f2vHbrNZpAAjU. You are now connected to socket server.
+2016-08-15 16:17:16,618 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'c2b65218-b2bc-40de-b9e1-0ba7c751a539'.
+2016-08-15 16:23:37,994 [AWT-EventQueue-0] INFO  com.cygnet.ourdrive.OurDriveService - Closing application and cleanup C:\Users\Cygnet Cloud\.ourdrive\/ourdrive_downloads
+2016-08-15 16:23:38,134 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service stopped
+2016-08-15 16:30:57,406 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:30:57,609 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:30:57,609 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:30:57,624 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:30:58,374 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: b0a8e63e-c62b-443a-a571-278d9095eb11
+2016-08-15 16:30:58,390 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:30:58,421 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#oGvCE4qIS-QmC0evAAjW. You are now connected to socket server.
+2016-08-15 16:30:58,531 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'b0a8e63e-c62b-443a-a571-278d9095eb11'.
+2016-08-15 16:31:32,420 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:31:32,607 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:31:32,623 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:31:32,638 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:31:33,310 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 5f09c479-0fc6-4899-8517-3badf662f143
+2016-08-15 16:31:33,342 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:31:33,388 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#sF2qHMqyYP8bsQYvAAjX. You are now connected to socket server.
+2016-08-15 16:31:33,467 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '5f09c479-0fc6-4899-8517-3badf662f143'.
+2016-08-15 16:32:22,542 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:32:22,729 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:32:22,745 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:32:22,760 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:32:23,429 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 05c8ee30-a3ed-4713-a05a-25227d4c3c6c
+2016-08-15 16:32:23,460 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:32:23,523 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#oKjRsXKzg9i4a3hcAAjY. You are now connected to socket server.
+2016-08-15 16:32:23,616 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '05c8ee30-a3ed-4713-a05a-25227d4c3c6c'.
+2016-08-15 16:32:47,086 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:32:47,274 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:32:47,289 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:32:47,305 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:32:48,025 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 746a89fb-42b3-45e0-bcba-d07150fe96b9
+2016-08-15 16:32:48,041 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:32:48,087 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#sK_tu7feZxrLOHT-AAjZ. You are now connected to socket server.
+2016-08-15 16:32:48,181 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '746a89fb-42b3-45e0-bcba-d07150fe96b9'.
+2016-08-15 16:33:25,440 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:33:25,471 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:33:25,486 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:33:25,502 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 39
+2016-08-15 16:33:25,518 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:33:28,803 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:33:28,819 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:33:30,550 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:33:56,445 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:36:22,549 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:36:22,737 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:36:22,752 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:36:22,768 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:36:23,596 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: d9a06217-8942-459f-b05e-1645f4883afb
+2016-08-15 16:36:23,628 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:36:23,690 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#8fuEQTMigrrGO_RiAAjb. You are now connected to socket server.
+2016-08-15 16:36:23,768 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'd9a06217-8942-459f-b05e-1645f4883afb'.
+2016-08-15 16:37:07,061 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:07,096 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:37:07,128 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:37:07,190 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 37
+2016-08-15 16:37:07,206 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:08,282 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:08,298 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:09,611 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:37:14,258 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:16,930 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:19,729 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:22,432 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:25,187 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:27,828 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:30,484 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:33,109 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:35,835 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:38,670 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:41,405 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:44,104 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:46,688 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:49,373 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:52,217 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:55,061 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:55,374 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:37:57,952 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 0 | Process Ids: 1
+2016-08-15 16:37:58,077 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:58,093 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:58,108 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:58,155 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc has been deleted!
+2016-08-15 16:37:58,171 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Saved and unlocked file: 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:58,187 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Try to delete: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:37:58,155 [DownloadFileWatcher] ERROR com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:58,218 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:37:58,233 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:37:58,249 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json has been deleted!
+2016-08-15 16:37:58,280 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - SFW thread has been interrupted
+2016-08-15 16:37:58,265 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:37:58,280 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Process watcher has been stopped because application has been closed
+2016-08-15 16:37:58,312 [Thread-19] ERROR com.cygnet.ourdrive.OurDriveService - 
+2016-08-15 16:38:24,745 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:24,776 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:38:24,792 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:38:24,808 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 51
+2016-08-15 16:38:24,823 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:25,918 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:25,934 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:27,197 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:38:31,605 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:38:34,207 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:38:37,051 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:38:39,834 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:38:42,044 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:42,776 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:38:45,441 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 0 | Process Ids: 1
+2016-08-15 16:38:45,469 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:45,469 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc has been deleted!
+2016-08-15 16:38:45,516 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - Saved and unlocked file: 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:45,527 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - Try to delete: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:38:45,486 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:45,545 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json has been deleted!
+2016-08-15 16:38:45,574 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - SFW thread has been interrupted
+2016-08-15 16:38:45,584 [Thread-32] INFO  com.cygnet.ourdrive.OurDriveService - Process watcher has been stopped because application has been closed
+2016-08-15 16:38:45,559 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:45,612 [Thread-32] ERROR com.cygnet.ourdrive.OurDriveService - 
+2016-08-15 16:38:45,628 [DownloadFileWatcher] ERROR com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json (The system cannot find the file specified)
+2016-08-15 16:38:45,651 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:38:45,666 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:38:45,682 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:39:06,407 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:39:06,422 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2016_08_12_cdv_photo_002-.jpg.json
+2016-08-15 16:39:06,454 [Thread-43] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:39:06,454 [Thread-43] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 62
+2016-08-15 16:39:06,469 [Thread-43] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:39:07,320 [Thread-43] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:39:34,170 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:34,186 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:34,202 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:39:34,186 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:34,249 [Thread-50] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:39:34,264 [Thread-50] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 69
+2016-08-15 16:39:34,283 [Thread-50] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:34,249 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:34,318 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:34,384 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:34,405 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:39:34,420 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:39:35,565 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:35,565 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:35,637 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:35,622 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:39:37,465 [Thread-50] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:40:22,318 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:40:22,505 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:40:22,521 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:40:22,536 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:40:23,439 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 1b7a5535-671e-422f-b8f5-c5f49121bca9
+2016-08-15 16:40:23,455 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:40:23,501 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#t1Ax7ZGE_FAF5G25AAjf. You are now connected to socket server.
+2016-08-15 16:40:23,564 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '1b7a5535-671e-422f-b8f5-c5f49121bca9'.
+2016-08-15 16:40:49,420 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:40:49,536 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:40:49,632 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:40:49,742 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 37
+2016-08-15 16:40:49,781 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:40:50,784 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:40:50,822 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:40:52,092 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:40:56,452 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:40:59,037 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:41:01,738 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:41:04,345 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:41:06,926 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:41:09,786 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 1 | Process Ids: 1
+2016-08-15 16:41:10,424 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-08-15 16:41:12,721 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - All Ids: 0 | Process Ids: 1
+2016-08-15 16:41:12,787 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:41:12,806 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:41:12,828 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:41:12,899 [DownloadFileWatcher] ERROR com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:41:12,896 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc has been deleted!
+2016-08-15 16:41:12,941 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Saved and unlocked file: 2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:41:12,956 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Try to delete: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:41:12,927 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-08-15 16:41:12,972 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json has been deleted!
+2016-08-15 16:41:13,003 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - SFW thread has been interrupted
+2016-08-15 16:41:13,019 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Process watcher has been stopped because application has been closed
+2016-08-15 16:41:13,019 [Thread-19] ERROR com.cygnet.ourdrive.OurDriveService - 
+2016-08-15 16:41:12,987 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:41:13,062 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Deleted file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-08-15 16:44:01,806 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:44:01,900 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2016_08_12_cdv_photo_002-.jpg.json
+2016-08-15 16:44:01,915 [Thread-40] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:44:01,931 [Thread-40] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 58
+2016-08-15 16:44:01,947 [Thread-40] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:44:07,593 [Thread-40] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:45:55,507 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,523 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,539 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,554 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2016_08_12_cdv_photo_002-.jpg.json
+2016-08-15 16:45:55,570 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,617 [Thread-54] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:45:55,632 [Thread-54] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 72
+2016-08-15 16:45:55,648 [Thread-54] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,804 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,820 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,836 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:55,867 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:56,242 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 16:45:56,257 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2016_08_12_cdv_photo_002-.jpg.json
+2016-08-15 16:45:56,999 [Thread-54] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:52:00,825 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,825 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,825 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,856 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,872 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,887 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,840 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,934 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,919 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:00,872 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.1470920343686.jpg.json
+2016-08-15 16:52:00,950 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.1470920343686.jpg.json
+2016-08-15 16:52:00,981 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.1470920343686.jpg.json
+2016-08-15 16:52:00,934 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:01,012 [Thread-89] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:52:01,044 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\1470920343686.jpg
+2016-08-15 16:52:01,059 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.1470920343686.jpg.json
+2016-08-15 16:52:01,075 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.1470920343686.jpg.json
+2016-08-15 16:52:01,044 [Thread-89] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 107
+2016-08-15 16:52:01,090 [Thread-89] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 1470920343686.jpg
+2016-08-15 16:52:02,100 [Thread-89] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:52:51,984 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:51,984 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,015 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:52:51,984 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,046 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:51,984 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,062 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,046 [Thread-99] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:52:52,000 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,093 [Thread-99] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 117
+2016-08-15 16:52:52,078 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,062 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,140 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,140 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,109 [Thread-99] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start invoice.pdf
+2016-08-15 16:52:52,109 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,210 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,171 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:52:52,245 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:52:52,156 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,230 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,292 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:52:52,323 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:52:52,355 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:52:52,339 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:52:52,464 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:52:55,181 [Thread-99] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 16:55:02,702 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-15 16:55:02,905 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:55:02,920 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-15 16:55:02,936 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-15 16:55:03,639 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: f3dd0fea-4dfb-49f8-8154-6ba64e76f9a4
+2016-08-15 16:55:03,655 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-08-15 16:55:03,686 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#7yVA-sAqrTTArdmaAAji. You are now connected to socket server.
+2016-08-15 16:55:03,780 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'f3dd0fea-4dfb-49f8-8154-6ba64e76f9a4'.
+2016-08-15 16:55:25,939 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\invoice.pdf
+2016-08-15 16:55:25,980 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.invoice.pdf.json
+2016-08-15 16:55:26,011 [Thread-20] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 16:55:26,038 [Thread-20] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 38
+2016-08-15 16:55:26,047 [Thread-20] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start invoice.pdf
+2016-08-15 16:55:27,230 [Thread-20] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished
+2016-08-15 17:19:21,628 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 17:19:21,628 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 17:19:21,628 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 17:19:21,644 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2016_08_12_cdv_photo_002-.jpg.json
+2016-08-15 17:19:21,660 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - JSON sibling check OK for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 17:19:21,691 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Trying to upload because of save action: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 17:19:21,691 [Thread-140] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-08-15 17:19:21,722 [Thread-140] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 158
+2016-08-15 17:19:21,738 [Thread-140] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2016_08_12_cdv_photo_002-.jpg
+2016-08-15 17:19:21,878 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Upload successful for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2016_08_12_cdv_photo_002-.jpg
+2016-08-15 17:19:21,894 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Created file: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2016_08_12_cdv_photo_002-.jpg.json
+2016-08-15 17:19:21,894 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2016_08_12_cdv_photo_002-.jpg.json
+2016-08-15 17:19:23,191 [Thread-140] INFO  com.cygnet.ourdrive.OurDriveService - Successfully started and finished

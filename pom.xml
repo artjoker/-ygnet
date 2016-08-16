@@ -66,17 +66,19 @@
             <version>0.7.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.jprocesses/jProcesses -->
+        <dependency>
+            <groupId>org.jprocesses</groupId>
+            <artifactId>jProcesses</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+
         <!--https://github.com/TooTallNate/Java-WebSocket-->
         <dependency>
             <groupId>org.java-websocket</groupId>
             <artifactId>Java-WebSocket</artifactId>
             <version>1.3.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jprocesses</groupId>
-            <artifactId>jProcesses</artifactId>
-            <version>1.4</version>
         </dependency>
 
         <dependency>
