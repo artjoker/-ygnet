@@ -71,7 +71,7 @@ public class Processes {
 
 //                            System.out.println(process);
 
-                            process = process.substring(1, process.length() - 1);
+//                            process = process.substring(1, process.length() - 1);
                             String arr[] = process.split("\",\"");
                             String[] preparedProcesses = new String[3];
 
@@ -97,7 +97,7 @@ public class Processes {
                                     case 7:
                                         break;
                                     case 8:
-                                        preparedProcesses[2] = value;
+                                        preparedProcesses[2] = value.replaceAll("[^A-Za-z0-9\\_\\-\\. ]", "");
                                         break;
                                 }
                                 i++;

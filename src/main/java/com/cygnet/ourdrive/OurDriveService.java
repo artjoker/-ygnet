@@ -268,8 +268,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     public static void main(String[] args) {
 
-        Boolean isLocked = lock();
-        if(!isLocked) {
+//        Boolean isLocked = lock();
+//        if(!isLocked) {
             createUUID();
             LocalWebServer localWebServer = new LocalWebServer();
             localWebServer.start();
@@ -311,11 +311,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             } else {
                 getInstance().stop();
             }
-        } else {
-            JOptionPane.showMessageDialog(new Frame(), "An instance of Ourdrive is currently running.", "Ourdrive Message",
-                    JOptionPane.ERROR_MESSAGE);
-            System.exit(0);
-        }
+//        } else {
+//            JOptionPane.showMessageDialog(new Frame(), "An instance of Ourdrive is currently running.", "Ourdrive Message",
+//                    JOptionPane.ERROR_MESSAGE);
+//            System.exit(0);
+//        }
     }
 
     @Override

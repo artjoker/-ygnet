@@ -276,6 +276,12 @@ public class Desktop {
             }
 
             try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
