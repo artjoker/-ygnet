@@ -112,7 +112,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error("Get process information failed: "+e.getMessage());
+                logger.warn("Get process information failed: ProcessWatcher has been stopped");
             }
 
 
@@ -139,7 +139,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "mac"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error("Get process information failed: "+e.getMessage());
+                logger.warn("Get process information failed: ProcessWatcher has been stopped");
             }
 
         } else if (isWindows() && isWindows9X()) {
@@ -194,7 +194,7 @@ public class Desktop {
                         logger.info("Could not find "+file.getAbsoluteFile()+"!");
                     }
                 } else {
-                    logger.info("Successfully started and finished");
+                    logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
                 }
 
             } catch (Exception e) {
@@ -212,7 +212,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error("Get process information failed: "+e.getMessage());
+                logger.warn("Get process information failed: ProcessWatcher has been stopped");
             }
 
         } else if (isWindows()) {
@@ -268,7 +268,7 @@ public class Desktop {
                     }
 
                 } else {
-                    logger.info("Successfully started and finished");
+                    logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
                 }
 
             } catch (Exception e) {
@@ -286,7 +286,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error("Get process information failed: "+e.getMessage());
+                logger.warn("Get process information failed: ProcessWatcher has been stopped");
             }
         }
     }
