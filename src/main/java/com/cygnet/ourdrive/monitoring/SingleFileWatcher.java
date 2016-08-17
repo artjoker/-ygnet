@@ -59,7 +59,6 @@ public class SingleFileWatcher extends Thread {
             return true;
         }
 
-
         boolean ignore = filename.toLowerCase().startsWith("#");
         ignore = ignore || filename.toLowerCase().startsWith("~");
         ignore = ignore || filename.toLowerCase().startsWith(".");
