@@ -56,7 +56,7 @@ public class ProcessWatcher extends Thread {
     private void stopThread() {
         this.sfwThread.interrupt();
         if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
-            logger.error("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive. Something went wrong");
+//            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
         } else {
             logger.info("SFW thread has been interrupted");
         }
