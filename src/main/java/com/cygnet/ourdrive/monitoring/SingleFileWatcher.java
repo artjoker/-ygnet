@@ -67,7 +67,8 @@ public class SingleFileWatcher extends Thread {
         ignore = ignore || filename.toLowerCase().endsWith(".swap");
         ignore = ignore || filename.toLowerCase().endsWith(".tmp");
         ignore = ignore || filename.toLowerCase().endsWith(".temp");
-        ignore = ignore || filename.toLowerCase().endsWith("#");
+        ignore = ignore || filename.toLowerCase().endsWith(".json");
+        ignore = ignore || filename.endsWith("#");
         return ignore;
     }
 
