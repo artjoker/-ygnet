@@ -38,10 +38,28 @@ public class SingleFileWatcher extends Thread {
     }
 
     /**
-     * @param filename
+     * @param file
      * @return
      */
-    private boolean shouldIgnoreFile(String filename) {
+    private boolean shouldIgnoreFile(File file) {
+
+        if(file.isDirectory()) {
+            return true;
+        }
+
+        if(file.isHidden()) {
+            return true;
+        }
+
+        String filename = file.getName();
+        String extension = "";
+        extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+
+        if(extension.equals("")) {
+            return true;
+        }
+
+
         boolean ignore = filename.toLowerCase().startsWith("#");
         ignore = ignore || filename.toLowerCase().startsWith("~");
         ignore = ignore || filename.toLowerCase().startsWith(".");
@@ -129,7 +147,7 @@ public class SingleFileWatcher extends Thread {
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
-                        if (!shouldIgnoreFile(file.getName()) && !isJsonFile(file.getName())) {
+                        if (!shouldIgnoreFile(file) && !isJsonFile(file.getName())) {
                             logger.info("Check if file has a JSON sibling: " + file.getAbsoluteFile().toString());
                             if (hasJsonBro(file)) {
                                 logger.info("JSON sibling check OK for: " + file.getAbsoluteFile().toString());
