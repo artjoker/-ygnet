@@ -36,16 +36,16 @@ public class FolderMonitor implements FileVisitor {
     }
 
     private boolean shouldIgnoreFile(String filename) {
-        boolean ignore = filename.startsWith("#");
-        ignore = ignore || filename.startsWith("~");
-        ignore = ignore || filename.startsWith(".");
-        ignore = ignore || filename.startsWith("$");
-        ignore = ignore || filename.endsWith(".swp");
-        ignore = ignore || filename.endsWith(".swap");
-        ignore = ignore || filename.endsWith(".tmp");
-        ignore = ignore || filename.endsWith(".temp");
-        ignore = ignore || filename.endsWith("#");
-        ignore = ignore || filename.indexOf('.') < 0;
+        boolean ignore = filename.toLowerCase().startsWith("#");
+        ignore = ignore || filename.toLowerCase().startsWith("~");
+        ignore = ignore || filename.toLowerCase().startsWith(".");
+        ignore = ignore || filename.toLowerCase().startsWith("$");
+        ignore = ignore || filename.toLowerCase().endsWith(".swp");
+        ignore = ignore || filename.toLowerCase().endsWith(".swap");
+        ignore = ignore || filename.toLowerCase().endsWith(".tmp");
+        ignore = ignore || filename.toLowerCase().endsWith(".temp");
+        ignore = ignore || filename.toLowerCase().endsWith("#");
+        ignore = ignore || filename.toLowerCase().indexOf('.') < 0;
         return ignore;
     }
 

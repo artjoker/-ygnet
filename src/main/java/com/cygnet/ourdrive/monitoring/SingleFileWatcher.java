@@ -42,15 +42,15 @@ public class SingleFileWatcher extends Thread {
      * @return
      */
     private boolean shouldIgnoreFile(String filename) {
-        boolean ignore = filename.startsWith("#");
-        ignore = ignore || filename.startsWith("~");
-        ignore = ignore || filename.startsWith(".");
-        ignore = ignore || filename.startsWith("$");
-        ignore = ignore || filename.endsWith(".swp");
-        ignore = ignore || filename.endsWith(".swap");
-        ignore = ignore || filename.endsWith(".tmp");
-        ignore = ignore || filename.endsWith(".temp");
-        ignore = ignore || filename.endsWith("#");
+        boolean ignore = filename.toLowerCase().startsWith("#");
+        ignore = ignore || filename.toLowerCase().startsWith("~");
+        ignore = ignore || filename.toLowerCase().startsWith(".");
+        ignore = ignore || filename.toLowerCase().startsWith("$");
+        ignore = ignore || filename.toLowerCase().endsWith(".swp");
+        ignore = ignore || filename.toLowerCase().endsWith(".swap");
+        ignore = ignore || filename.toLowerCase().endsWith(".tmp");
+        ignore = ignore || filename.toLowerCase().endsWith(".temp");
+        ignore = ignore || filename.toLowerCase().endsWith("#");
         return ignore;
     }
 
@@ -59,7 +59,7 @@ public class SingleFileWatcher extends Thread {
      * @return
      */
     private boolean isJsonFile(String filename) {
-        return filename.endsWith(".json");
+        return filename.toLowerCase().endsWith(".json");
     }
 
     /**
@@ -86,7 +86,7 @@ public class SingleFileWatcher extends Thread {
         try {
             return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("Uploading as new version failed: "+e.getMessage());
         }
         return false;
     }
@@ -158,7 +158,7 @@ public class SingleFileWatcher extends Thread {
             }
 
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            logger.error("Creating single file watcher process failed: "+e.getMessage());
         }
 
     }
@@ -179,32 +179,4 @@ public class SingleFileWatcher extends Thread {
         return testFile.exists();
     }
 
-
-    /**
-     * @param filename
-     * @return
-     */
-    private String getRealFilenameFromTmpFile(String filename) {
-
-        //array to hold replacements
-        String replacements[] = {"#", "~", "$", ".swp", ".swap", ".tmp", ".temp", "lock"};
-
-        //loop over the array and replace
-        String replacedFilename = filename;
-        for (String replacement : replacements) {
-            replacedFilename = replacedFilename.replace(replacement, "");
-        }
-
-        String arr[] = replacedFilename.split("\\.");
-        ArrayList<String> returnArr = new ArrayList<String>();
-
-        for (int i = 0; i < arr.length; i++) {
-            if (!arr[i].equals("")) {
-                returnArr.add(arr[i]);
-            }
-        }
-
-        return StringUtils.join(returnArr, ".");
-
-    }
 }

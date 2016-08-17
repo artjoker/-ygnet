@@ -53,7 +53,7 @@ public class WebSocketClient {
             try {
                 instance = new WebSocketClient();
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Get instance of web socket failed: "+e.getMessage());
             }
         }
         return instance;
@@ -99,7 +99,7 @@ public class WebSocketClient {
                 try {
                     logger.info(obj.getString(Socket.EVENT_MESSAGE));
                 } catch (JSONException e) {
-                    logger.error(e.getMessage());
+                    logger.error("Enabling socket even listener failed: "+e.getMessage());
                 }
             }
 
@@ -164,11 +164,11 @@ public class WebSocketClient {
                     logger.error("Could not emit event your room connection, because socket is NULL.");
                 }
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Emitting socket "+OURDRIVE_JOIN_ROOM+" failed: "+e.getMessage());
             }
 
         } catch (JSONException e) {
-            logger.error(e.getMessage());
+            logger.error("JSON emitting to socket "+OURDRIVE_JOIN_ROOM+" failed: "+e.getMessage());
         }
     }
 
@@ -198,11 +198,11 @@ public class WebSocketClient {
                     logger.error("Could not emit event 'upload_as_new_version', because socket is NULL.");
                 }
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Emitting socket "+OURDRIVE_FILE_DOWNLOAD_SUCCESSFUL+" failed: "+e.getMessage());
             }
 
         } catch (JSONException e) {
-            logger.error(e.getMessage());
+            logger.error("JSON emitting to socket "+OURDRIVE_FILE_DOWNLOAD_SUCCESSFUL+" failed: "+e.getMessage());
         }
 
         return response;
@@ -264,18 +264,18 @@ public class WebSocketClient {
                             logger.error("Could not emit event 'upload_as_new_version', because socket is NULL.");
                         }
                     } catch (Exception e) {
-                        logger.error(e.getMessage());
+                        logger.error("uploadAsNewVersionRequest failed: "+e.getMessage());
                     }
 
                 } catch (JSONException e) {
-                    logger.error(e.getMessage());
+                    logger.error("JSON for uploadAsNewVersionRequest failed: "+e.getMessage());
                 }
 
             } catch (IOException e) {
-                logger.error(e.getMessage());
+                logger.error("IO for uploadAsNewVersionRequest failed: "+e.getMessage());
             }
         } catch (FileNotFoundException e) {
-            logger.error(e.getMessage());
+            logger.error("File not found for uploadAsNewVersionRequest failed: "+e.getMessage());
         }
 
         return returnVal;
@@ -334,19 +334,19 @@ public class WebSocketClient {
                             }).start();
 
                         } catch (Exception e) {
-                            logger.error(e.getMessage());
+                            logger.error("OurdriveFileDownload failed: "+e.getMessage());
                         }
 
                     } catch (Exception e) {
-                        logger.error(e.getMessage());
+                        logger.error("OurdriveFileDownload failed: "+e.getMessage());
                     }
 
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    logger.error("OurdriveFileDownload failed: "+e.getMessage());
                 }
 
             } catch (JSONException e) {
-                logger.error(e.getMessage());
+                logger.error("JSON OurdriveFileDownload failed: "+e.getMessage());
             }
         }
     }

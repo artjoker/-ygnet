@@ -102,9 +102,9 @@ public class Desktop {
                 ProcessBuilder pb = new ProcessBuilder(args);
                 Process process = pb.start(); // Start the process.
                 process.waitFor(); // Wait for the process to finish.
-                logger.info("Successfully started and finished");
+                logger.info("Successfully opened file with an application");
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Open file with application failed: "+e.getMessage());
             }
 
             try {
@@ -112,7 +112,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Get process information failed: "+e.getMessage());
             }
 
 
@@ -129,9 +129,9 @@ public class Desktop {
                 ProcessBuilder pb = new ProcessBuilder(args);
                 Process process = pb.start(); // Start the process.
                 process.waitFor(); // Wait for the process to finish.
-                logger.info("Successfully started and finished");
+                logger.info("Successfully opened file with an application");
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Open file with application failed: "+e.getMessage());
             }
 
             try {
@@ -139,7 +139,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "mac"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Get process information failed: "+e.getMessage());
             }
 
         } else if (isWindows() && isWindows9X()) {
@@ -170,7 +170,7 @@ public class Desktop {
                 process.waitFor(); // Wait for the process to finish.
 
                 if(process.exitValue() != 0) {
-                    logger.error(errorMsg);
+                    logger.error("Open file with application failed: "+errorMsg);
                     File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
                     if(jsonFile.exists()) {
                         Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
@@ -198,7 +198,7 @@ public class Desktop {
                 }
 
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Open file with application failed: "+e.getMessage());
             }
 
             try {
@@ -212,7 +212,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Get process information failed: "+e.getMessage());
             }
 
         } else if (isWindows()) {
@@ -243,7 +243,7 @@ public class Desktop {
                 process.waitFor(); // Wait for the process to finish.
 
                 if(process.exitValue() != 0) {
-                    logger.error(errorMsg);
+                    logger.error("Open file with application failed: "+errorMsg);
                     File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
                     if(jsonFile.exists()) {
                         Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
@@ -272,7 +272,7 @@ public class Desktop {
                 }
 
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Open file with application failed: "+e.getMessage());
             }
 
             try {
@@ -286,7 +286,7 @@ public class Desktop {
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("Get process information failed: "+e.getMessage());
             }
         }
     }

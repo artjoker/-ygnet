@@ -155,7 +155,7 @@ public class ProcessWatcher extends Thread {
                 switch(this.OS) {
                     case "windows":
                         // 2015_08_04_IMG_0082-uuu
-                        logger.info("All Ids: "+allpIds.size()+" | Process Ids: "+this.processIds.size());
+//                        logger.info("All Ids: "+allpIds.size()+" | Process Ids: "+this.processIds.size());
                         if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
@@ -185,7 +185,7 @@ public class ProcessWatcher extends Thread {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
-                logger.error(e.getMessage());
+                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
             }
 
         }
