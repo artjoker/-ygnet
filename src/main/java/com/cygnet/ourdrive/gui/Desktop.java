@@ -202,7 +202,7 @@ public class Desktop {
             }
 
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(3000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -276,7 +276,7 @@ public class Desktop {
             }
 
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(3000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
