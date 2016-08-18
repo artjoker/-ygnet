@@ -29,7 +29,7 @@ public class LocalSSLWebServer {
         Integer port = 44444;
         try {
 
-            String certFileName = "cert/ourdrive.jks";
+            String certFileName = "cert/server.cert";
             InputStream certInputStream = getClass().getClassLoader().getResourceAsStream(certFileName);
 
             char[] password = "ourdrive123".toCharArray();

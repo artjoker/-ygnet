@@ -92,28 +92,102 @@ public class Desktop {
 
         if (isLinux()) {
 
-            List<String> args = new ArrayList<String>();
-            args.add(properties.getProperty("linux.openAs")); // command name
-            args.add(file.getAbsoluteFile().toString()); // optional args added as separate list items
+            String[] Commands = new String[]{
+                    properties.getProperty("linux.openAs"),
+                    file.getAbsolutePath()
+            };
 
             try {
-                logger.info("Trying to start command: linux.openAs "+file.getAbsolutePath());
+                logger.info("Trying to start command: "+properties.getProperty("linux.openAs")+" "+file.getAbsolutePath());
 
-                ProcessBuilder pb = new ProcessBuilder(args);
+                ProcessBuilder pb = new ProcessBuilder(Commands).redirectErrorStream(true);
                 Process process = pb.start(); // Start the process.
+
+                InputStream stderr = process.getInputStream();
+                InputStreamReader isr = new InputStreamReader(stderr);
+                BufferedReader br = new BufferedReader(isr);
+                String line = null;
+                String errorMsg = null;
+
+                while ((line = br.readLine()) != null) {
+                    System.out.println(line);
+                    errorMsg += line;
+                }
+
                 process.waitFor(); // Wait for the process to finish.
-                logger.info("Successfully opened file with an application");
+
+                if(process.exitValue() != 0) {
+                    logger.error("Open file with application failed: "+errorMsg);
+                    File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
+                    if(jsonFile.exists()) {
+                        Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
+                        if(isJsonDeleted) {
+                            logger.info("Because of previous error, "+jsonFile.getAbsoluteFile()+" has been deleted!");
+                        } else {
+                            logger.error("Could not delete "+jsonFile.getAbsoluteFile()+" because of previous error!");
+                        }
+                    } else {
+                        logger.info("Could not find "+jsonFile.getAbsoluteFile()+"!");
+                    }
+
+                    if(file.exists()) {
+                        Boolean isDeleted = file.getAbsoluteFile().delete();
+                        if(isDeleted) {
+                            logger.info("Because of previous error, "+file.getAbsoluteFile()+" has been deleted!");
+                        } else {
+                            logger.error("Could not delete "+file.getAbsoluteFile()+" because of previous error!");
+                        }
+                    } else {
+                        logger.info("Could not find "+file.getAbsoluteFile()+"!");
+                    }
+
+                } else {
+                    logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
+                }
+
             } catch (Exception e) {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
 
             try {
-                HashMap processIds = Processes.GetSystemProcesses(file, "linux", false);// Processes.getProcessIdsByFile(file, "linux");
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
+                Thread.sleep(3000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.warn("Get process information failed: ProcessWatcher has been stopped");
             }
+
+
+
+
+//            List<String> args = new ArrayList<String>();
+//            args.add(properties.getProperty("linux.openAs")); // command name
+//            args.add(file.getAbsoluteFile().toString()); // optional args added as separate list items
+//
+//            try {
+//                logger.info("Trying to start command: linux.openAs "+file.getAbsolutePath());
+//
+//                ProcessBuilder pb = new ProcessBuilder(args);
+//                Process process = pb.start(); // Start the process.
+//                process.waitFor(); // Wait for the process to finish.
+//                logger.info("Successfully opened file with an application");
+//            } catch (Exception e) {
+//                logger.error("Open file with application failed: "+e.getMessage());
+//            }
+//
+//            try {
+//                HashMap processIds = Processes.GetSystemProcesses(file, "linux", false);// Processes.getProcessIdsByFile(file, "linux");
+//                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
+//                this.pwt.get().run();
+//            } catch (Exception e) {
+//                logger.warn("Get process information failed: ProcessWatcher has been stopped");
+//            }
 
 
 
