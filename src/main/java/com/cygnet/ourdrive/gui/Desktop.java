@@ -350,11 +350,6 @@ public class Desktop {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
 
-//            try {
-//                this.wait();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
             try {
                 Thread.sleep(3000L);
             } catch (InterruptedException e) {
