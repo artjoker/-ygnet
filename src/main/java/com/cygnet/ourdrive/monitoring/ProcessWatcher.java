@@ -140,11 +140,11 @@ public class ProcessWatcher extends Thread {
             // [pid][detailed title with file name]
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
-            }
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
+//            }
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
