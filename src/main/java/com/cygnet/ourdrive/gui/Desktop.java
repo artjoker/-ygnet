@@ -351,16 +351,16 @@ public class Desktop extends Thread {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
 
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 //            try {
-//                Thread.sleep(3000L);
+//                this.wait();
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
+            try {
+                Thread.sleep(3000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
