@@ -155,14 +155,15 @@ public class SingleFileWatcher extends Thread {
                                 Boolean uploadAsNewVersion = uploadAsNewVersion(file, false);
                                 if (uploadAsNewVersion) {
                                     logger.info("Upload successful for: " + file.getAbsoluteFile().toString());
-
-                                    try {
-                                        Thread.sleep(500L);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
                                 }
                             }
+
+                            try {
+                                Thread.sleep(500L);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
                         } else {
                             logger.info("No modify action for: " + file.getAbsoluteFile().toString());
                         }
