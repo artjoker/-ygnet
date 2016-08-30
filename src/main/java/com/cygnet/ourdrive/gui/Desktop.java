@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Desktop {
+public class Desktop extends Thread {
 
     private static final Logger logger = LoggerFactory.getLogger(OurDriveService.class);
 
@@ -41,6 +41,8 @@ public class Desktop {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        this.setName("Desktop");
     }
 
     /**
@@ -350,10 +352,15 @@ public class Desktop {
             }
 
             try {
-                Thread.sleep(3000L);
+                this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+//            try {
+//                Thread.sleep(3000L);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
