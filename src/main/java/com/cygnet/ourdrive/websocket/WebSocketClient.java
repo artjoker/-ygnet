@@ -223,56 +223,64 @@ public class WebSocketClient {
         FileInputStream jsonTargetFile = null;
 
         try {
-            jsonTargetFile = new FileInputStream(jsonFile);
-            try {
+            if(jsonFile.exists()) {
+                jsonTargetFile = new FileInputStream(jsonFile);
 
-
-                String targetFileStr = IOUtils.toString(jsonTargetFile);
-                jsonTargetFile.close();
-
-                byte[] bytes = Files.readAllBytes(Paths.get(downloadPath.toAbsolutePath().toString() + File.separator + file.getName()));
-
-                byte[] dataFileStr = StringDecoder.encode(bytes, StringDecoder.ENCODE_BASE64);
-
-                JSONObject JsonObj = null;
-                JSONObject client = new JSONObject();
-                try {
-
-                    client.put("id", OurDriveService.getOurdriveId());
-                    client.put("name", OurDriveService.getOurdriveId());
-                    client.put("room", OurDriveService.getOurdriveId());
-
-                    JsonObj = new JSONObject(targetFileStr);
-                    JsonObj.getJSONObject("file_data").remove("client");
-                    JsonObj.getJSONObject("file_data").put("content", new String(dataFileStr, "UTF-8"));
-                    JsonObj.getJSONObject("file_data").put("unlock", unlock);
-                    JsonObj.getJSONObject("file_data").put("base64", true);
-
-                    if (unlock) {
-                        JsonObj.getJSONObject("file_data").put("edit", 1);
-                        JsonObj.getJSONObject("file_data").put("next_action", "close");
-                    } else {
-                        JsonObj.getJSONObject("file_data").put("next_action", "nothing");
-                    }
-
-                    JsonObj.put("client", client);
+                if(file.exists()) {
                     try {
-                        if (socket != null) {
-                            socket.emit(OURDRIVE_FILE_UPLOAD, JsonObj);
-                            returnVal = true;
-                        } else {
-                            logger.error("Could not emit event 'upload_as_new_version', because socket is NULL.");
+
+                        String targetFileStr = IOUtils.toString(jsonTargetFile);
+                        jsonTargetFile.close();
+
+                        byte[] bytes = Files.readAllBytes(Paths.get(downloadPath.toAbsolutePath().toString() + File.separator + file.getName()));
+
+                        byte[] dataFileStr = StringDecoder.encode(bytes, StringDecoder.ENCODE_BASE64);
+
+                        JSONObject JsonObj = null;
+                        JSONObject client = new JSONObject();
+                        try {
+
+                            client.put("id", OurDriveService.getOurdriveId());
+                            client.put("name", OurDriveService.getOurdriveId());
+                            client.put("room", OurDriveService.getOurdriveId());
+
+                            JsonObj = new JSONObject(targetFileStr);
+                            JsonObj.getJSONObject("file_data").remove("client");
+                            JsonObj.getJSONObject("file_data").put("content", new String(dataFileStr, "UTF-8"));
+                            JsonObj.getJSONObject("file_data").put("unlock", unlock);
+                            JsonObj.getJSONObject("file_data").put("base64", true);
+
+                            if (unlock) {
+                                JsonObj.getJSONObject("file_data").put("edit", 1);
+                                JsonObj.getJSONObject("file_data").put("next_action", "close");
+                            } else {
+                                JsonObj.getJSONObject("file_data").put("next_action", "nothing");
+                            }
+
+                            JsonObj.put("client", client);
+                            try {
+                                if (socket != null) {
+                                    socket.emit(OURDRIVE_FILE_UPLOAD, JsonObj);
+                                    returnVal = true;
+                                } else {
+                                    logger.error("Could not emit event 'upload_as_new_version', because socket is NULL.");
+                                }
+                            } catch (Exception e) {
+                                logger.error("uploadAsNewVersionRequest failed: " + e.getMessage());
+                            }
+
+                        } catch (JSONException e) {
+                            logger.error("JSON for uploadAsNewVersionRequest failed: " + e.getMessage());
                         }
-                    } catch (Exception e) {
-                        logger.error("uploadAsNewVersionRequest failed: "+e.getMessage());
+
+                    } catch (IOException e) {
+                        logger.warn("IO for uploadAsNewVersionRequest failed: " + e.getMessage());
                     }
-
-                } catch (JSONException e) {
-                    logger.error("JSON for uploadAsNewVersionRequest failed: "+e.getMessage());
+                } else {
+                    logger.warn(file.getAbsolutePath()+" does not exists anymore.");
                 }
-
-            } catch (IOException e) {
-                logger.error("IO for uploadAsNewVersionRequest failed: "+e.getMessage());
+            } else {
+                logger.warn(jsonFile.getAbsolutePath()+" does not exists anymore.");
             }
         } catch (FileNotFoundException e) {
             logger.error("File not found for uploadAsNewVersionRequest failed: "+e.getMessage());

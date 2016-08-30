@@ -168,9 +168,9 @@ public class SingleFileWatcher extends Thread {
                         }
 
                     } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                        logger.info("Created file: " + file.getAbsoluteFile().toString());
+//                        logger.info("Created file: " + file.getAbsoluteFile().toString());
                     } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-                        logger.info("Deleted file: " + file.getAbsoluteFile().toString());
+//                        logger.info("Deleted file: " + file.getAbsoluteFile().toString());
                     }
                 }
 
