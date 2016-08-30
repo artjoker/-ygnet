@@ -268,7 +268,9 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     public static void main(String[] args) {
 
         createUUID();
-        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
+
+        LocalWebServer localWebServer = new LocalWebServer();
+//        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
         localWebServer.start();
 
         boolean configure = false;

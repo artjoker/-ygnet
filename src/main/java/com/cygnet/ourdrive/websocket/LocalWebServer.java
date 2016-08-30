@@ -61,7 +61,7 @@ public class LocalWebServer {
                 jsonObject.put("ourdrive_id", OurDriveService.getOurdriveId());
 
                 String response = jsonObject.toString();
-//                t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+                t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
                 t.sendResponseHeaders(200, response.length());
                 OutputStream os = t.getResponseBody();
                 os.write(response.getBytes());
@@ -92,7 +92,7 @@ public class LocalWebServer {
                 jsonObject.put("ourdrive_running", true);
 
                 String response = jsonObject.toString();
-//                t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+                t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
                 t.sendResponseHeaders(200, response.length());
                 OutputStream os = t.getResponseBody();
                 os.write(response.getBytes());
