@@ -17,6 +17,8 @@ public class Processes {
 
     private static final Logger logger = LoggerFactory.getLogger(OurDriveService.class);
 
+    private static final Integer maxCheckCount = 3;
+
     /**
      * get process ids
      * @param file
@@ -30,94 +32,105 @@ public class Processes {
         Process p = null;
         HashMap<String, String> processes = new HashMap<String, String>();
 
-        try {
+        for (int x = 1; x <= maxCheckCount; x++) {
 
-            switch (OS) {
-                case "linux":
-                    // ps -Ao %p%a
-                    p = Runtime.getRuntime().exec("ps -Ao %p;%a");
-                    p.waitFor();
+            processes = new HashMap<String, String>();
 
-                    if (p != null) {
-                        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                        while ((process = input.readLine()) != null) {
+            try {
 
-                            String arr[] = process.split(";");
+                switch (OS) {
+                    case "linux":
+                        // ps -Ao %p%a
+                        p = Runtime.getRuntime().exec("ps -Ao %p;%a");
+                        p.waitFor();
 
-                            if(getall) {
-                                processes.put(arr[0].trim(), arr[1].trim());
-                            } else {
-                                String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
-                                if (arr[1].contains(filenameWithoutExtension)) {
-                                    processes.put(arr[0].trim(), file.getAbsoluteFile().toString());
+                        if (p != null) {
+                            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                            while ((process = input.readLine()) != null) {
+
+                                String arr[] = process.split(";");
+
+                                if (getall) {
+                                    processes.put(arr[0].trim(), arr[1].trim());
+                                } else {
+                                    String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+                                    if (arr[1].contains(filenameWithoutExtension)) {
+                                        processes.put(arr[0].trim(), file.getAbsoluteFile().toString());
+                                    }
                                 }
                             }
+                            input.close();
+
                         }
-                        input.close();
+                        break;
+                    case "windows":
+                        p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
+                        p.waitFor();
 
-                    }
-                    break;
-                case "windows":
-                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
-                    p.waitFor();
+                        if (p != null) {
+                            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                            while ((process = input.readLine()) != null) {
 
-                    if (p != null) {
-                        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                        while ((process = input.readLine()) != null) {
+                                logger.info(process);
 
-                            logger.info(process);
+                                String arr[] = process.split("\",\"");
+                                String[] preparedProcesses = new String[3];
 
-                            String arr[] = process.split("\",\"");
-                            String[] preparedProcesses = new String[3];
-
-                            Integer i = 0;
-                            for (String value : arr) {
-                                switch (i) {
-                                    case 0:
-                                        break;
-                                    case 1:
-                                        preparedProcesses[1] = value;
-                                        break;
-                                    case 2:
-                                        break;
-                                    case 3:
-                                        break;
-                                    case 4:
-                                        break;
-                                    case 5:
-                                        break;
-                                    case 6:
-                                        preparedProcesses[0] = value;
-                                        break;
-                                    case 7:
-                                        break;
-                                    case 8:
-                                        preparedProcesses[2] = value;
-                                        break;
+                                Integer i = 0;
+                                for (String value : arr) {
+                                    switch (i) {
+                                        case 0:
+                                            break;
+                                        case 1:
+                                            preparedProcesses[1] = value;
+                                            break;
+                                        case 2:
+                                            break;
+                                        case 3:
+                                            break;
+                                        case 4:
+                                            break;
+                                        case 5:
+                                            break;
+                                        case 6:
+                                            preparedProcesses[0] = value;
+                                            break;
+                                        case 7:
+                                            break;
+                                        case 8:
+                                            preparedProcesses[2] = value;
+                                            break;
+                                    }
+                                    i++;
                                 }
-                                i++;
-                            }
 
-                            if(getall) {
-                                processes.put(preparedProcesses[1].trim(), preparedProcesses[2].trim());
-                            } else {
+                                if (getall) {
+                                    processes.put(preparedProcesses[1].trim(), preparedProcesses[2].trim());
+                                } else {
 
-                                String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
-                                if (preparedProcesses[2].contains(filenameWithoutExtension)) {
-                                    processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+                                    String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+                                    if (preparedProcesses[2].contains(filenameWithoutExtension)) {
+                                        processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+                                    }
                                 }
                             }
+                            input.close();
+
                         }
-                        input.close();
+                        break;
 
-                    }
-                    break;
+                }
 
+
+            } catch (Exception err) {
+                err.printStackTrace();
             }
 
-
-        } catch (Exception err) {
-            err.printStackTrace();
+            try {
+                Thread.sleep(500L);
+            } catch (InterruptedException e) {
+                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
+            }
         }
 
         return processes;
