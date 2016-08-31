@@ -1,0 +1,18 @@
+2016-08-29 16:27:34,052 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: /home/casten/ourdrive-files/test
+2016-08-29 16:27:34,053 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-29 16:27:34,469 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: /home/casten/.ourdrive/ourdrive_downloads
+2016-08-29 16:27:34,469 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-29 16:27:34,473 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-29 16:27:34,768 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 21666642-bcb8-4ee4-98b8-e0e14d11f1f7
+2016-08-29 16:27:34,769 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'linux' machine
+2016-08-29 16:27:34,775 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#_1RhX3XmJzaq0rQ2AAqA. You are now connected to socket server.
+2016-08-29 16:27:34,807 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '21666642-bcb8-4ee4-98b8-e0e14d11f1f7'.
+2016-08-29 17:24:56,138 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: /home/casten/ourdrive-files/test
+2016-08-29 17:24:56,139 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-08-29 17:24:56,567 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: /home/casten/.ourdrive/ourdrive_downloads
+2016-08-29 17:24:56,567 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-08-29 17:24:56,570 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-08-29 17:24:56,834 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: c8db3afb-ee85-426c-83d6-4e9e3aad04f2
+2016-08-29 17:24:56,835 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'linux' machine
+2016-08-29 17:24:56,840 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#G5pVPICVIpB80RJPAAqB. You are now connected to socket server.
+2016-08-29 17:24:56,879 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'c8db3afb-ee85-426c-83d6-4e9e3aad04f2'.
