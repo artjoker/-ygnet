@@ -100,7 +100,7 @@ public class SingleFileWatcher extends Thread {
      */
     public boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
         try {
-            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
+            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
         } catch (Exception e) {
             logger.error("Uploading as new version failed: "+e.getMessage());
         }

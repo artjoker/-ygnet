@@ -76,7 +76,7 @@ public class ProcessWatcher extends Thread {
         Boolean isUploaded = false;
         try {
 
-            isUploaded = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
+            isUploaded = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
             if (isUploaded) {
 
                 boolean origFileDeleted = false;
