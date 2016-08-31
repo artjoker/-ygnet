@@ -58,8 +58,8 @@ public class Processes {
                     }
                     break;
                 case "windows":
-//                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
-                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /NH");
+                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
+//                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /NH");
                     p.waitFor();
 
                     if (p != null) {
