@@ -144,57 +144,52 @@ public class ProcessWatcher extends Thread {
 
         while (!isStopped()) {
 
-            Boolean hasProcess = false;
+            // [pid][detailed title with file name]
+            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
-            do {
-                // [pid][detailed title with file name]
-                HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
+            // [pid][detailed title with file name]
+            for (Object o : this.processIds.entrySet()) { // processIds is the small array
+                Map.Entry pair = (Map.Entry) o;
 
-                // [pid][detailed title with file name]
-                for (Object o : this.processIds.entrySet()) { // processIds is the small array
-                    Map.Entry pair = (Map.Entry) o;
+                // contain only pid
+                List<String> allpIds = new ArrayList<String>();
 
-                    // contain only pid
-                    List<String> allpIds = new ArrayList<String>();
-
-                    logger.info("Actual process list values:");
-                    for (Object processInfo : processesList.entrySet()) {
-                        Map.Entry processPair = (Map.Entry) processInfo;
-                        logger.info("Key: " + processPair.getKey().toString() + ", -> Value: " + processPair.getValue().toString());
-                        allpIds.add(processPair.getKey().toString());
-                    }
-
-                    switch (this.OS) {
-                        case "windows":
-                            // 2015_08_04_IMG_0082-uuu
-                            logger.info("All Ids: " + allpIds.size() + " | Process Ids: " + this.processIds.size());
-                            if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
-                                hasProcess = true;
-                                File file = new File(pair.getValue().toString());
-                                if (hasJsonBro(file)) {
-                                    if (this.uploadAsNewVersion(file, true)) {
-                                        this.stopThread();
-                                    }
-                                }
-                            }
-                            break;
-
-                        case "mac":
-                            break;
-
-                        case "linux":
-                            if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
-                                File file = new File(pair.getValue().toString());
-                                if (hasJsonBro(file)) {
-                                    if (this.uploadAsNewVersion(file, true)) {
-                                        this.stopThread();
-                                    }
-                                }
-                            }
-                            break;
-                    }
+                logger.info("Actual process list values:");
+                for (Object processInfo : processesList.entrySet()) {
+                    Map.Entry processPair = (Map.Entry) processInfo;
+                    logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
+                    allpIds.add(processPair.getKey().toString());
                 }
-            } while(!hasProcess);
+
+                switch(this.OS) {
+                    case "windows":
+                        // 2015_08_04_IMG_0082-uuu
+                        logger.info("All Ids: "+allpIds.size()+" | Process Ids: "+this.processIds.size());
+                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+                            File file = new File(pair.getValue().toString());
+                            if (hasJsonBro(file)) {
+                                if (this.uploadAsNewVersion(file, true)) {
+                                    this.stopThread();
+                                }
+                            }
+                        }
+                        break;
+
+                    case "mac":
+                        break;
+
+                    case "linux":
+                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+                            File file = new File(pair.getValue().toString());
+                            if (hasJsonBro(file)) {
+                                if (this.uploadAsNewVersion(file, true)) {
+                                    this.stopThread();
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
 
 //            try {
 //                Thread.sleep(500);
