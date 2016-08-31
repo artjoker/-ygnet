@@ -111,6 +111,7 @@ public class Processes {
                                     String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
                                     if (preparedProcesses[2].contains(filenameWithoutExtension)) {
                                         processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+                                        break;
                                     }
                                 }
                             }
@@ -131,6 +132,7 @@ public class Processes {
             } catch (InterruptedException e) {
                 logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
             }
+
         }
 
         return processes;
