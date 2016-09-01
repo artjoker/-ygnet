@@ -144,25 +144,28 @@ public class Desktop {
 
                 } else {
                     logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
+
+                    try {
+                        HashMap processIds = Processes.GetSystemProcesses(file, "linux", false); //Processes.getProcessIdsByFile(file, "windows");
+                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
+                        this.pwt.get().run();
+                    } catch (Exception e) {
+                        logger.warn("Get process information failed: ProcessWatcher has been stopped");
+                    }
+
                 }
 
             } catch (Exception e) {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
 
-            try {
-                Thread.sleep(3000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(3000L);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
-            try {
-                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
-                this.pwt.get().run();
-            } catch (Exception e) {
-                logger.warn("Get process information failed: ProcessWatcher has been stopped");
-            }
+
 
 
 

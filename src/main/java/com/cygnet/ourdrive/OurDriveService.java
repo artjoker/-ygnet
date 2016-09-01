@@ -274,6 +274,9 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         String tempDir = System.getProperty(property);
         System.out.println("OS temporary directory is " + tempDir);
 
+        Properties props = System.getProperties();
+        props.list(System.out);
+
 
 
         createUUID();

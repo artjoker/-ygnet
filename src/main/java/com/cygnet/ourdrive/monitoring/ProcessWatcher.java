@@ -145,7 +145,7 @@ public class ProcessWatcher extends Thread {
         while (!isStopped()) {
 
             // [pid][detailed title with file name]
-            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, true); // all current processes
+            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array

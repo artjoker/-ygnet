@@ -35,7 +35,7 @@ public class Processes {
             switch (OS) {
                 case "linux":
                     // ps -Ao %p%a
-                    p = Runtime.getRuntime().exec("ps -Ao %p;%a");
+                    p = Runtime.getRuntime().exec("ps -Ao \"%p;%a\"");
                     p.waitFor();
 
                     if (p != null) {
