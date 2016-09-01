@@ -165,6 +165,9 @@ public class ProcessWatcher extends Thread {
                     case "windows":
                         // 2015_08_04_IMG_0082-uuu
                         logger.info("All Ids: "+allpIds.size()+" | Process Ids: "+this.processIds.size());
+
+                        // check also if process id is still there
+
                         if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {

@@ -17,6 +17,8 @@ public class Processes {
 
     private static final Logger logger = LoggerFactory.getLogger(OurDriveService.class);
 
+    private static String Pid = "0";
+
     /**
      * get process ids
      * @param file
@@ -104,7 +106,10 @@ public class Processes {
                             } else {
 
                                 String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
-                                if (preparedProcesses[2].contains(filenameWithoutExtension)) {
+                                if (preparedProcesses[2].contains(filenameWithoutExtension) || Pid.equals(preparedProcesses[1].trim())) {
+                                    if(Pid.equals("0")) {
+                                        Pid = preparedProcesses[1].trim();
+                                    }
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
                                 }
                             }
@@ -128,5 +133,9 @@ public class Processes {
         }
 
         return processes;
+    }
+
+    public static String getPid() {
+        return Pid;
     }
 }
