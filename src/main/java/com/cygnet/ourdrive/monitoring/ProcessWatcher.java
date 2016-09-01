@@ -146,6 +146,7 @@ public class ProcessWatcher extends Thread {
 
             // [pid][detailed title with file name]
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
+            Boolean onlyFileHasClosed = false;
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
@@ -158,17 +159,39 @@ public class ProcessWatcher extends Thread {
                 for (Object processInfo : processesList.entrySet()) {
                     Map.Entry processPair = (Map.Entry) processInfo;
                     logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
+
+
+                    if(processPair.getKey().toString().equals(Processes.getPid()) && !this.file.getName().contains(processPair.getValue().toString())) {
+                        // try a few times loop toget the file name again
+                        Integer counter = 0;
+                        onlyFileHasClosed = true;
+
+                        do {
+                            HashMap loopProcessesList = Processes.GetSystemProcesses(this.file, this.OS, false);
+                            for (Object loopProcessInfo : loopProcessesList.entrySet()) {
+                                Map.Entry loopProcessPair = (Map.Entry) loopProcessInfo;
+                                if(loopProcessPair.getKey().toString().equals(Processes.getPid()) && this.file.getName().contains(loopProcessPair.getValue().toString())) {
+                                    onlyFileHasClosed = false;
+                                    break;
+                                }
+                            }
+                            counter++;
+                        } while(counter < 3);
+
+                    }
+
+
                     allpIds.add(processPair.getKey().toString());
                 }
 
                 switch(this.OS) {
                     case "windows":
                         // 2015_08_04_IMG_0082-uuu
-                        logger.info("All Ids: "+allpIds.size()+" | Process Ids: "+this.processIds.size());
+                        logger.info("All Ids: "+allpIds.size()+" | First Process Id: "+Processes.getPid());
 
                         // check also if process id is still there
 
-                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+                        if ((!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) && !onlyFileHasClosed) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {

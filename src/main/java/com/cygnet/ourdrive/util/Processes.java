@@ -106,11 +106,14 @@ public class Processes {
                             } else {
 
                                 String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+
                                 if (preparedProcesses[2].contains(filenameWithoutExtension) || Pid.equals(preparedProcesses[1].trim())) {
+
                                     if(Pid.equals("0")) {
                                         Pid = preparedProcesses[1].trim();
                                     }
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+
                                 }
                             }
                         }
