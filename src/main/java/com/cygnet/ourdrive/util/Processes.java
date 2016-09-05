@@ -68,8 +68,6 @@ public class Processes {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
 
-                            logger.info(process);
-
                             String arr[] = process.split("\",\"");
                             String[] preparedProcesses = new String[3];
 
@@ -77,6 +75,9 @@ public class Processes {
                             for (String value : arr) {
                                 switch (i) {
                                     case 0:
+                                        if(value.equals("WINWORD>EXE")) {
+                                            logger.info(process);
+                                        }
                                         break;
                                     case 1:
                                         preparedProcesses[1] = value;
