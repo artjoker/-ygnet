@@ -268,14 +268,14 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     public static void main(String[] args) {
 
 
-        String property = "java.io.tmpdir";
+//        String property = "java.io.tmpdir";
 
         // Get the temporary directory and print it.
-        String tempDir = System.getProperty(property);
-        System.out.println("OS temporary directory is " + tempDir);
-
-        Properties props = System.getProperties();
-        props.list(System.out);
+//        String tempDir = System.getProperty(property);
+//        System.out.println("OS temporary directory is " + tempDir);
+//
+//        Properties props = System.getProperties();
+//        props.list(System.out);
 
 
 
