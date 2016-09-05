@@ -141,4 +141,8 @@ public class Processes {
     public static String getPid() {
         return Pid;
     }
+
+    public static void setPid(String pid) {
+        Pid = pid;
+    }
 }

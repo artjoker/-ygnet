@@ -141,6 +141,7 @@ public class ProcessWatcher extends Thread {
             logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
         }
 
+        Processes.setPid("0");
 
         while (!isStopped()) {
 
@@ -190,7 +191,7 @@ public class ProcessWatcher extends Thread {
 
                         // check also if process id is still there
 
-                        if ((!allpIds.contains(pair.getKey().toString()) || allpIds.size() == 0) && onlyFileHasClosed) {
+                        if (allpIds.size() == 0 || onlyFileHasClosed) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {
