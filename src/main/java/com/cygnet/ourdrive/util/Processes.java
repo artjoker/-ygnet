@@ -150,11 +150,11 @@ public class Processes {
             err.printStackTrace();
         }
 
-        try {
-            Thread.sleep(500L);
-        } catch (InterruptedException e) {
-            logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
-        }
+//        try {
+//            Thread.sleep(500L);
+//        } catch (InterruptedException e) {
+//            logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
+//        }
 
         return processes;
     }
