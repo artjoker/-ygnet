@@ -189,10 +189,13 @@ public class ProcessWatcher extends Thread {
                     case "windows":
                         // 2015_08_04_IMG_0082-uuu
                         logger.info("All Ids: "+allpIds.size()+" | First Process Id: "+Processes.getPid());
+                        logger.info("titleDocument: "+Processes.getTitleDocument());
+                        logger.info("titleNotAvailable: "+Processes.getTitleNotAvailable());
+                        logger.info("titleOnlyFileClosed: "+Processes.getTitleOnlyFileClosed());
 
                         // check also if process id is still there
 
-                        if (allpIds.size() == 0 || onlyFileHasClosed) {
+                        if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {

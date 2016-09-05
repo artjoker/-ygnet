@@ -19,6 +19,12 @@ public class Processes {
 
     private static String Pid = "0";
 
+    private static String titleDocument = "";
+
+    private static String titleNotAvailable = "";
+
+    private static String titleOnlyFileClosed = "";
+
     /**
      * get process ids
      * @param file
@@ -75,7 +81,7 @@ public class Processes {
                             for (String value : arr) {
                                 switch (i) {
                                     case 0:
-                                        if(value.equals("WINWORD>EXE")) {
+                                        if(value.equals("WINWORD.EXE")) {
                                             logger.info(process);
                                         }
                                         break;
@@ -113,6 +119,15 @@ public class Processes {
                                     if(Pid.equals("0")) {
                                         Pid = preparedProcesses[1].trim();
                                     }
+
+                                    if(titleDocument.equals("")) {
+                                        setTitleDocument(preparedProcesses[2].trim());
+                                    } else if(!titleDocument.equals("") && titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument)) {
+                                        setTitleNotAvailable(preparedProcesses[2].trim());
+                                    } else if(!titleDocument.equals("") && !titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument) && !preparedProcesses[2].trim().equals(titleNotAvailable)) {
+                                        setTitleOnlyFileClosed(preparedProcesses[2].trim());
+                                    }
+
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
 
                                 }
@@ -145,5 +160,29 @@ public class Processes {
 
     public static void setPid(String pid) {
         Pid = pid;
+    }
+
+    public static String getTitleDocument() {
+        return titleDocument;
+    }
+
+    public static void setTitleDocument(String titleDocument) {
+        Processes.titleDocument = titleDocument;
+    }
+
+    public static String getTitleNotAvailable() {
+        return titleNotAvailable;
+    }
+
+    public static void setTitleNotAvailable(String titleNotAvailable) {
+        Processes.titleNotAvailable = titleNotAvailable;
+    }
+
+    public static String getTitleOnlyFileClosed() {
+        return titleOnlyFileClosed;
+    }
+
+    public static void setTitleOnlyFileClosed(String titleOnlyFileClosed) {
+        Processes.titleOnlyFileClosed = titleOnlyFileClosed;
     }
 }
