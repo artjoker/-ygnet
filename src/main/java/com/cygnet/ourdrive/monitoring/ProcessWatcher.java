@@ -190,7 +190,7 @@ public class ProcessWatcher extends Thread {
 
                         // check also if process id is still there
 
-                        if ((!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) && onlyFileHasClosed) {
+                        if ((!allpIds.contains(pair.getKey().toString()) || allpIds.size() == 0) && onlyFileHasClosed) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {
