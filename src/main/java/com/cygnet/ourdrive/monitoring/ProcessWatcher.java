@@ -174,6 +174,7 @@ public class ProcessWatcher extends Thread {
                                 Map.Entry loopProcessPair = (Map.Entry) loopProcessInfo;
                                 if (loopProcessPair.getKey().toString().equals(Processes.getPid()) && this.file.getName().contains(loopProcessPair.getValue().toString())) {
                                     onlyFileHasClosed = true;
+                                    logger.info("= = = should break now cause found name back. = = = = = = = = = = = = =");
                                     break testLoop;
                                 }
                             }
@@ -191,7 +192,7 @@ public class ProcessWatcher extends Thread {
 
                         // check also if process id is still there
 
-                        if (allpIds.size() == 0 || onlyFileHasClosed) {
+                        if (allpIds.size() == 0 || !onlyFileHasClosed) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {
