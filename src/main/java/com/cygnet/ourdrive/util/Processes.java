@@ -82,7 +82,7 @@ public class Processes {
                                 switch (i) {
                                     case 0:
                                         if(value.equals("WINWORD.EXE")) {
-                                            logger.info(process);
+//                                            logger.info(process);
                                         }
                                         break;
                                     case 1:
@@ -145,16 +145,9 @@ public class Processes {
 
             }
 
-
         } catch (Exception err) {
             err.printStackTrace();
         }
-
-//        try {
-//            Thread.sleep(500L);
-//        } catch (InterruptedException e) {
-//            logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
-//        }
 
         return processes;
     }

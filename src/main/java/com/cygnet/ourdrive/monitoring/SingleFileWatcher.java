@@ -156,12 +156,6 @@ public class SingleFileWatcher extends Thread {
                                 }
                             }
 
-//                            try {
-//                                Thread.sleep(500L);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-
                         } else {
                             logger.info("No modify action for: " + file.getAbsoluteFile().toString());
                         }

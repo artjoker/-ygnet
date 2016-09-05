@@ -163,35 +163,15 @@ public class ProcessWatcher extends Thread {
 
                     allpIds.add(processPair.getKey().toString());
 
-                    // if we still have the process id but the file name disappeared
-//                    if(processPair.getKey().toString().equals(Processes.getPid()) && !this.file.getName().contains(processPair.getValue().toString())) {
-//
-//                        // give it 5 tries to get the file name back to tasklist, otherwise expect the file was closed
-//                        Integer counter = 0;
-//                        do {
-//                            HashMap loopProcessesList = Processes.GetSystemProcesses(this.file, this.OS, false);
-//                            for (Object loopProcessInfo : loopProcessesList.entrySet()) {
-//                                Map.Entry loopProcessPair = (Map.Entry) loopProcessInfo;
-//                                if (loopProcessPair.getKey().toString().equals(Processes.getPid()) && this.file.getName().contains(loopProcessPair.getValue().toString())) {
-//                                    onlyFileHasClosed = true;
-//                                    logger.info("= = = should break now cause found name back. = = = = = = = = = = = = =");
-//                                    break testLoop;
-//                                }
-//                            }
-//
-//                            counter ++;
-//                        } while (counter < 5);
-//                    }
-
                 }
 
                 switch(this.OS) {
                     case "windows":
                         // 2015_08_04_IMG_0082-uuu
-                        logger.info("All Ids: "+allpIds.size()+" | First Process Id: "+Processes.getPid());
-                        logger.info("titleDocument: "+Processes.getTitleDocument());
-                        logger.info("titleNotAvailable: "+Processes.getTitleNotAvailable());
-                        logger.info("titleOnlyFileClosed: "+Processes.getTitleOnlyFileClosed());
+//                        logger.info("All Ids: "+allpIds.size()+" | First Process Id: "+Processes.getPid());
+//                        logger.info("titleDocument: "+Processes.getTitleDocument());
+//                        logger.info("titleNotAvailable: "+Processes.getTitleNotAvailable());
+//                        logger.info("titleOnlyFileClosed: "+Processes.getTitleOnlyFileClosed());
 
                         // check also if process id is still there
 
