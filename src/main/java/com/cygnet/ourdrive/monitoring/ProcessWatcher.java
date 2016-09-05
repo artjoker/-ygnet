@@ -176,6 +176,14 @@ public class ProcessWatcher extends Thread {
                                 }
                             }
                             counter++;
+
+                            try {
+                                Thread.sleep(300L);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            logger.info("== Counter "+counter+" = = = = = = = = = = = = = = = = = = = = =");
                         } while(counter < 3);
 
                     }
