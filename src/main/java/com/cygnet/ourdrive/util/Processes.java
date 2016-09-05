@@ -78,7 +78,7 @@ public class Processes {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
 
-//                            logger.info(process);
+//                            System.out.println(process);
 
                             String arr[] = process.split("\",\"");
                             String[] preparedProcesses = new String[3];
