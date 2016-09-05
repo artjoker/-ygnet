@@ -160,11 +160,14 @@ public class ProcessWatcher extends Thread {
                     Map.Entry processPair = (Map.Entry) processInfo;
                     logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
 
-                    if(processPair.getKey().toString().equals(Processes.getPid()) && !this.file.getName().contains(processPair.getValue().toString())) {
-                        // try a few times loop toget the file name again
-//                        onlyFileHasClosed = true;
+                    allpIds.add(processPair.getKey().toString());
 
-                        while (true) {
+                    // if we still have the process id but the file name disappeared
+                    if(processPair.getKey().toString().equals(Processes.getPid()) && !this.file.getName().contains(processPair.getValue().toString())) {
+
+                        // give it 5 tries to get the file name back to tasklist, otherwise expect the file was closed
+                        Integer counter = 0;
+                        do {
                             HashMap loopProcessesList = Processes.GetSystemProcesses(this.file, this.OS, false);
                             for (Object loopProcessInfo : loopProcessesList.entrySet()) {
                                 Map.Entry loopProcessPair = (Map.Entry) loopProcessInfo;
@@ -173,10 +176,11 @@ public class ProcessWatcher extends Thread {
                                     break testLoop;
                                 }
                             }
-                        }
+
+                            counter ++;
+                        } while (counter < 5);
                     }
 
-                    allpIds.add(processPair.getKey().toString());
                 }
 
                 switch(this.OS) {
