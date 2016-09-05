@@ -146,7 +146,7 @@ public class ProcessWatcher extends Thread {
 
             // [pid][detailed title with file name]
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
-            Boolean onlyFileHasClosed = true;
+            Boolean onlyFileHasClosed = false;
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
@@ -156,38 +156,25 @@ public class ProcessWatcher extends Thread {
                 List<String> allpIds = new ArrayList<String>();
 
                 logger.info("Actual process list values:");
-                for (Object processInfo : processesList.entrySet()) {
+                testLoop: for (Object processInfo : processesList.entrySet()) {
                     Map.Entry processPair = (Map.Entry) processInfo;
                     logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
 
-
                     if(processPair.getKey().toString().equals(Processes.getPid()) && !this.file.getName().contains(processPair.getValue().toString())) {
                         // try a few times loop toget the file name again
-//                        Integer counter = 0;
 //                        onlyFileHasClosed = true;
 
-                        do {
+                        while (true) {
                             HashMap loopProcessesList = Processes.GetSystemProcesses(this.file, this.OS, false);
                             for (Object loopProcessInfo : loopProcessesList.entrySet()) {
                                 Map.Entry loopProcessPair = (Map.Entry) loopProcessInfo;
-                                if(loopProcessPair.getKey().toString().equals(Processes.getPid()) && this.file.getName().contains(loopProcessPair.getValue().toString())) {
-                                    onlyFileHasClosed = false;
-                                    break;
+                                if (loopProcessPair.getKey().toString().equals(Processes.getPid()) && this.file.getName().contains(loopProcessPair.getValue().toString())) {
+                                    onlyFileHasClosed = true;
+                                    break testLoop;
                                 }
                             }
-//                            counter++;
-//
-//                            try {
-//                                Thread.sleep(300L);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-
-//                            logger.info("== Counter "+counter+" = = = = = = = = = = = = = = = = = = = = =");
-                        } while(true);
-
+                        }
                     }
-
 
                     allpIds.add(processPair.getKey().toString());
                 }
@@ -199,7 +186,7 @@ public class ProcessWatcher extends Thread {
 
                         // check also if process id is still there
 
-                        if ((!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) && !onlyFileHasClosed) {
+                        if ((!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) && onlyFileHasClosed) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {
