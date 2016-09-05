@@ -25,6 +25,10 @@ public class Processes {
 
     private static String titleOnlyFileClosed = "";
 
+    private static Boolean isMsOffice = false;
+
+    private static String microsoft = "microsoft";
+
     /**
      * get process ids
      * @param file
@@ -121,11 +125,24 @@ public class Processes {
                                     }
 
                                     if(titleDocument.equals("")) {
+
                                         setTitleDocument(preparedProcesses[2].trim());
+                                        if(preparedProcesses[2].trim().toLowerCase().equals(microsoft)) {
+                                            setIsMsOffice(true);
+                                        }
+
                                     } else if(!titleDocument.equals("") && titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument)) {
+
                                         setTitleNotAvailable(preparedProcesses[2].trim());
+
+                                        if(getIsMsOffice()) {
+                                            setTitleOnlyFileClosed("Only file closed by application.");
+                                        }
+
                                     } else if(!titleDocument.equals("") && !titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument) && !preparedProcesses[2].trim().equals(titleNotAvailable)) {
+
                                         setTitleOnlyFileClosed(preparedProcesses[2].trim());
+
                                     }
 
                                     if(preparedProcesses[2].contains(filenameWithoutExtension)) {
@@ -182,5 +199,13 @@ public class Processes {
 
     public static void setTitleOnlyFileClosed(String titleOnlyFileClosed) {
         Processes.titleOnlyFileClosed = titleOnlyFileClosed;
+    }
+
+    public static Boolean getIsMsOffice() {
+        return isMsOffice;
+    }
+
+    public static void setIsMsOffice(Boolean isMsOffice) {
+        Processes.isMsOffice = isMsOffice;
     }
 }
