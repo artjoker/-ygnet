@@ -199,6 +199,9 @@ public class ProcessWatcher extends Thread {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {
+                                    Processes.setTitleDocument("");
+                                    Processes.setTitleNotAvailable("");
+                                    Processes.setTitleOnlyFileClosed("");
                                     this.stopThread();
                                 }
                             }

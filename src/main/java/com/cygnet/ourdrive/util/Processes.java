@@ -128,6 +128,11 @@ public class Processes {
                                         setTitleOnlyFileClosed(preparedProcesses[2].trim());
                                     }
 
+                                    if(preparedProcesses[2].contains(filenameWithoutExtension)) {
+                                        setTitleNotAvailable("");
+                                        setTitleOnlyFileClosed("");
+                                    }
+
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
 
                                 }
