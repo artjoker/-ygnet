@@ -204,11 +204,11 @@ public class ProcessWatcher extends Thread {
                 }
             }
 
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
-//            }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
+            }
 
         }
     }
