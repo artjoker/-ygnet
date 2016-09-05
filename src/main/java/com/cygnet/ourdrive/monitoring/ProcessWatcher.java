@@ -146,7 +146,7 @@ public class ProcessWatcher extends Thread {
 
             // [pid][detailed title with file name]
             HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
-            Boolean onlyFileHasClosed = false;
+            Boolean onlyFileHasClosed = true;
 
             // [pid][detailed title with file name]
             for (Object o : this.processIds.entrySet()) { // processIds is the small array
@@ -163,8 +163,8 @@ public class ProcessWatcher extends Thread {
 
                     if(processPair.getKey().toString().equals(Processes.getPid()) && !this.file.getName().contains(processPair.getValue().toString())) {
                         // try a few times loop toget the file name again
-                        Integer counter = 0;
-                        onlyFileHasClosed = true;
+//                        Integer counter = 0;
+//                        onlyFileHasClosed = true;
 
                         do {
                             HashMap loopProcessesList = Processes.GetSystemProcesses(this.file, this.OS, false);
@@ -175,16 +175,16 @@ public class ProcessWatcher extends Thread {
                                     break;
                                 }
                             }
-                            counter++;
+//                            counter++;
+//
+//                            try {
+//                                Thread.sleep(300L);
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
 
-                            try {
-                                Thread.sleep(300L);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
-                            logger.info("== Counter "+counter+" = = = = = = = = = = = = = = = = = = = = =");
-                        } while(counter < 3);
+//                            logger.info("== Counter "+counter+" = = = = = = = = = = = = = = = = = = = = =");
+                        } while(true);
 
                     }
 
