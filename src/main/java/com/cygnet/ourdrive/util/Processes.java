@@ -84,7 +84,7 @@ public class Processes {
                                 switch (i) {
                                     case 0:
                                         if(value.contains("soffice") || value.contains("WINWORD")) {
-                                            System.out.println(process);
+//                                            System.out.println(process);
                                         }
                                         break;
                                     case 1:
