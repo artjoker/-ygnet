@@ -353,11 +353,11 @@ public class Desktop {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
 
-//            try {
-//                Thread.sleep(3000L);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Thread.sleep(2000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
