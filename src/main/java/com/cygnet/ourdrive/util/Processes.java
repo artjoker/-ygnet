@@ -132,14 +132,21 @@ public class Processes {
 
                                     } else if(!titleDocument.equals("") && !titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument) && !preparedProcesses[2].trim().equals(titleNotAvailable)) {
 
+                                        /*
+                                        if not empty doc title &&
+                                        if not empty N/A title &&
+                                        process title not equals doc title &&
+                                        process title not equals N/A title  &&
+                                         */
+
                                         setTitleOnlyFileClosed(preparedProcesses[2].trim());
 
                                     }
 
-                                    if(preparedProcesses[2].contains(filenameWithoutExtension)) {
-                                        setTitleNotAvailable("");
-                                        setTitleOnlyFileClosed("");
-                                    }
+//                                    if(preparedProcesses[2].contains(filenameWithoutExtension)) {
+//                                        setTitleNotAvailable("");
+//                                        setTitleOnlyFileClosed("");
+//                                    }
 
                                     processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
 
