@@ -1,82 +1,123 @@
-2016-08-30 10:10:07,377 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: /home/casten/ourdrive-files/test
-2016-08-30 10:10:07,379 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
-2016-08-30 10:10:07,790 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: /home/casten/.ourdrive/ourdrive_downloads
-2016-08-30 10:10:07,791 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
-2016-08-30 10:10:07,794 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
-2016-08-30 10:10:08,072 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 3df0fab6-8b75-4890-8883-038375232b6a
-2016-08-30 10:10:08,072 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'linux' machine
-2016-08-30 10:10:08,078 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#mU208m66fUTC0dHxAAqK. You are now connected to socket server.
-2016-08-30 10:10:08,107 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '3df0fab6-8b75-4890-8883-038375232b6a'.
-2016-08-30 10:10:54,566 [AWT-EventQueue-0] INFO  com.cygnet.ourdrive.gui.SystrayItem - Show log
-2016-08-30 10:10:54,604 [AWT-EventQueue-0] INFO  com.cygnet.ourdrive.swingTail.SwingTail - Showing swingtail
-2016-08-30 10:12:55,291 [AWT-EventQueue-0] INFO  com.cygnet.ourdrive.OurDriveService - Closing application and cleanup /home/casten/.ourdrive//ourdrive_downloads
-2016-08-30 10:12:55,297 [main] INFO  com.cygnet.ourdrive.OurDriveService - Stopped monitoring folder: /home/casten/ourdrive-files/test
-2016-08-30 10:12:55,303 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service stopped
-2016-09-05 14:19:35,186 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Folder Upload
-2016-09-05 14:19:35,186 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Intray
-2016-09-05 14:19:35,186 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
-2016-09-05 14:19:35,372 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:19:35,372 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
-2016-09-05 14:19:35,388 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
-2016-09-05 14:19:36,138 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: f1d66e7f-c749-4b01-8c58-585d8ee1d666
-2016-09-05 14:19:36,138 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
-2016-09-05 14:19:36,153 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#BMmUmGzUiI97k38xAADZ. You are now connected to socket server.
-2016-09-05 14:19:36,232 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'f1d66e7f-c749-4b01-8c58-585d8ee1d666'.
-2016-09-05 14:19:59,453 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:19:59,519 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
-2016-09-05 14:19:59,529 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:19:59,529 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 40
-2016-09-05 14:19:59,548 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:20:00,696 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
-2016-09-05 14:20:01,587 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Opening file C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc with an application was successful.
-2016-09-05 14:25:08,271 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Folder Upload
-2016-09-05 14:25:08,286 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Intray
-2016-09-05 14:25:08,286 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
-2016-09-05 14:25:08,489 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:25:08,489 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
-2016-09-05 14:25:08,505 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
-2016-09-05 14:25:09,297 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: ca909d2c-487f-452f-9d98-2d8e387536f7
-2016-09-05 14:25:09,297 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
-2016-09-05 14:25:09,344 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#AHb3iI7snXzFbOYWAADb. You are now connected to socket server.
-2016-09-05 14:25:09,453 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'ca909d2c-487f-452f-9d98-2d8e387536f7'.
-2016-09-05 14:25:27,470 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:25:27,501 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
-2016-09-05 14:25:27,501 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:25:27,501 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 41
-2016-09-05 14:25:27,501 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:25:28,594 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
-2016-09-05 14:25:29,534 [Thread-22] INFO  com.cygnet.ourdrive.OurDriveService - Opening file C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc with an application was successful.
-2016-09-05 14:28:01,990 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Folder Upload
-2016-09-05 14:28:02,052 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Intray
-2016-09-05 14:28:02,256 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
-2016-09-05 14:28:02,615 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:28:02,615 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
-2016-09-05 14:28:02,615 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
-2016-09-05 14:28:04,644 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: a059d6c0-2ae1-465f-909e-3e91d5d94ab4
-2016-09-05 14:28:04,675 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
-2016-09-05 14:28:04,707 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#wjL9ZeP-os0eYi5CAADd. You are now connected to socket server.
-2016-09-05 14:28:04,941 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'a059d6c0-2ae1-465f-909e-3e91d5d94ab4'.
-2016-09-05 14:28:26,705 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:28:26,721 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
-2016-09-05 14:28:26,721 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:28:26,736 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 38
-2016-09-05 14:28:26,736 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:28:27,751 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
-2016-09-05 14:28:28,740 [Thread-19] INFO  com.cygnet.ourdrive.OurDriveService - Opening file C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc with an application was successful.
-2016-09-05 14:32:32,932 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Folder Upload
-2016-09-05 14:32:32,932 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Intray
-2016-09-05 14:32:32,932 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
-2016-09-05 14:32:33,136 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:32:33,136 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
-2016-09-05 14:32:33,151 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
-2016-09-05 14:32:33,871 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 07d275d3-ec70-4c7e-9259-5f4b47fadde9
-2016-09-05 14:32:33,871 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
-2016-09-05 14:32:33,918 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#q73ILE2RWGKPis5EAADk. You are now connected to socket server.
-2016-09-05 14:32:34,221 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '07d275d3-ec70-4c7e-9259-5f4b47fadde9'.
-2016-09-05 14:32:51,880 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:32:51,907 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
-2016-09-05 14:32:51,919 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
-2016-09-05 14:32:51,922 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 39
-2016-09-05 14:32:51,928 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
-2016-09-05 14:32:52,844 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
-2016-09-05 14:32:53,740 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Opening file C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc with an application was successful.
+2016-09-06 09:41:25,842 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Folder Upload
+2016-09-06 09:41:25,857 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Intray
+2016-09-06 09:41:25,857 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-09-06 09:41:26,061 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-09-06 09:41:26,061 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-09-06 09:41:26,076 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-09-06 09:41:26,880 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: 3d808795-4bc4-40da-859f-afb220e67136
+2016-09-06 09:41:26,942 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-09-06 09:41:26,973 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#kLk8EKG-mKdMlHisAAD6. You are now connected to socket server.
+2016-09-06 09:41:27,067 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: '3d808795-4bc4-40da-859f-afb220e67136'.
+2016-09-06 09:41:53,080 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:41:53,237 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successfully saved JSON Object to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-09-06 09:41:53,238 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Set file watcher service to: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-09-06 09:41:53,238 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Started file watcher service: DownloadFileWatcher with ID: 39
+2016-09-06 09:41:53,238 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Trying to start command: cmd.exe /c cd C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads && start 2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:41:54,643 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\~$05_04_14_sadcsfs-uuu.doc
+2016-09-06 09:41:55,593 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Opening file C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc with an application was successful.
+2016-09-06 09:41:58,216 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Initial values:
+2016-09-06 09:41:58,216 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:00,643 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:00,647 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:00,649 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:00,651 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:00,655 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:03,231 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:03,233 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:03,236 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:03,238 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:03,241 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:05,541 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:05,557 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:05,557 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:05,557 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:05,557 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:07,885 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:07,885 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:07,885 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:07,885 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:07,885 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:10,399 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:10,399 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:10,399 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:10,399 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:10,399 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:12,660 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:12,676 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:12,676 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:12,676 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:12,676 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:15,203 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:15,203 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:15,203 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:15,203 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:15,203 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:17,422 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:17,422 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:17,422 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:17,422 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:17,422 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:19,691 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:19,691 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:19,691 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:19,691 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:19,691 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:21,981 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:21,981 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:21,981 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:21,997 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:21,997 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:24,545 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:24,545 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:24,545 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:24,545 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:24,545 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:26,811 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:26,811 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:26,811 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:26,826 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:26,826 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:29,061 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:29,061 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:29,061 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:29,061 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:29,061 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:31,249 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:31,249 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:31,249 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:31,264 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:31,264 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:33,717 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:33,717 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:33,717 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:33,717 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:33,717 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:35,998 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:35,998 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:35,998 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:36,014 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: 
+2016-09-06 09:42:36,014 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:38,311 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:38,311 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:38,311 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:38,311 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: N/A"
+2016-09-06 09:42:38,311 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:40,649 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:40,649 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:40,649 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:40,649 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: N/A"
+2016-09-06 09:42:40,649 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: 
+2016-09-06 09:42:42,923 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Actual process list values:
+2016-09-06 09:42:42,939 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Key: 6876, -> Value: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:42,939 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleDocument: 2005_04_14_sadcsfs-uuu [Compatibility Mode] - Microsoft Word"
+2016-09-06 09:42:42,939 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleNotAvailable: N/A"
+2016-09-06 09:42:42,939 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - titleOnlyFileClosed: Microsoft Word"
+2016-09-06 09:42:42,986 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc has been deleted!
+2016-09-06 09:42:43,001 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Saved and unlocked file: 2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:43,001 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Try to delete: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-09-06 09:42:42,986 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - Check if file has a JSON sibling: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\2005_04_14_sadcsfs-uuu.doc
+2016-09-06 09:42:43,001 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json has been deleted!
+2016-09-06 09:42:43,001 [DownloadFileWatcher] INFO  com.cygnet.ourdrive.OurDriveService - No modify action for: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads\.2005_04_14_sadcsfs-uuu.doc.json
+2016-09-06 09:42:43,001 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - SFW thread has been interrupted
+2016-09-06 09:42:43,017 [Thread-21] INFO  com.cygnet.ourdrive.OurDriveService - Process watcher has been stopped because application has been closed
+2016-09-06 09:42:43,017 [Thread-21] WARN  com.cygnet.ourdrive.OurDriveService - Get process information failed: ProcessWatcher has been stopped

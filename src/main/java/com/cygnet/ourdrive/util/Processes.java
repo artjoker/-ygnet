@@ -27,8 +27,6 @@ public class Processes {
 
     private static Boolean isMsOffice = false;
 
-    private static String microsoft = "microsoft";
-
     /**
      * get process ids
      * @param file
@@ -129,6 +127,7 @@ public class Processes {
                                     if(titleDocument.equals("")) {
 
                                         setTitleDocument(preparedProcesses[2].trim());
+                                        String microsoft = "microsoft";
                                         if(preparedProcesses[2].trim().toLowerCase().equals(microsoft)) {
                                             setIsMsOffice(true);
                                         }
