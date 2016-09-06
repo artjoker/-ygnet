@@ -76,8 +76,6 @@ public class Processes {
                         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                         while ((process = input.readLine()) != null) {
 
-//                            System.out.println(process);
-
                             String arr[] = process.split("\",\"");
                             String[] preparedProcesses = new String[3];
 
@@ -85,9 +83,6 @@ public class Processes {
                             for (String value : arr) {
                                 switch (i) {
                                     case 0:
-                                        if(value.equals("WINWORD.EXE")) {
-//                                            logger.info(process);
-                                        }
                                         break;
                                     case 1:
                                         preparedProcesses[1] = value;
@@ -127,10 +122,10 @@ public class Processes {
                                     if(titleDocument.equals("")) {
 
                                         setTitleDocument(preparedProcesses[2].trim());
-                                        String microsoft = "microsoft";
-                                        if(preparedProcesses[2].trim().toLowerCase().contains(microsoft)) {
-                                            setIsMsOffice(true);
-                                        }
+//                                        String microsoft = "microsoft";
+//                                        if(preparedProcesses[2].trim().toLowerCase().contains(microsoft)) {
+//                                            setIsMsOffice(true);
+//                                        }
 
                                     } else if(!titleDocument.equals("") && titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument)) {
 
