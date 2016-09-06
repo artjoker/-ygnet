@@ -136,9 +136,9 @@ public class Processes {
 
                                         setTitleNotAvailable(preparedProcesses[2].trim());
 
-                                        if(!getIsMsOffice()) {
-                                            setTitleOnlyFileClosed("Only file closed by application.");
-                                        }
+//                                        if(!getIsMsOffice()) {
+//                                            setTitleOnlyFileClosed("Only file closed by application.");
+//                                        }
 
                                     } else if(!titleDocument.equals("") && !titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument) && !preparedProcesses[2].trim().equals(titleNotAvailable)) {
 
