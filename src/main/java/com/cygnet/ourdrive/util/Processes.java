@@ -83,7 +83,7 @@ public class Processes {
                             for (String value : arr) {
                                 switch (i) {
                                     case 0:
-                                        if(value.contains("soffice")) {
+                                        if(value.contains("soffice") || value.contains("WINWORD")) {
                                             System.out.println(process);
                                         }
                                         break;
