@@ -122,18 +122,10 @@ public class Processes {
                                     if(titleDocument.equals("")) {
 
                                         setTitleDocument(preparedProcesses[2].trim());
-//                                        String microsoft = "microsoft";
-//                                        if(preparedProcesses[2].trim().toLowerCase().contains(microsoft)) {
-//                                            setIsMsOffice(true);
-//                                        }
 
                                     } else if(!titleDocument.equals("") && titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument)) {
 
                                         setTitleNotAvailable(preparedProcesses[2].trim());
-
-//                                        if(!getIsMsOffice()) {
-//                                            setTitleOnlyFileClosed("Only file closed by application.");
-//                                        }
 
                                     } else if(!titleDocument.equals("") && !titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument) && !preparedProcesses[2].trim().equals(titleNotAvailable)) {
 

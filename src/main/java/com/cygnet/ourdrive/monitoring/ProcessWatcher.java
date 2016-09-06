@@ -60,7 +60,7 @@ public class ProcessWatcher extends Thread {
         } else {
             logger.info("SFW thread has been interrupted");
         }
-        logger.info("Process watcher has been stopped because application has been closed");
+        logger.info("Process watcher has been stopped because application and/or file has been closed");
         stop.set(true);
         process.destroy();
     }
@@ -90,19 +90,19 @@ public class ProcessWatcher extends Thread {
                 if (origFileDeleted) {
 
                     logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
-                    logger.info("Saved and unlocked file: " + modifiedFile.getName());
+                    logger.info("Saved and unlocked file: " + modifiedFile.getName() + " on Cygnet");
 
                     File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
 
                     try {
-                        logger.info("Try to delete: " + jsonFile.getAbsolutePath());
+                        logger.info("Try to delete: " + jsonFile.getAbsolutePath() + " locally.");
                         boolean jsonFileDeleted = jsonFile.delete();
 
                         if (jsonFileDeleted) {
-                            logger.info(jsonFile.getAbsolutePath() + " has been deleted!");
+                            logger.info("Local file " + jsonFile.getAbsolutePath() + " has been deleted!");
                             isUploaded = true;
                         } else {
-                            logger.error("Delete operation is failed for " + jsonFile.getAbsolutePath());
+                            logger.error("Delete operation is failed for local " + jsonFile.getAbsolutePath());
                         }
 
                     } catch(Exception e) {
@@ -110,7 +110,7 @@ public class ProcessWatcher extends Thread {
                     }
 
                 } else {
-                    logger.error("Delete operation is failed for " + modifiedFile.getAbsolutePath());
+                    logger.error("Local delete operation is failed for " + modifiedFile.getAbsolutePath());
                 }
 
             }
@@ -135,12 +135,6 @@ public class ProcessWatcher extends Thread {
     @Override
     public void run() {
 
-//        logger.info("Initial values:");
-//        for (Object processInfoInit : this.processIds.entrySet()) {
-//            Map.Entry processPairInit = (Map.Entry) processInfoInit;
-//            logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
-//        }
-
         Processes.setPid("0");
 
         while (!isStopped()) {
@@ -156,24 +150,14 @@ public class ProcessWatcher extends Thread {
                 // contain only pid
                 List<String> allpIds = new ArrayList<String>();
 
-//                logger.info("Actual process list values:");
                 for (Object processInfo : processesList.entrySet()) {
                     Map.Entry processPair = (Map.Entry) processInfo;
-//                    logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
-
                     allpIds.add(processPair.getKey().toString());
 
                 }
 
                 switch(this.OS) {
                     case "windows":
-                        // 2015_08_04_IMG_0082-uuu
-//                        logger.info("All Ids: "+allpIds.size()+" | First Process Id: "+Processes.getPid());
-//                        logger.info("titleDocument: "+Processes.getTitleDocument());
-//                        logger.info("titleNotAvailable: "+Processes.getTitleNotAvailable());
-//                        logger.info("titleOnlyFileClosed: "+Processes.getTitleOnlyFileClosed());
-
-                        // check also if process id is still there
 
                         if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
                             File file = new File(pair.getValue().toString());
@@ -203,12 +187,6 @@ public class ProcessWatcher extends Thread {
                         break;
                 }
             }
-
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
-//            }
 
         }
     }
