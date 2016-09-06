@@ -83,6 +83,9 @@ public class Processes {
                             for (String value : arr) {
                                 switch (i) {
                                     case 0:
+                                        if(value.contains("soffice")) {
+                                            System.out.println(process);
+                                        }
                                         break;
                                     case 1:
                                         preparedProcesses[1] = value;

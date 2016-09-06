@@ -135,6 +135,12 @@ public class ProcessWatcher extends Thread {
     @Override
     public void run() {
 
+//        logger.info("Initial values:");
+//        for (Object processInfoInit : this.processIds.entrySet()) {
+//            Map.Entry processPairInit = (Map.Entry) processInfoInit;
+//            logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
+//        }
+
         Processes.setPid("0");
 
         while (!isStopped()) {
@@ -150,14 +156,24 @@ public class ProcessWatcher extends Thread {
                 // contain only pid
                 List<String> allpIds = new ArrayList<String>();
 
+//                logger.info("Actual process list values:");
                 for (Object processInfo : processesList.entrySet()) {
                     Map.Entry processPair = (Map.Entry) processInfo;
+//                    logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
+
                     allpIds.add(processPair.getKey().toString());
 
                 }
 
                 switch(this.OS) {
                     case "windows":
+                        // 2015_08_04_IMG_0082-uuu
+//                        logger.info("All Ids: "+allpIds.size()+" | First Process Id: "+Processes.getPid());
+//                        logger.info("titleDocument: "+Processes.getTitleDocument());
+//                        logger.info("titleNotAvailable: "+Processes.getTitleNotAvailable());
+//                        logger.info("titleOnlyFileClosed: "+Processes.getTitleOnlyFileClosed());
+
+                        // check also if process id is still there
 
                         if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
                             File file = new File(pair.getValue().toString());
@@ -187,6 +203,12 @@ public class ProcessWatcher extends Thread {
                         break;
                 }
             }
+
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
+//            }
 
         }
     }
