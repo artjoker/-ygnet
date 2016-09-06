@@ -135,11 +135,11 @@ public class ProcessWatcher extends Thread {
     @Override
     public void run() {
 
-        logger.info("Initial values:");
-        for (Object processInfoInit : this.processIds.entrySet()) {
-            Map.Entry processPairInit = (Map.Entry) processInfoInit;
-            logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
-        }
+//        logger.info("Initial values:");
+//        for (Object processInfoInit : this.processIds.entrySet()) {
+//            Map.Entry processPairInit = (Map.Entry) processInfoInit;
+//            logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
+//        }
 
         Processes.setPid("0");
 
@@ -156,10 +156,10 @@ public class ProcessWatcher extends Thread {
                 // contain only pid
                 List<String> allpIds = new ArrayList<String>();
 
-                logger.info("Actual process list values:");
+//                logger.info("Actual process list values:");
                 for (Object processInfo : processesList.entrySet()) {
                     Map.Entry processPair = (Map.Entry) processInfo;
-                    logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
+//                    logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
 
                     allpIds.add(processPair.getKey().toString());
 
