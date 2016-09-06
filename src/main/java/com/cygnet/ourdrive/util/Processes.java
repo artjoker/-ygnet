@@ -128,7 +128,7 @@ public class Processes {
 
                                         setTitleDocument(preparedProcesses[2].trim());
                                         String microsoft = "microsoft";
-                                        if(preparedProcesses[2].trim().toLowerCase().equals(microsoft)) {
+                                        if(preparedProcesses[2].trim().toLowerCase().contains(microsoft)) {
                                             setIsMsOffice(true);
                                         }
 
@@ -136,7 +136,7 @@ public class Processes {
 
                                         setTitleNotAvailable(preparedProcesses[2].trim());
 
-                                        if(getIsMsOffice()) {
+                                        if(!getIsMsOffice()) {
                                             setTitleOnlyFileClosed("Only file closed by application.");
                                         }
 
