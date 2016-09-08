@@ -303,20 +303,31 @@ Function LeaveEnterOurdriveParams
 validate:
 
   ReadINIStr $ourdriveUrl "$PLUGINSDIR\ourdriveparams.ini" "Field 2" "State"
-  ${StrContains} $0 "http" $ourdriveUrl checkUsername
-    MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL can't be empty"
+  StrCmp $ourdriveUrl "" urlMBox checkUsername
 
-checkUsername:
-  ReadINIStr $ourdriveUsername "$PLUGINSDIR\ourdriveparams.ini" "Field 4" "State"
-  StrCmp $ourdriveUsername "" 0 +3 checkPassword
-    MessageBox MB_ICONEXCLAMATION|MB_OK "Username can't be empty"
+  urlMBox:
+    MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL can't be empty" IDOK StartAgainWithParameter
 
-checkPassword
-  ReadINIStr $ourdrivePassword "$PLUGINSDIR\ourdriveparams.ini" "Field 6" "State"
-    StrCmp $ourdrivePassword "" 0 +3 done
-    MessageBox MB_ICONEXCLAMATION|MB_OK "Password can't be empty"
 
-  ; MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL: " + $ourdriveUrl
+
+  checkUsername:
+    ReadINIStr $ourdriveUsername "$PLUGINSDIR\ourdriveparams.ini" "Field 4" "State"
+    StrCmp $ourdriveUsername "" usernameMBox checkPassword
+
+    usernameMBox:
+      MessageBox MB_ICONEXCLAMATION|MB_OK "Username can't be empty" IDOK StartAgainWithParameter
+
+
+
+  checkPassword:
+    ReadINIStr $ourdrivePassword "$PLUGINSDIR\ourdriveparams.ini" "Field 6" "State"
+    StrCmp $ourdrivePassword "" passwordMBox done
+
+    passwordMBox:
+      MessageBox MB_ICONEXCLAMATION|MB_OK "Password can't be empty" IDOK StartAgainWithParameter
+
+  StartAgainWithParameter:
+    Abort
 
 done:
 
