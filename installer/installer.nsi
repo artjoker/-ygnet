@@ -187,6 +187,7 @@ Section "Uninstall"
   	delete $INSTDIR\ourdrive.ico
   	delete $INSTDIR\ourdrive.jar
   	delete $INSTDIR\ourdrive.ini
+  	delete $INSTDIR\settings.xml
 
   	rmDir /r $INSTDIR\log
 
@@ -196,12 +197,13 @@ Section "Uninstall"
   	# Try to remove the install directory - this will only happen if it is empty
   	rmDir $INSTDIR
 
-        # Remove the default folders
-        rmDir "$DESKTOP\Cygnet Cloud Intray"
+    # Remove the default folders
+    rmDir "$DESKTOP\Cygnet Cloud Intray"
   	rmDir "$DESKTOP\Cygnet Cloud Folder Upload"
 
   	# Remove uninstaller information from the registry
   	DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}\${APPNAME}"
+    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder\OurDrive.lnk"
 
   	DeleteRegKey /ifempty HKCU "Software\${COMPANYNAME}\${APPNAME}"
   	DeleteRegKey /ifempty HKCU "Software\${COMPANYNAME}"
@@ -301,8 +303,18 @@ Function LeaveEnterOurdriveParams
 validate:
 
   ReadINIStr $ourdriveUrl "$PLUGINSDIR\ourdriveparams.ini" "Field 2" "State"
+  ${StrContains} $0 "http" $ourdriveUrl checkUsername
+    MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL can't be empty"
+
+checkUsername:
   ReadINIStr $ourdriveUsername "$PLUGINSDIR\ourdriveparams.ini" "Field 4" "State"
+  StrCmp $ourdriveUsername "" 0 +3 checkPassword
+    MessageBox MB_ICONEXCLAMATION|MB_OK "Username can't be empty"
+
+checkPassword
   ReadINIStr $ourdrivePassword "$PLUGINSDIR\ourdriveparams.ini" "Field 6" "State"
+    StrCmp $ourdrivePassword "" 0 +3 done
+    MessageBox MB_ICONEXCLAMATION|MB_OK "Password can't be empty"
 
   ; MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL: " + $ourdriveUrl
 
