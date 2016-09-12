@@ -54,6 +54,17 @@ public class ProcessWatcher extends Thread {
      *
      */
     private void stopThread() {
+
+        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
+
+        //Iterate over set to find yours
+        for(Thread thread : setOfThread){
+            if(thread.getName()=="DesktopOpener"){
+                thread.stop();
+                logger.info("DesktopOpener watcher thread has been stopped");
+            }
+        }
+
         this.sfwThread.interrupt();
         if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
 //            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
@@ -61,17 +72,6 @@ public class ProcessWatcher extends Thread {
             logger.info("File watcher thread has been stopped");
         }
         logger.info("Process watcher has been stopped because application and/or file has been closed");
-
-
-        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
-
-        //Iterate over set to find yours
-        for(Thread thread : setOfThread){
-            if(thread.getName()=="DesktopOpener"){
-                thread.interrupt();
-                logger.info("DesktopOpener watcher thread has been stopped");
-            }
-        }
 
         OurDriveService.showAllThreads();
 
