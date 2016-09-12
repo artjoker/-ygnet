@@ -331,6 +331,10 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         return System.getProperty("user.home") + File.separator + ".ourdrive" + File.separator;
     }
 
+    /**
+     *
+     * @param folderSettings
+     */
     private void startTimer(FolderSettings folderSettings) {
         if (isSettingsValid(folderSettings)) {
             final File folder = folderSettings.getFolder();
@@ -393,7 +397,10 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         return true;
     }
 
-
+    /**
+     *
+     * @param message
+     */
     private void showWarningDialog(String message) {
         if (!dialogDismissedForever) {
             Icon icon = OurDriveGUI.getLargeIcon();
@@ -414,6 +421,20 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             }
 
         }
+    }
+
+    /**
+     *
+     */
+    public static void showAllThreads()
+    {
+        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+
+        System.out.println("Found "+threadSet.size()+" Threads = = = = =");
+        for(Thread ts:threadSet){
+            System.out.println(ts.getName());
+        }
+        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = =");
     }
 
     /**

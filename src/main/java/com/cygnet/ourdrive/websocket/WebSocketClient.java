@@ -334,13 +334,26 @@ public class WebSocketClient {
                              * we add a change watcher to this file
                              */
 //                            desktop.open(file);
+//                            Thread desktopThread = new Thread()
+//                            {
+//                                public void run() {
+//                                    try {
+//                                        desktop.open(file);
+//                                    } catch (IOException e) {
+//                                        e.printStackTrace();
+//                                    }
+//                                }
+//                            };
+//                            desktopThread.setName("DesktopOpener");
+//                            desktopThread.start();
+
                             new Thread(() -> {
                                 try {
                                     desktop.open(file);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                            }).start();
+                            }, "DesktopOpener").start();
 
                         } catch (Exception e) {
                             logger.error("OurdriveFileDownload failed: "+e.getMessage());

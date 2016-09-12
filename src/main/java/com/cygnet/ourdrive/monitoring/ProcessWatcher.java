@@ -58,68 +58,25 @@ public class ProcessWatcher extends Thread {
         if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
 //            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
         } else {
-            logger.info("SFW thread has been interrupted");
+            logger.info("File watcher thread has been stopped");
         }
         logger.info("Process watcher has been stopped because application and/or file has been closed");
-        stop.set(true);
-        process.destroy();
-    }
 
-    /**
-     *
-     * @param modifiedFile
-     * @param unlock
-     * @return
-     */
-    private boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
 
-        Boolean isUploaded = false;
-        try {
+        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
 
-            isUploaded = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
-            if (isUploaded) {
-
-                boolean origFileDeleted = false;
-
-                try {
-                    origFileDeleted = modifiedFile.delete();
-                } catch(Exception e) {
-                    logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
-                }
-
-                if (origFileDeleted) {
-
-                    logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
-                    logger.info("Saved and unlocked file: " + modifiedFile.getName() + " on Cygnet");
-
-                    File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
-
-                    try {
-                        logger.info("Try to delete: " + jsonFile.getAbsolutePath() + " locally.");
-                        boolean jsonFileDeleted = jsonFile.delete();
-
-                        if (jsonFileDeleted) {
-                            logger.info("Local file " + jsonFile.getAbsolutePath() + " has been deleted!");
-                            isUploaded = true;
-                        } else {
-                            logger.error("Delete operation is failed for local " + jsonFile.getAbsolutePath());
-                        }
-
-                    } catch(Exception e) {
-                        logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
-                    }
-
-                } else {
-                    logger.error("Local delete operation is failed for " + modifiedFile.getAbsolutePath());
-                }
-
+        //Iterate over set to find yours
+        for(Thread thread : setOfThread){
+            if(thread.getName()=="DesktopOpener"){
+                thread.interrupt();
+                logger.info("DesktopOpener watcher thread has been stopped");
             }
-
-        } catch (Exception e) {
-            logger.error("Try to upload "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
         }
 
-        return isUploaded;
+        OurDriveService.showAllThreads();
+
+        stop.set(true);
+        process.destroy();
     }
 
     /**
@@ -132,6 +89,62 @@ public class ProcessWatcher extends Thread {
     }
 
 
+    /**
+     *
+     * @param modifiedFile
+     * @param unlock
+     * @return
+     */
+    private boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
+
+        Boolean uploadProcessSuccessful = false;
+        try {
+            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
+
+            if (fileUpload) {
+
+                try {
+                    Boolean origFileDeleted = modifiedFile.delete();
+
+                    if (origFileDeleted) {
+
+                        logger.info(modifiedFile.getAbsolutePath() + " has been deleted!");
+                        logger.info("Saved and unlocked file: " + modifiedFile.getName() + " on Cygnet");
+
+                        File jsonFile = new File(modifiedFile.getParent() + File.separator + "." + modifiedFile.getName() + ".json");
+
+                        try {
+                            logger.info("Try to delete: " + jsonFile.getAbsolutePath() + " locally.");
+                            boolean jsonFileDeleted = jsonFile.delete();
+
+                            if (jsonFileDeleted) {
+                                logger.info("Local file " + jsonFile.getAbsolutePath() + " has been deleted!");
+                                uploadProcessSuccessful = true;
+                            } else {
+                                logger.error("Delete operation is failed for local " + jsonFile.getAbsolutePath());
+                            }
+
+                        } catch(Exception e) {
+                            logger.error("Try to delete "+jsonFile.getAbsolutePath()+" with error: "+e.getMessage());
+                        }
+
+                    } else {
+                        logger.error("Local delete operation is failed for " + modifiedFile.getAbsolutePath());
+                    }
+
+                } catch(Exception e) {
+                    logger.error("Try to delete "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
+                }
+            }
+
+        } catch (Exception e) {
+            logger.error("Try to upload "+modifiedFile.getAbsolutePath()+" with error: "+e.getMessage());
+        }
+
+        return uploadProcessSuccessful;
+    }
+
+
     @Override
     public void run() {
 
@@ -140,6 +153,8 @@ public class ProcessWatcher extends Thread {
 //            Map.Entry processPairInit = (Map.Entry) processInfoInit;
 //            logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
 //        }
+
+        OurDriveService.showAllThreads();
 
         Processes.setPid("0");
 
