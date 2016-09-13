@@ -91,11 +91,17 @@ public class Desktop {
         SingleFileWatcher sfw = null;  // new SingleFileWatcher(downloadPath, socketClient, file);
 
         try {
-            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
-
-            if(!sfw.isAlive()) {
+            if(!file.exists()) {
+                sfw = new SingleFileWatcher(downloadPath, socketClient, file);
                 sfw.start();
+            } else {
+                sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
+                if(!sfw.isAlive()) {
+                    sfw.start();
+                }
             }
+
+
         } catch (Exception e) {
             logger.error("WTF dude: "+e.getMessage());
         }
