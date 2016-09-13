@@ -88,12 +88,12 @@ public class Desktop {
         // add file to watcher
         logger.info("Set file watcher service to: "+downloadPath.toString());
 
-        SingleFileWatcher sfw = null;
-        try {
-            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
-        } catch (Exception e) {
-            logger.error("WTF dude: "+e.getMessage());
-        }
+        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient, file);
+//        try {
+//            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
+//        } catch (Exception e) {
+//            logger.error("WTF dude: "+e.getMessage());
+//        }
 
 
 //        Thread fileWatchCheck =  getThreadByName("DownloadFileWatcher");

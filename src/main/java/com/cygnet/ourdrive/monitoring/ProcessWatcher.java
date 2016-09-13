@@ -30,20 +30,20 @@ public class ProcessWatcher extends Thread {
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
-    private Thread sfwThread;
+    private SingleFileWatcher sfwThread;
 
     public ProcessWatcher() {
 
     }
 
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, Thread sfwThread, String OS) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher sfwThread, String OS) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
-        this.sfwThread = sfwThread;
+        sfwThread = sfwThread;
     }
 
     public boolean isStopped() {
@@ -68,12 +68,7 @@ public class ProcessWatcher extends Thread {
 //            }
 //        }
 
-        this.sfwThread.interrupt();
-        try {
-            this.sfwThread.join();
-        } catch (InterruptedException e) {
-            logger.info("Process watcher has been stopped because application and/or file has been closed. Process-message: "+e.getMessage());
-        }
+        sfwThread.stopThread();
 //        if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
 ////            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
 //        } else {
