@@ -90,11 +90,9 @@ public class Desktop {
 
         SingleFileWatcher sfw = null;
         try {
-            sfw = SingleFileWatcher.class.newInstance();
-        } catch (InstantiationException e) {
-            logger.error(e.getMessage());
-        } catch (IllegalAccessException e) {
-            logger.error(e.getMessage());
+            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
+        } catch (Exception e) {
+            logger.error("WTF dude: "+e.getMessage());
         }
 
 
