@@ -339,7 +339,7 @@ public class WebSocketClient {
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                            }).start();
+                            }, "DesktopOpener").start();
 
                         } catch (Exception e) {
                             logger.error("OurdriveFileDownload failed: "+e.getMessage());
