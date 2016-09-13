@@ -87,9 +87,27 @@ public class Desktop {
         Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
         // add file to watcher
         logger.info("Set file watcher service to: "+downloadPath.toString());
-        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient, file);
-        sfw.start();
-        logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
+
+        SingleFileWatcher sfw;
+
+//        new Thread(() -> {
+//            try {
+//                desktop.open(file);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }, "DesktopOpener").start();
+
+        Thread fileWatchCheck =  getThreadByName("DownloadFileWatcher");
+
+        if(fileWatchCheck == null) {
+            sfw = new SingleFileWatcher(downloadPath, socketClient, file);
+            sfw.start();
+            logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
+        } else {
+            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
+        }
+
 
         if (isLinux()) {
 

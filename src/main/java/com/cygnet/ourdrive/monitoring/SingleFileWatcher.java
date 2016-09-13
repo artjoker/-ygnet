@@ -24,6 +24,17 @@ public class SingleFileWatcher extends Thread {
 
     boolean overflowTriggeredFlag = false;
 
+    private static SingleFileWatcher instance;
+
+    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient, File downloadedFile)
+    {
+        if (instance == null)
+            instance = new SingleFileWatcher(downloadPath, socketClient, downloadedFile);
+        return instance;
+    }
+
+//    private SingleFileWatcher() {}
+
     /**
      * @param downloadPath
      * @param socketClient
@@ -162,6 +173,7 @@ public class SingleFileWatcher extends Thread {
 
                     } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
 //                        logger.info("Created file: " + file.getAbsoluteFile().toString());
+//                        this.stopThread();
                     } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
 //                        logger.info("Deleted file: " + file.getAbsoluteFile().toString());
                     }
