@@ -54,38 +54,9 @@ public class ProcessWatcher extends Thread {
      *
      */
     private void stopThread() {
-
-//        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
-
-        // Iterate over set to find yours
-//        for(Thread thread : setOfThread){
-//            if(thread.getName().equals("DesktopOpener")){
-//                thread.interrupt();
-//                logger.info("DesktopOpener watcher thread has been stopped");
-//            } else if(thread.getName().equals("DownloadFileWatcher")) {
-//                thread.interrupt();
-//                logger.info("DownloadFileWatcher watcher thread has been stopped");
-//            }
-//        }
-
-
-
-        sfwThread.stopThread();
-
-
-
-//        if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
-////            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
-//        } else {
-//            logger.info("File watcher thread has been stopped");
-//        }
-//        logger.info("Process watcher has been stopped because application and/or file has been closed");
-
+//        sfwThread.stopThread();
         logger.info("running garbage collector to clean application.");
         System.gc();
-
-        System.out.println("= = comes from ProcessWatcher = = = = = = = = = = = = = = = =");
-        OurDriveService.showAllThreads();
 
         stop.set(true);
         process.destroy();
@@ -159,14 +130,6 @@ public class ProcessWatcher extends Thread {
 
     @Override
     public void run() {
-
-//        logger.info("Initial values:");
-//        for (Object processInfoInit : this.processIds.entrySet()) {
-//            Map.Entry processPairInit = (Map.Entry) processInfoInit;
-//            logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
-//        }
-
-//        OurDriveService.showAllThreads();
 
         Processes.setPid("0");
 
