@@ -333,37 +333,13 @@ public class WebSocketClient {
                              * try to open file with appropriate local application
                              * we add a change watcher to this file
                              */
-//                            desktop.open(file);
-//                            Thread desktopThread = new Thread()
-//                            {
-//                                public void run() {
-//                                    try {
-//                                        desktop.open(file);
-//                                    } catch (IOException e) {
-//                                        e.printStackTrace();
-//                                    }
-//                                }
-//                            };
-//                            desktopThread.setName("DesktopOpener");
-//                            desktopThread.start();
-
-                            Thread checker = getThreadByName("DesktopOpener");
-
-                            if(checker == null) {
-                                System.out.println("Try to create DesktopOpener thread.");
-                                new Thread(() -> {
-                                    try {
-                                        desktop.open(file);
-                                    } catch (IOException e) {
-                                        System.out.println(e.getMessage());
-                                    }
-                                }, "DesktopOpener").start();
-                            } else {
-                                System.out.println("DesktopOpener is alive.");
-                                checker.interrupt();
-                                checker.join();
-
-                            }
+                            new Thread(() -> {
+                                try {
+                                    desktop.open(file);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }).start();
 
                         } catch (Exception e) {
                             logger.error("OurdriveFileDownload failed: "+e.getMessage());
@@ -381,14 +357,6 @@ public class WebSocketClient {
                 logger.error("JSON OurdriveFileDownload failed: "+e.getMessage());
             }
         }
-    }
-
-
-    private Thread getThreadByName(String threadName) {
-        for (Thread t : Thread.getAllStackTraces().keySet()) {
-            if (t.getName().equals(threadName)) return t;
-        }
-        return null;
     }
 
     public void disconnect() {
