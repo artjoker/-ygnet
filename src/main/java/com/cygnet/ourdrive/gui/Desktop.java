@@ -89,6 +89,7 @@ public class Desktop {
         logger.info("Set file watcher service to: "+downloadPath.toString());
 
         SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient, file);
+        sfw.start();
 //        try {
 //            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
 //        } catch (Exception e) {
@@ -131,7 +132,7 @@ public class Desktop {
                     errorMsg += line;
                 }
 
-//                process.waitFor(); // Wait for the process to finish.
+                process.waitFor(); // Wait for the process to finish.
 
                 if(process.exitValue() != 0) {
                     logger.error("Open file with application failed: "+errorMsg);

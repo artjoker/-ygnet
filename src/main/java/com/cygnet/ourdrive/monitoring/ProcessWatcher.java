@@ -70,7 +70,7 @@ public class ProcessWatcher extends Thread {
 
 
 
-//        sfwThread.stopThread();
+        sfwThread.stopThread();
 
 
 
