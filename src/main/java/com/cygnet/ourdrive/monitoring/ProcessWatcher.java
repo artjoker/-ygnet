@@ -36,14 +36,14 @@ public class ProcessWatcher extends Thread {
 
     }
 
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher sfwThread, String OS) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher swf, String OS) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
-        sfwThread = sfwThread;
+        sfwThread = swf;
     }
 
     public boolean isStopped() {
@@ -68,7 +68,12 @@ public class ProcessWatcher extends Thread {
 //            }
 //        }
 
+
+
         sfwThread.stopThread();
+
+
+
 //        if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
 ////            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
 //        } else {
@@ -204,7 +209,7 @@ public class ProcessWatcher extends Thread {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
                                     Processes.setTitleOnlyFileClosed("");
-                                    this.stopThread();
+                                    stopThread();
                                 }
                             }
                         }
