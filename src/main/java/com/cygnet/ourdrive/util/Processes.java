@@ -45,118 +45,118 @@ public class Processes {
             switch (OS) {
                 case "linux":
                     // ps -Ao %p%a
-                    p = Runtime.getRuntime().exec("ps -Ao \"%p;%a\"");
+                    p = Runtime.getRuntime().exec("ps -Ao '%p,%a'");
                     p.waitFor();
 
-                    if (p != null) {
-                        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                        while ((process = input.readLine()) != null) {
+//                    if (!(p == null)) {
+                    BufferedReader linput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    while ((process = linput.readLine()) != null) {
 
-                            System.out.println(process);
-                            String arr[] = process.split(";");
+                        System.out.println(process);
+                        String arr[] = process.split(",");
 
-                            if (getall) {
-                                processes.put(arr[0].trim(), arr[1].trim());
-                            } else {
-                                String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
-                                if (arr[1].contains(filenameWithoutExtension)) {
-                                    processes.put(arr[0].trim(), file.getAbsoluteFile().toString());
-                                }
+                        if (getall) {
+                            processes.put(arr[0].trim(), arr[1].trim());
+                        } else {
+                            String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+                            if (arr[1].contains(filenameWithoutExtension)) {
+                                processes.put(arr[0].trim(), file.getAbsoluteFile().toString());
                             }
                         }
-                        input.close();
-
                     }
+                    linput.close();
+
+//                    }
                     break;
                 case "windows":
                     p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
 //                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /NH");
                     p.waitFor();
 
-                    if (p != null) {
-                        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                        while ((process = input.readLine()) != null) {
+//                    if (p != null) {
+                    BufferedReader winput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    while ((process = winput.readLine()) != null) {
 
-                            String arr[] = process.split("\",\"");
-                            String[] preparedProcesses = new String[3];
+                        String arr[] = process.split("\",\"");
+                        String[] preparedProcesses = new String[3];
 
-                            Integer i = 0;
-                            for (String value : arr) {
-                                switch (i) {
-                                    case 0:
-                                        if(value.contains("soffice") || value.contains("WINWORD")) {
+                        Integer i = 0;
+                        for (String value : arr) {
+                            switch (i) {
+                                case 0:
+                                    if(value.contains("soffice") || value.contains("WINWORD")) {
 //                                            System.out.println(process);
-                                        }
-                                        break;
-                                    case 1:
-                                        preparedProcesses[1] = value;
-                                        break;
-                                    case 2:
-                                        break;
-                                    case 3:
-                                        break;
-                                    case 4:
-                                        break;
-                                    case 5:
-                                        break;
-                                    case 6:
-                                        preparedProcesses[0] = value;
-                                        break;
-                                    case 7:
-                                        break;
-                                    case 8:
-                                        preparedProcesses[2] = value;
-                                        break;
-                                }
-                                i++;
+                                    }
+                                    break;
+                                case 1:
+                                    preparedProcesses[1] = value;
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                case 6:
+                                    preparedProcesses[0] = value;
+                                    break;
+                                case 7:
+                                    break;
+                                case 8:
+                                    preparedProcesses[2] = value;
+                                    break;
                             }
+                            i++;
+                        }
 
-                            if (getall) {
-                                processes.put(preparedProcesses[1].trim(), preparedProcesses[2].trim());
-                            } else {
+                        if (getall) {
+                            processes.put(preparedProcesses[1].trim(), preparedProcesses[2].trim());
+                        } else {
 
-                                String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+                            String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
 
-                                if (preparedProcesses[2].contains(filenameWithoutExtension) || Pid.equals(preparedProcesses[1].trim())) {
+                            if (preparedProcesses[2].contains(filenameWithoutExtension) || Pid.equals(preparedProcesses[1].trim())) {
 
-                                    if(Pid.equals("0")) {
-                                        Pid = preparedProcesses[1].trim();
-                                    }
+                                if(Pid.equals("0")) {
+                                    Pid = preparedProcesses[1].trim();
+                                }
 
-                                    if(titleDocument.equals("")) {
+                                if(titleDocument.equals("")) {
 
-                                        setTitleDocument(preparedProcesses[2].trim());
+                                    setTitleDocument(preparedProcesses[2].trim());
 
-                                    } else if(!titleDocument.equals("") && titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument)) {
+                                } else if(!titleDocument.equals("") && titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument)) {
 
-                                        setTitleNotAvailable(preparedProcesses[2].trim());
+                                    setTitleNotAvailable(preparedProcesses[2].trim());
 
-                                    } else if(!titleDocument.equals("") && !titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument) && !preparedProcesses[2].trim().equals(titleNotAvailable)) {
+                                } else if(!titleDocument.equals("") && !titleNotAvailable.equals("") && !preparedProcesses[2].trim().equals(titleDocument) && !preparedProcesses[2].trim().equals(titleNotAvailable)) {
 
-                                        /*
-                                        if not empty doc title &&
-                                        if not empty N/A title &&
-                                        process title not equals doc title &&
-                                        process title not equals N/A title  &&
-                                         */
+                                    /*
+                                    if not empty doc title &&
+                                    if not empty N/A title &&
+                                    process title not equals doc title &&
+                                    process title not equals N/A title  &&
+                                     */
 
-                                        setTitleOnlyFileClosed(preparedProcesses[2].trim());
+                                    setTitleOnlyFileClosed(preparedProcesses[2].trim());
 
-                                    }
+                                }
 
 //                                    if(preparedProcesses[2].contains(filenameWithoutExtension)) {
 //                                        setTitleNotAvailable("");
 //                                        setTitleOnlyFileClosed("");
 //                                    }
 
-                                    processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
+                                processes.put(preparedProcesses[1].trim(), file.getAbsoluteFile().toString().trim());
 
-                                }
                             }
                         }
-                        input.close();
-
                     }
+                    winput.close();
+
+//                    }
                     break;
 
             }

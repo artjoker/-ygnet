@@ -69,6 +69,11 @@ public class ProcessWatcher extends Thread {
 //        }
 
         this.sfwThread.interrupt();
+        try {
+            this.sfwThread.join();
+        } catch (InterruptedException e) {
+            logger.info("Process watcher has been stopped because application and/or file has been closed. Process-message: "+e.getMessage());
+        }
 //        if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
 ////            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
 //        } else {
@@ -161,7 +166,7 @@ public class ProcessWatcher extends Thread {
 //            logger.info("Key: "+processPairInit.getKey().toString()+", -> Value: "+processPairInit.getValue().toString());
 //        }
 
-        OurDriveService.showAllThreads();
+//        OurDriveService.showAllThreads();
 
         Processes.setPid("0");
 
@@ -226,11 +231,11 @@ public class ProcessWatcher extends Thread {
                 }
             }
 
-//            try {
-//                Thread.sleep(500);
-//            } catch (InterruptedException e) {
-//                logger.error("Pause ProcessWatcher thread for 0.5 sec failed: "+e.getMessage());
-//            }
+            try {
+                Thread.sleep(200L);
+            } catch (InterruptedException e) {
+                logger.error("Pause ProcessWatcher thread for 0.2 sec failed: "+e.getMessage());
+            }
 
         }
     }

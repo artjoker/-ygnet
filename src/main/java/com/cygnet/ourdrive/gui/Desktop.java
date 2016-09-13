@@ -158,12 +158,12 @@ public class Desktop {
             } catch (Exception e) {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
-//
-//            try {
-//                Thread.sleep(2000L);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+
+            try {
+                Thread.sleep(2000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
 
 
