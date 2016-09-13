@@ -115,7 +115,7 @@ public class Desktop {
                     errorMsg += line;
                 }
 
-                process.waitFor(); // Wait for the process to finish.
+//                process.waitFor(); // Wait for the process to finish.
 
                 if(process.exitValue() != 0) {
                     logger.error("Open file with application failed: "+errorMsg);
@@ -158,9 +158,9 @@ public class Desktop {
             } catch (Exception e) {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
-
+//
 //            try {
-//                Thread.sleep(3000L);
+//                Thread.sleep(2000L);
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }

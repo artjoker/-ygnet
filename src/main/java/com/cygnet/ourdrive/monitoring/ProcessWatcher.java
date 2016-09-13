@@ -55,25 +55,29 @@ public class ProcessWatcher extends Thread {
      */
     private void stopThread() {
 
-//        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
+        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
 
-        //Iterate over set to find yours
-//        for(Thread thread : setOfThread){
-//            if(thread.getName()=="DesktopOpener"){
-//                thread.interrupt();
-//                logger.info("DesktopOpener watcher thread has been stopped");
-//            }
-//        }
-
-
-        this.sfwThread.interrupt();
-        if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
-//            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
-        } else {
-            logger.info("File watcher thread has been stopped");
+        // Iterate over set to find yours
+        for(Thread thread : setOfThread){
+            if(thread.getName().equals("DesktopOpener")){
+                thread.interrupt();
+                logger.info("DesktopOpener watcher thread has been stopped");
+            } else if(thread.getName().equals("DownloadFileWatcher")) {
+                thread.interrupt();
+                logger.info("DownloadFileWatcher watcher thread has been stopped");
+            }
         }
-        logger.info("Process watcher has been stopped because application and/or file has been closed");
 
+
+//        this.sfwThread.interrupt();
+//        if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {
+////            logger.warn("The thread "+this.sfwThread.getName()+" (ID: "+this.sfwThread.getId()+") is still alive.");
+//        } else {
+//            logger.info("File watcher thread has been stopped");
+//        }
+//        logger.info("Process watcher has been stopped because application and/or file has been closed");
+
+        System.out.println("= = comes from ProcessWatcher = = = = = = = = = = = = = = = =");
         OurDriveService.showAllThreads();
 
         stop.set(true);
