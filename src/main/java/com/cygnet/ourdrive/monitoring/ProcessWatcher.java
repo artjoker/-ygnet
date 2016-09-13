@@ -54,7 +54,7 @@ public class ProcessWatcher extends Thread {
      *
      */
     private void stopThread() {
-//        sfwThread.stopThread();
+        sfwThread.stopThread();
         logger.info("running garbage collector to clean application.");
         System.gc();
 
