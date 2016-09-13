@@ -24,14 +24,15 @@ public class SingleFileWatcher extends Thread {
 
     boolean overflowTriggeredFlag = false;
 
-    private static SingleFileWatcher instance;
-
-    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient, File downloadedFile)
-    {
-        if (instance == null)
-            instance = new SingleFileWatcher(downloadPath, socketClient, downloadedFile);
-        return instance;
-    }
+//    private static SingleFileWatcher instance;
+//
+//    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient, File downloadedFile)
+//    {
+//        if (instance == null) {
+//            instance = new SingleFileWatcher(downloadPath, socketClient, downloadedFile);
+//        }
+//        return instance;
+//    }
 
 //    private SingleFileWatcher() {}
 

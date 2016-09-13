@@ -52,7 +52,7 @@ public class Processes {
                     BufferedReader linput = new BufferedReader(new InputStreamReader(p.getInputStream()));
                     while ((process = linput.readLine()) != null) {
 
-                        System.out.println(process);
+//                        System.out.println(process);
                         String arr[] = process.split(",");
 
                         if (getall) {

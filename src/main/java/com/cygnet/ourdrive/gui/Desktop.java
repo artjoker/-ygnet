@@ -88,25 +88,25 @@ public class Desktop {
         // add file to watcher
         logger.info("Set file watcher service to: "+downloadPath.toString());
 
-        SingleFileWatcher sfw;
-
-//        new Thread(() -> {
-//            try {
-//                desktop.open(file);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }, "DesktopOpener").start();
-
-        Thread fileWatchCheck =  getThreadByName("DownloadFileWatcher");
-
-        if(fileWatchCheck == null) {
-            sfw = new SingleFileWatcher(downloadPath, socketClient, file);
-            sfw.start();
-            logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
-        } else {
-            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
+        SingleFileWatcher sfw = null;
+        try {
+            sfw = SingleFileWatcher.class.newInstance();
+        } catch (InstantiationException e) {
+            logger.error(e.getMessage());
+        } catch (IllegalAccessException e) {
+            logger.error(e.getMessage());
         }
+
+
+//        Thread fileWatchCheck =  getThreadByName("DownloadFileWatcher");
+//
+//        if(fileWatchCheck == null) {
+//            sfw = new SingleFileWatcher(downloadPath, socketClient, file);
+//            sfw.start();
+//            logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
+//        } else {
+//            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
+//        }
 
 
         if (isLinux()) {
