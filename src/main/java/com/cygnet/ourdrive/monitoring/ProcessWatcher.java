@@ -55,15 +55,16 @@ public class ProcessWatcher extends Thread {
      */
     private void stopThread() {
 
-        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
+//        Set<Thread> setOfThread = Thread.getAllStackTraces().keySet();
 
         //Iterate over set to find yours
-        for(Thread thread : setOfThread){
-            if(thread.getName()=="DesktopOpener"){
-                thread.stop();
-                logger.info("DesktopOpener watcher thread has been stopped");
-            }
-        }
+//        for(Thread thread : setOfThread){
+//            if(thread.getName()=="DesktopOpener"){
+//                thread.interrupt();
+//                logger.info("DesktopOpener watcher thread has been stopped");
+//            }
+//        }
+
 
         this.sfwThread.interrupt();
         if(!this.sfwThread.isInterrupted() || !this.sfwThread.isAlive()) {

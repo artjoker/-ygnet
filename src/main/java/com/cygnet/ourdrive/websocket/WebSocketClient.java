@@ -347,13 +347,23 @@ public class WebSocketClient {
 //                            desktopThread.setName("DesktopOpener");
 //                            desktopThread.start();
 
-                            new Thread(() -> {
-                                try {
-                                    desktop.open(file);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }, "DesktopOpener").start();
+                            Thread checker = getThreadByName("DesktopOpener");
+
+                            if(checker == null) {
+                                System.out.println("Try to create DesktopOpener thread.");
+                                new Thread(() -> {
+                                    try {
+                                        desktop.open(file);
+                                    } catch (IOException e) {
+                                        System.out.println(e.getMessage());
+                                    }
+                                }, "DesktopOpener").start();
+                            } else {
+                                System.out.println("DesktopOpener is alive.");
+                                checker.interrupt();
+                                checker.join();
+
+                            }
 
                         } catch (Exception e) {
                             logger.error("OurdriveFileDownload failed: "+e.getMessage());
@@ -371,6 +381,14 @@ public class WebSocketClient {
                 logger.error("JSON OurdriveFileDownload failed: "+e.getMessage());
             }
         }
+    }
+
+
+    private Thread getThreadByName(String threadName) {
+        for (Thread t : Thread.getAllStackTraces().keySet()) {
+            if (t.getName().equals(threadName)) return t;
+        }
+        return null;
     }
 
     public void disconnect() {
