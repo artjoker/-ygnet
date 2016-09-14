@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by casten on 5/12/16.
  */
-public class SingleFileWatcher extends Thread {
+public class SingleFileWatcher {
     private final Path downloadPath;
     private final WebSocketClient socketClient;
     private AtomicBoolean stop = new AtomicBoolean(false);
@@ -44,7 +44,7 @@ public class SingleFileWatcher extends Thread {
         this.downloadPath = downloadPath;
         this.socketClient = socketClient;
         this.downloadedFile = downloadedFile;
-        this.setName("DownloadFileWatcher");
+//        this.setName("DownloadFileWatcher");
     }
 
     /**
@@ -112,15 +112,15 @@ public class SingleFileWatcher extends Thread {
      */
     public boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
         try {
-            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
+//            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
+            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
         } catch (Exception e) {
             logger.error("Uploading as new version failed: "+e.getMessage());
         }
         return false;
     }
 
-    @Override
-    public void run() {
+    public void startWatching() {
 
         try {
 

@@ -213,7 +213,7 @@ public class WebSocketClient {
      * @param unlock
      * @return
      */
-    public boolean uploadAsNewVersionRequest(File file, Boolean unlock, String processName) {
+    public boolean uploadAsNewVersionRequest(File file, Boolean unlock) {
         // upload_as_new_version
         // read json file, get data form that containing json and sen all back to cygnet
         File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
@@ -249,7 +249,7 @@ public class WebSocketClient {
                             JsonObj.getJSONObject("file_data").put("content", new String(dataFileStr, "UTF-8"));
                             JsonObj.getJSONObject("file_data").put("unlock", unlock);
                             JsonObj.getJSONObject("file_data").put("base64", true);
-                            JsonObj.getJSONObject("file_data").put("process_name", processName);
+//                            JsonObj.getJSONObject("file_data").put("process_name", processName);
 
                             if (unlock) {
                                 JsonObj.getJSONObject("file_data").put("edit", 1);

@@ -54,7 +54,7 @@ public class ProcessWatcher extends Thread {
      *
      */
     private void stopThread() {
-        sfwThread.stopThread();
+//        sfwThread.stopThread();
         logger.info("running garbage collector to clean application.");
         System.gc();
 
@@ -82,7 +82,8 @@ public class ProcessWatcher extends Thread {
 
         Boolean uploadProcessSuccessful = false;
         try {
-            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
+//            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
+            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
 
             if (fileUpload) {
 

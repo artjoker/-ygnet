@@ -88,23 +88,19 @@ public class Desktop {
         // add file to watcher
         logger.info("Set file watcher service to: "+downloadPath.toString());
 
-        SingleFileWatcher sfw = null;  // new SingleFileWatcher(downloadPath, socketClient, file);
+//        SingleFileWatcher sfw = null;  // new SingleFileWatcher(downloadPath, socketClient, file);
+//
+//        try {
+//            sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
+//            if(!sfw.isAlive()) {
+//                sfw.start();
+//            }
+//        } catch (Exception e) {
+//            logger.error("WTF dude: "+e.getMessage());
+//        }
 
-        try {
-            if(!file.exists()) {
-                sfw = new SingleFileWatcher(downloadPath, socketClient, file);
-                sfw.start();
-            } else {
-                sfw = SingleFileWatcher.getInstance(downloadPath, socketClient, file);
-                if(!sfw.isAlive()) {
-                    sfw.start();
-                }
-            }
-
-
-        } catch (Exception e) {
-            logger.error("WTF dude: "+e.getMessage());
-        }
+        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient, file);
+        new Thread(sfw::startWatching, "DownloadFileWatcher").start();
 
         if (isLinux()) {
 
