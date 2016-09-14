@@ -30,20 +30,21 @@ public class ProcessWatcher extends Thread {
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
-    private SingleFileWatcher sfwThread;
+//    private SingleFileWatcher sfwThread;
 
     public ProcessWatcher() {
 
     }
 
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher swf, String OS) {
+//    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher swf, String OS) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
-        sfwThread = swf;
+//        sfwThread = swf;
     }
 
     public boolean isStopped() {
