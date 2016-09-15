@@ -111,13 +111,13 @@ public class SingleFileWatcher {
      * @param unlock       unlock this file at Cygnet?
      */
     public boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
-        try {
+//        try {
 //            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
             return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, "DownloadFileWatcher");
-        } catch (Exception e) {
-            logger.error("Uploading as new version failed: "+e.getMessage());
-        }
-        return false;
+//        } catch (Exception e) {
+//            logger.error("Uploading as new version failed: "+e.getMessage());
+//        }
+//        return false;
     }
 
     public void startWatching() {
