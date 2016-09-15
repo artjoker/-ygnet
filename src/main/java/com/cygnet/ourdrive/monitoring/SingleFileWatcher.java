@@ -113,7 +113,7 @@ public class SingleFileWatcher {
     public boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
         try {
 //            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
-            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
+            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, "DownloadFileWatcher");
         } catch (Exception e) {
             logger.error("Uploading as new version failed: "+e.getMessage());
         }

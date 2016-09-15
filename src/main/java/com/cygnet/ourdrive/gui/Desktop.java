@@ -99,12 +99,15 @@ public class Desktop {
 //            logger.error("WTF dude: "+e.getMessage());
 //        }
 
-        Thread fileWatcher =  getThreadByName("DownloadFileWatcher");
+//        Thread fileWatcher =  getThreadByName("DownloadFileWatcher");
 
-        if(fileWatcher == null) {
+//        if(fileWatcher == null) {
             SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient, file);
-            new Thread(sfw::startWatching, "DownloadFileWatcher").start();
-        }
+            Thread fileWatcher = new Thread(sfw::startWatching, "DownloadFileWatcher");
+            fileWatcher.start();
+//        }
+
+//        Thread fileWatcher =  getThreadByName("DownloadFileWatcher");
 
         if (isLinux()) {
 
@@ -163,7 +166,7 @@ public class Desktop {
                     try {
                         HashMap processIds = Processes.GetSystemProcesses(file, "linux", false); //Processes.getProcessIdsByFile(file, "windows");
 //                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
-                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "linux"));
+                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "linux", fileWatcher.getId()));
                         this.pwt.get().run();
                     } catch (Exception e) {
                         logger.warn("Get process information failed: ProcessWatcher has been stopped");
@@ -231,7 +234,7 @@ public class Desktop {
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "mac", false); //Processes.getProcessIdsByFile(file, "mac");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "mac"));
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "mac"));
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "mac", fileWatcher.getId()));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.warn("Get process information failed: ProcessWatcher has been stopped");
@@ -305,7 +308,7 @@ public class Desktop {
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows", fileWatcher.getId()));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.warn("Get process information failed: ProcessWatcher has been stopped");
@@ -380,7 +383,7 @@ public class Desktop {
             try {
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows", fileWatcher.getId()));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.warn("Get process information failed: ProcessWatcher has been stopped");

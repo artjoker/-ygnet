@@ -30,21 +30,21 @@ public class ProcessWatcher extends Thread {
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
-//    private SingleFileWatcher sfwThread;
+    private Long sfwThreadId;
 
     public ProcessWatcher() {
 
     }
 
 //    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher swf, String OS) {
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS, Long sfwThreadId) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
-//        sfwThread = swf;
+        this.sfwThreadId = sfwThreadId;
     }
 
     public boolean isStopped() {
@@ -83,8 +83,8 @@ public class ProcessWatcher extends Thread {
 
         Boolean uploadProcessSuccessful = false;
         try {
-//            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
-            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
+            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
+//            Boolean fileUpload = socketClient.uploadAsNewVersionRequest(modifiedFile, unlock);
 
             if (fileUpload) {
 
@@ -174,6 +174,7 @@ public class ProcessWatcher extends Thread {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
                                     Processes.setTitleOnlyFileClosed("");
+                                    Thread fileWatcher = getThreadById(sfwThreadId);
                                     stopThread();
                                 }
                             }
@@ -205,6 +206,19 @@ public class ProcessWatcher extends Thread {
         }
     }
 
+    /**
+     *
+     * @param threadId
+     * @return
+     */
+    private Thread getThreadById(Long threadId) {
+        for (Thread t : Thread.getAllStackTraces().keySet()) {
+            if (t.getId() == threadId) {
+                return t;
+            }
+        }
+        return null;
+    }
 
     /**
      * Check if a given file has a JSON brother
