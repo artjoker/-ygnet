@@ -26,10 +26,10 @@ public class SingleFileWatcher {
 
     private static SingleFileWatcher instance;
 
-    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient, File downloadedFile)
+    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient)
     {
         if (instance == null) {
-            instance = new SingleFileWatcher(downloadPath, socketClient, downloadedFile);
+            instance = new SingleFileWatcher(downloadPath, socketClient);
         }
         return instance;
     }
@@ -40,10 +40,10 @@ public class SingleFileWatcher {
      * @param downloadPath
      * @param socketClient
      */
-    public SingleFileWatcher(Path downloadPath, WebSocketClient socketClient, File downloadedFile) {
+    public SingleFileWatcher(Path downloadPath, WebSocketClient socketClient) {
         this.downloadPath = downloadPath;
         this.socketClient = socketClient;
-        this.downloadedFile = downloadedFile;
+//        this.downloadedFile = downloadedFile;
 //        this.setName("DownloadFileWatcher");
     }
 

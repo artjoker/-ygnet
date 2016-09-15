@@ -30,21 +30,21 @@ public class ProcessWatcher extends Thread {
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
-    private Long sfwThreadId;
+//    private Long sfwThreadId;
 
     public ProcessWatcher() {
 
     }
 
 //    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher swf, String OS) {
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS, Long sfwThreadId) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
-        this.sfwThreadId = sfwThreadId;
+//        this.sfwThreadId = sfwThreadId;
     }
 
     public boolean isStopped() {
@@ -174,7 +174,7 @@ public class ProcessWatcher extends Thread {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
                                     Processes.setTitleOnlyFileClosed("");
-                                    Thread fileWatcher = getThreadById(sfwThreadId);
+//                                    Thread fileWatcher = getThreadById(sfwThreadId);
                                     stopThread();
                                 }
                             }

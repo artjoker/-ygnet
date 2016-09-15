@@ -7,6 +7,7 @@ import com.cygnet.ourdrive.gui.SytrayInitializationException;
 import com.cygnet.ourdrive.monitoring.FolderMonitor;
 import com.cygnet.ourdrive.monitoring.FolderMonitorListener;
 import com.cygnet.ourdrive.monitoring.FolderMonitorTask;
+import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.monitoring.exceptions.OurdriveException;
 import com.cygnet.ourdrive.settings.FolderSettings;
 import com.cygnet.ourdrive.settings.GlobalSettings;
@@ -57,6 +58,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     private boolean dialogDismissedForever = false;
 
     private WebSocketClient socketClient;
+
+    private SingleFileWatcher singleFileWatcher;
 
 
     private static String download_folder_name = "ourdrive_downloads";
@@ -139,7 +142,20 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             logger.warn("Could not initialize systray item", e);
         }
 
-        checkDownloadFolder(globalSettings);
+        /*
+        start the download folder watcher to chekc file changes
+         */
+        Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
+
+        if(checkDownloadFolder(globalSettings)) {
+            // add file to watcher
+            logger.info("Set file watcher service to: "+downloadPath.toString());
+
+            singleFileWatcher = new SingleFileWatcher(downloadPath, socketClient);
+            Thread fileWatcher = new Thread(singleFileWatcher::startWatching, "DownloadFileWatcher");
+            fileWatcher.start();
+        }
+
 
         logger.info("OurDrive service started");
 
@@ -191,7 +207,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     /**
      * @param settings
      */
-    private void checkDownloadFolder(GlobalSettings settings) {
+    private boolean checkDownloadFolder(GlobalSettings settings) {
         Path userDirPath = Paths.get(getUserDataDirectory());
         Path downloadPath = Paths.get(getUserDataDirectory() + "/" + download_folder_name);
 
@@ -201,6 +217,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             try {
                 Files.createDirectory(userDirPath);
                 Files.createDirectory(downloadPath);
+                return true;
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(0);
@@ -209,12 +226,15 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             if (!Files.exists(downloadPath)) {
                 try {
                     Files.createDirectory(downloadPath);
+                    return true;
                 } catch (IOException e) {
                     e.printStackTrace();
                     System.exit(0);
                 }
             }
         }
+
+        return false;
     }
 
     @Override
