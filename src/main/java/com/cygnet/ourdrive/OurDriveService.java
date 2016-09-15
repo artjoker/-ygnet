@@ -146,8 +146,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         start the download folder watcher to chekc file changes
          */
         Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
+        Boolean folderCheck = checkDownloadFolder(globalSettings);
 
-        if(checkDownloadFolder(globalSettings)) {
+        logger.info("Folder check: " + folderCheck);
+
+        if(folderCheck) {
             // add file to watcher
             logger.info("Set file watcher service to: "+downloadPath.toString());
 
@@ -231,6 +234,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
                     e.printStackTrace();
                     System.exit(0);
                 }
+            } else {
+                return true;
             }
         }
 
