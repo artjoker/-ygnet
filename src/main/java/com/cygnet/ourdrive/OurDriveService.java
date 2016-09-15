@@ -142,6 +142,19 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             logger.warn("Could not initialize systray item", e);
         }
 
+        try {
+            // open websocket
+            socketClient = new WebSocketClient();
+            socketClient.connect();
+
+        } catch (InterruptedException ex) {
+            logger.error("InterruptedException exception: " + ex.getMessage());
+        } catch (URISyntaxException ex) {
+            logger.error("URISyntaxException exception: " + ex.getMessage());
+        } catch (Exception e) {
+            logger.error("Websocket Exception: " + e.getMessage());
+        }
+
         /*
         start the download folder watcher to chekc file changes
          */
@@ -161,19 +174,6 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
 
         logger.info("OurDrive service started");
-
-        try {
-            // open websocket
-            socketClient = new WebSocketClient();
-            socketClient.connect();
-
-        } catch (InterruptedException ex) {
-            logger.error("InterruptedException exception: " + ex.getMessage());
-        } catch (URISyntaxException ex) {
-            logger.error("URISyntaxException exception: " + ex.getMessage());
-        } catch (Exception e) {
-            logger.error("Websocket Exception: " + e.getMessage());
-        }
 
         // now configure
         if (configure) {

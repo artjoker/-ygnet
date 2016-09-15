@@ -20,7 +20,7 @@ public class SingleFileWatcher {
     private AtomicBoolean stop = new AtomicBoolean(false);
     private static final Logger logger = LoggerFactory.getLogger(OurDriveService.class);
 
-    private File downloadedFile;
+//    private File downloadedFile;
 
     boolean overflowTriggeredFlag = false;
 
