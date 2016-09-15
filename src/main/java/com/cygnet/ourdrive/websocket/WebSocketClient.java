@@ -218,6 +218,7 @@ public class WebSocketClient {
         // read json file, get data form that containing json and sen all back to cygnet
         File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
 
+        logger.info("request check 1: "+jsonFile.getName());
         Boolean returnVal = false;
 
         FileInputStream jsonTargetFile = null;
@@ -226,11 +227,15 @@ public class WebSocketClient {
             if(jsonFile.exists()) {
                 jsonTargetFile = new FileInputStream(jsonFile);
 
+                logger.info("request check 2: "+jsonTargetFile.toString());
+
                 if(file.exists()) {
                     try {
 
                         String targetFileStr = IOUtils.toString(jsonTargetFile);
                         jsonTargetFile.close();
+
+                        logger.info("request check 3: "+targetFileStr);
 
                         byte[] bytes = Files.readAllBytes(Paths.get(downloadPath.toAbsolutePath().toString() + File.separator + file.getName()));
 
@@ -251,6 +256,8 @@ public class WebSocketClient {
                             JsonObj.getJSONObject("file_data").put("base64", true);
                             JsonObj.getJSONObject("file_data").put("process_name", processName);
 
+                            logger.info("request check 4: "+JsonObj.toString());
+
                             if (unlock) {
                                 JsonObj.getJSONObject("file_data").put("edit", 1);
                                 JsonObj.getJSONObject("file_data").put("next_action", "close");
@@ -262,6 +269,9 @@ public class WebSocketClient {
                             try {
                                 if (socket != null) {
                                     socket.emit(OURDRIVE_FILE_UPLOAD, JsonObj);
+
+                                    logger.info("request check 5: socket.emit");
+
                                     returnVal = true;
                                 } else {
                                     logger.error("Could not emit event 'upload_as_new_version', because socket is NULL.");
