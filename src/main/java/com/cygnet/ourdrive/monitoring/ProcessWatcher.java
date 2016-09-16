@@ -4,6 +4,7 @@ import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +34,8 @@ public class ProcessWatcher extends Thread {
 
     private File file;
 
+    private  Path downloadPath;
+
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
@@ -43,13 +46,14 @@ public class ProcessWatcher extends Thread {
     }
 
 //    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher swf, String OS) {
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS, Path downloadPath) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
+        this.downloadPath = downloadPath;
 //        this.sfwThreadId = sfwThreadId;
     }
 
@@ -175,11 +179,10 @@ public class ProcessWatcher extends Thread {
 
                         if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
                             File file = new File(pair.getValue().toString());
-                            if (hasJsonBro(file)) {
 
-                                Boolean isFileOpen = isFileOpened(file);
-                                logger.info("Check if file is open = "+isFileOpen+" for "+file.getName());
+                            String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
 
+                            if (hasJsonBro(file) && !hasForCorrespondingTmpFile(filenameWithoutExtension)) {
                                 if (this.uploadAsNewVersion(file, true)) {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
@@ -216,36 +219,28 @@ public class ProcessWatcher extends Thread {
         }
     }
 
-    public boolean isFileOpened(File fileName) {
-        boolean res = false;
-        File file = new File(fileName.getAbsolutePath());
-        FileChannel channel = null;
-        try {
-            channel = new RandomAccessFile(file, "rw").getChannel();
-            // Get an exclusive lock on the whole file
-            FileLock lock = null;
-            try {
-                lock = channel.lock();
-                try {
-                    lock = channel.tryLock();
-                    res = true;
-                    // Ok. You get the lock
-                } catch (OverlappingFileLockException e) {
-                    logger.warn("OverlappingFileLockException "+e.getMessage());
-                    // File is open by someone else
-                } finally {
-                    lock.release();
+    /**
+     *
+     * @param fileWithoutExtension
+     * @return
+     */
+    private Boolean hasForCorrespondingTmpFile(String fileWithoutExtension)
+    {
+        Boolean check = false;
+        File folder = new File(downloadPath.toAbsolutePath().toString());
+        File[] fileList = folder.listFiles();
+
+        for(File f : fileList) {
+            if(f.isFile()) {
+                String ext = FilenameUtils.getExtension(f.getName());
+
+                if(f.getName().indexOf(fileWithoutExtension) > -1 && !ext.equals("json")) {
+                    check = true;
                 }
-            } catch (IOException e) {
-                logger.warn("IOException "+e.getMessage());
-//                e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            logger.warn("FileNotFoundException "+e.getMessage());
-//            e.printStackTrace();
         }
 
-        return res;
+        return check;
     }
 
 

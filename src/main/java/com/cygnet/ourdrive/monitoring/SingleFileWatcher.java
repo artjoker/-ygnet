@@ -3,10 +3,12 @@ package com.cygnet.ourdrive.monitoring;
 import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -158,8 +160,10 @@ public class SingleFileWatcher {
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
-                        if (!shouldIgnoreFile(file) && !isJsonFile(file.getName()) && file.canWrite()) {
+                        if (!shouldIgnoreFile(file) && !isJsonFile(file.getName())) {
+
                             logger.info("Check if file has a JSON sibling: " + file.getAbsoluteFile().toString());
+
                             if (hasJsonBro(file)) {
                                 logger.info("JSON sibling check OK for: " + file.getAbsoluteFile().toString());
                                 logger.info("Trying to upload because of save action: " + file.getAbsoluteFile().toString());
