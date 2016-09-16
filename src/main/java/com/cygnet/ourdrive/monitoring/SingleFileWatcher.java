@@ -111,13 +111,14 @@ public class SingleFileWatcher {
      * @param unlock       unlock this file at Cygnet?
      */
     public boolean uploadAsNewVersion(File modifiedFile, Boolean unlock) {
-//        try {
+        try {
 //            return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, this.getName());
             return socketClient.uploadAsNewVersionRequest(modifiedFile, unlock, "DownloadFileWatcher");
-//        } catch (Exception e) {
-//            logger.error("Uploading as new version failed: "+e.getMessage());
-//        }
-//        return false;
+        } catch (Exception e) {
+            logger.error("Uploading as new version failed: "+e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void startWatching() {
@@ -157,7 +158,7 @@ public class SingleFileWatcher {
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
 
-                        if (!shouldIgnoreFile(file) && !isJsonFile(file.getName())) {
+                        if (!shouldIgnoreFile(file) && !isJsonFile(file.getName()) && file.canWrite()) {
                             logger.info("Check if file has a JSON sibling: " + file.getAbsoluteFile().toString());
                             if (hasJsonBro(file)) {
                                 logger.info("JSON sibling check OK for: " + file.getAbsoluteFile().toString());
