@@ -8,6 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -170,6 +176,10 @@ public class ProcessWatcher extends Thread {
                         if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
                             File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
+
+                                Boolean isFileOpen = isFileOpened(file);
+                                logger.info("Check if file is open = "+isFileOpen+" for "+file.getName());
+
                                 if (this.uploadAsNewVersion(file, true)) {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
@@ -205,6 +215,39 @@ public class ProcessWatcher extends Thread {
 
         }
     }
+
+    public boolean isFileOpened(File fileName) {
+        boolean res = false;
+        File file = new File(fileName.getAbsolutePath());
+        FileChannel channel = null;
+        try {
+            channel = new RandomAccessFile(file, "rw").getChannel();
+            // Get an exclusive lock on the whole file
+            FileLock lock = null;
+            try {
+                lock = channel.lock();
+                try {
+                    lock = channel.tryLock();
+                    res = true;
+                    // Ok. You get the lock
+                } catch (OverlappingFileLockException e) {
+                    logger.warn("OverlappingFileLockException "+e.getMessage());
+                    // File is open by someone else
+                } finally {
+                    lock.release();
+                }
+            } catch (IOException e) {
+                logger.warn("IOException "+e.getMessage());
+//                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            logger.warn("FileNotFoundException "+e.getMessage());
+//            e.printStackTrace();
+        }
+
+        return res;
+    }
+
 
     /**
      *
