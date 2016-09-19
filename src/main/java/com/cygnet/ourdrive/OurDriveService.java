@@ -163,14 +163,14 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
         logger.info("Folder check: " + folderCheck);
 
-        if(folderCheck) {
-            // add file to watcher
-            logger.info("Set file watcher service to: "+downloadPath.toString());
-
-            singleFileWatcher = new SingleFileWatcher(downloadPath, socketClient);
-            Thread fileWatcher = new Thread(singleFileWatcher::startWatching, "DownloadFileWatcher");
-            fileWatcher.start();
-        }
+//        if(folderCheck) {
+//            // add file to watcher
+//            logger.info("Set file watcher service to: "+downloadPath.toString());
+//
+//            singleFileWatcher = new SingleFileWatcher(downloadPath, socketClient);
+//            Thread fileWatcher = new Thread(singleFileWatcher::startWatching, "DownloadFileWatcher");
+//            fileWatcher.start();
+//        }
 
 
         logger.info("OurDrive service started");
