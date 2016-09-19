@@ -85,15 +85,10 @@ public class Desktop extends Thread {
     public void open(File file) throws IOException {
 
         Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
-//        // add file to watcher
-//        logger.info("Set file watcher service to: "+downloadPath.toString());
-//
+
         SingleFileWatcher sfw = null;
-//        if(null != sfw) {
-            sfw = new SingleFileWatcher(downloadPath, socketClient);
-//            Thread fileWatcher = new Thread(sfw::startWatching, "DownloadFileWatcher");
-            sfw.startWatching();
-//        }
+        sfw = new SingleFileWatcher(downloadPath, socketClient);
+        Thread fileWatcher = new Thread(sfw::startWatching, "DownloadFileWatcher");
 
         if (isLinux()) {
 
@@ -374,6 +369,8 @@ public class Desktop extends Thread {
             } catch (Exception e) {
                 logger.warn("Get process information failed: ProcessWatcher has been stopped");
             }
+        } else {
+            logger.warn("No OS given?");
         }
     }
 

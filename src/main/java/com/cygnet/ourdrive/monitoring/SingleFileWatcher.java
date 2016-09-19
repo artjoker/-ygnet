@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Created by casten on 5/12/16.
  */
-public class SingleFileWatcher {
+public class SingleFileWatcher extends Thread {
     private final Path downloadPath;
     private final WebSocketClient socketClient;
     private AtomicBoolean stop = new AtomicBoolean(false);
