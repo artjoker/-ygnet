@@ -34,7 +34,7 @@ public class ProcessWatcher extends Thread {
 
     private File file;
 
-    private  Path downloadPath;
+//    private  Path downloadPath;
 
     private HashMap processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
@@ -45,15 +45,15 @@ public class ProcessWatcher extends Thread {
 
     }
 
-//    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, SingleFileWatcher swf, String OS) {
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS, Path downloadPath) {
+    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
+//    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS, Path downloadPath) {
         this.processIds = processIds;
         this.process = process;
         this.setName("ApplicationWatcher");
         this.socketClient = socketClient;
         this.OS = OS;
         this.file = file;
-        this.downloadPath = downloadPath;
+//        this.downloadPath = downloadPath;
 //        this.sfwThreadId = sfwThreadId;
     }
 
@@ -182,7 +182,7 @@ public class ProcessWatcher extends Thread {
 
                             String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
 
-                            if (hasJsonBro(file) && !hasForCorrespondingTmpFile(filenameWithoutExtension)) {
+                            if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
@@ -224,24 +224,24 @@ public class ProcessWatcher extends Thread {
      * @param fileWithoutExtension
      * @return
      */
-    private Boolean hasForCorrespondingTmpFile(String fileWithoutExtension)
-    {
-        Boolean check = false;
-        File folder = new File(downloadPath.toAbsolutePath().toString());
-        File[] fileList = folder.listFiles();
-
-        for(File f : fileList) {
-            if(f.isFile()) {
-                String ext = FilenameUtils.getExtension(f.getName());
-
-                if(f.getName().indexOf(fileWithoutExtension) > -1 && !ext.equals("json")) {
-                    check = true;
-                }
-            }
-        }
-
-        return check;
-    }
+//    private Boolean hasForCorrespondingTmpFile(String fileWithoutExtension)
+//    {
+//        Boolean check = false;
+//        File folder = new File(downloadPath.toAbsolutePath().toString());
+//        File[] fileList = folder.listFiles();
+//
+//        for(File f : fileList) {
+//            if(f.isFile()) {
+//                String ext = FilenameUtils.getExtension(f.getName());
+//
+//                if(f.getName().indexOf(fileWithoutExtension) > -1 && !ext.equals("json")) {
+//                    check = true;
+//                }
+//            }
+//        }
+//
+//        return check;
+//    }
 
 
     /**

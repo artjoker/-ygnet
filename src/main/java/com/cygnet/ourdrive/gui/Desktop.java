@@ -88,11 +88,11 @@ public class Desktop {
 //        // add file to watcher
 //        logger.info("Set file watcher service to: "+downloadPath.toString());
 //
-//        SingleFileWatcher sfw = null;
+        SingleFileWatcher sfw = null;
 //        if(null != sfw) {
-//            sfw = new SingleFileWatcher(downloadPath, socketClient, file);
+            sfw = new SingleFileWatcher(downloadPath, socketClient);
 //            Thread fileWatcher = new Thread(sfw::startWatching, "DownloadFileWatcher");
-//            fileWatcher.start();
+            sfw.startWatching();
 //        }
 
         if (isLinux()) {
