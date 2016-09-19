@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Desktop {
+public class Desktop extends Thread {
 
     private static final Logger logger = LoggerFactory.getLogger(OurDriveService.class);
 
