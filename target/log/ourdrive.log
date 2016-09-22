@@ -526,3 +526,14 @@
 2016-09-06 12:51:45,145 [main] INFO  com.cygnet.ourdrive.OurDriveService - Stopped monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Folder Upload
 2016-09-06 12:51:45,160 [main] INFO  com.cygnet.ourdrive.OurDriveService - Stopped monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Intray
 2016-09-06 12:51:45,207 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service stopped
+2016-09-19 14:48:44,026 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Folder Upload
+2016-09-19 14:48:44,043 [main] INFO  com.cygnet.ourdrive.OurDriveService - Started monitoring folder: C:\Users\Cygnet Cloud\Desktop\Cygnet Cloud Intray
+2016-09-19 14:48:44,044 [main] INFO  com.cygnet.ourdrive.OurDriveService - Loading systray item
+2016-09-19 14:48:45,514 [main] INFO  com.cygnet.ourdrive.OurDriveService - SSL Socket Server URL: http://89.31.96.228:40644
+2016-09-19 14:48:45,776 [main] INFO  com.cygnet.ourdrive.OurDriveService - Checking download folder path: C:\Users\Cygnet Cloud\.ourdrive\ourdrive_downloads
+2016-09-19 14:48:45,781 [main] INFO  com.cygnet.ourdrive.OurDriveService - Folder check: true
+2016-09-19 14:48:45,785 [main] INFO  com.cygnet.ourdrive.OurDriveService - OurDrive service started
+2016-09-19 14:48:47,624 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Successful connected to websocket: http://89.31.96.228:40644 to room: c1315ff8-ef28-419c-aa39-74d4160ee5f0
+2016-09-19 14:48:47,629 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Your are working on a 'windows 10' machine
+2016-09-19 14:48:47,790 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello /#H5TwyaClfhdJHw-6AAR1. You are now connected to socket server.
+2016-09-19 14:48:47,969 [EventThread] INFO  com.cygnet.ourdrive.OurDriveService - Hello OurDrive Client APP. You are now connected to room: 'c1315ff8-ef28-419c-aa39-74d4160ee5f0'.

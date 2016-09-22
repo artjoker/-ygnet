@@ -7,11 +7,13 @@ package com.cygnet.ourdrive.gui;
  */
 
 import com.cygnet.ourdrive.OurDriveService;
+import com.cygnet.ourdrive.monitoring.FolderMonitor;
 import com.cygnet.ourdrive.monitoring.ProcessWatcher;
 import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.settings.ReadProperties;
 import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,9 +88,12 @@ public class Desktop extends Thread {
 
         Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
 
-        SingleFileWatcher sfw = null;
-        sfw = new SingleFileWatcher(downloadPath, socketClient);
-        Thread fileWatcher = new Thread(sfw::startWatching, "DownloadFileWatcher");
+        // add file to watcher
+        logger.info("Set file watcher service to: "+downloadPath.toString());
+        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
+        sfw.start();
+        logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
+
 
         if (isLinux()) {
 
@@ -362,6 +367,7 @@ public class Desktop extends Thread {
             }
 
             try {
+
                 HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));

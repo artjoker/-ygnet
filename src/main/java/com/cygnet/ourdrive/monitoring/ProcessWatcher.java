@@ -9,12 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileLock;
-import java.nio.channels.OverlappingFileLockException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -180,9 +176,17 @@ public class ProcessWatcher extends Thread {
                         if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
                             File file = new File(pair.getValue().toString());
 
-                            String filenameWithoutExtension = FilenameUtils.removeExtension(file.getName());
+                            FileLock fileLock = null;
+                            fileLock = FileLock.tryLock(file);
+                            if (fileLock != null) {
+                                //We succeeded in locking the file so go ahead and upload it if modified
+                                System.out.println("got lock");
+                            } else {
+                                System.out.println("try lock is null");
+                            }
 
-                            if (hasJsonBro(file)) {
+                            if (hasJsonBro(file) && fileLock != null) {
+                                fileLock.unlock();
                                 if (this.uploadAsNewVersion(file, true)) {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
@@ -220,28 +224,37 @@ public class ProcessWatcher extends Thread {
     }
 
     /**
-     *
-     * @param fileWithoutExtension
-     * @return
+     * File lock implementation
      */
-//    private Boolean hasForCorrespondingTmpFile(String fileWithoutExtension)
-//    {
-//        Boolean check = false;
-//        File folder = new File(downloadPath.toAbsolutePath().toString());
-//        File[] fileList = folder.listFiles();
-//
-//        for(File f : fileList) {
-//            if(f.isFile()) {
-//                String ext = FilenameUtils.getExtension(f.getName());
-//
-//                if(f.getName().indexOf(fileWithoutExtension) > -1 && !ext.equals("json")) {
-//                    check = true;
-//                }
-//            }
-//        }
-//
-//        return check;
-//    }
+    private static class FileLock {
+
+        private final RandomAccessFile randomAccessFile;
+
+        private FileLock(File file) throws IOException {
+            if (file.canWrite()) {
+                this.randomAccessFile = new RandomAccessFile(file, "rw");
+            } else {
+//                System.out.println("Could not obtain lock");
+                throw new IOException("Could not obtain lock");
+            }
+        }
+
+        public static FileLock tryLock(File file) {
+            try {
+                return new FileLock(file);
+            } catch (IOException e) {
+                return null;
+            }
+        }
+
+        public void unlock() {
+            try {
+                this.randomAccessFile.close();
+            } catch (IOException e) {
+                //ignore
+            }
+        }
+    }
 
 
     /**

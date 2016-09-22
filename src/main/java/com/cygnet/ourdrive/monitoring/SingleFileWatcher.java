@@ -123,7 +123,7 @@ public class SingleFileWatcher extends Thread {
         return false;
     }
 
-    public void startWatching() {
+    public void run() {
 
         try {
 
