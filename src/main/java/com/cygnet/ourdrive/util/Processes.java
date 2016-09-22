@@ -69,6 +69,17 @@ public class Processes {
 //                    }
                     break;
                 case "windows":
+
+                    /*
+                    instead of that we should use this:
+
+                    wmic path cim_datafile where "path='\\.ourdrive\\downloadpath\\' and AccessMask is null" get Caption,AccessMask,Extension,FileSize
+
+                    if all empty it gives : empty line, next line contains 'Node,'
+                    otherweise csv list
+
+                     */
+
                     p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /FI \"STATUS eq running\" /NH");
 //                    p = Runtime.getRuntime().exec("tasklist /V /FO \"CSV\" /NH");
                     p.waitFor();
