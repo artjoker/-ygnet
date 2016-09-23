@@ -176,17 +176,9 @@ public class ProcessWatcher extends Thread {
                         if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
                             File file = new File(pair.getValue().toString());
 
-                            FileLock fileLock = null;
-                            fileLock = FileLock.tryLock(file);
-                            if (fileLock != null) {
-                                //We succeeded in locking the file so go ahead and upload it if modified
-                                System.out.println("got lock");
-                            } else {
-                                System.out.println("try lock is null");
-                            }
+                            Boolean accessMask = false;
 
-                            if (hasJsonBro(file) && fileLock != null) {
-                                fileLock.unlock();
+                            if (hasJsonBro(file) && accessMask) {
                                 if (this.uploadAsNewVersion(file, true)) {
                                     Processes.setTitleDocument("");
                                     Processes.setTitleNotAvailable("");
@@ -222,40 +214,6 @@ public class ProcessWatcher extends Thread {
 
         }
     }
-
-    /**
-     * File lock implementation
-     */
-    private static class FileLock {
-
-        private final RandomAccessFile randomAccessFile;
-
-        private FileLock(File file) throws IOException {
-            if (file.canWrite()) {
-                this.randomAccessFile = new RandomAccessFile(file, "rw");
-            } else {
-//                System.out.println("Could not obtain lock");
-                throw new IOException("Could not obtain lock");
-            }
-        }
-
-        public static FileLock tryLock(File file) {
-            try {
-                return new FileLock(file);
-            } catch (IOException e) {
-                return null;
-            }
-        }
-
-        public void unlock() {
-            try {
-                this.randomAccessFile.close();
-            } catch (IOException e) {
-                //ignore
-            }
-        }
-    }
-
 
     /**
      *
