@@ -12,6 +12,7 @@ import com.cygnet.ourdrive.monitoring.ProcessWatcher;
 import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.settings.ReadProperties;
 import com.cygnet.ourdrive.util.Processes;
+import com.cygnet.ourdrive.util.WmicProcesses;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -368,7 +369,8 @@ public class Desktop extends Thread {
 
             try {
 
-                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
+//                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
+                HashMap processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
                 this.pwt.get().run();
