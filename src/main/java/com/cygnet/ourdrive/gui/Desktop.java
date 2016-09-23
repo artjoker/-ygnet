@@ -151,7 +151,7 @@ public class Desktop extends Thread {
                     logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
 
                     try {
-                        HashMap processIds = Processes.GetSystemProcesses(file, "linux", false); //Processes.getProcessIdsByFile(file, "windows");
+                        String[] processIds = WmicProcesses.GetSystemProcesses(file, "linux"); //Processes.getProcessIdsByFile(file, "windows");
 //                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
                         this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "linux"));
                         this.pwt.get().run();
@@ -219,7 +219,7 @@ public class Desktop extends Thread {
             }
 
             try {
-                HashMap processIds = Processes.GetSystemProcesses(file, "mac", false); //Processes.getProcessIdsByFile(file, "mac");
+                String[] processIds = WmicProcesses.GetSystemProcesses(file, "mac"); //Processes.getProcessIdsByFile(file, "mac");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "mac"));
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "mac"));
                 this.pwt.get().run();
@@ -293,7 +293,7 @@ public class Desktop extends Thread {
 //            }
 
             try {
-                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
+                String[] processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
                 this.pwt.get().run();
@@ -370,7 +370,7 @@ public class Desktop extends Thread {
             try {
 
 //                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
-                HashMap processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
+                String[] processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
                 this.pwt.get().run();

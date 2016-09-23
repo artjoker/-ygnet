@@ -3,6 +3,7 @@ package com.cygnet.ourdrive.monitoring;
 import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.util.Processes;
+import com.cygnet.ourdrive.util.WmicProcesses;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class ProcessWatcher extends Thread {
 
 //    private  Path downloadPath;
 
-    private HashMap processIds;
+    private String[] processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
 //    private Long sfwThreadId;
@@ -41,7 +42,7 @@ public class ProcessWatcher extends Thread {
 
     }
 
-    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS) {
+    public ProcessWatcher(File file, String[] processIds, Process process, WebSocketClient socketClient, String OS) {
 //    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS, Path downloadPath) {
         this.processIds = processIds;
         this.process = process;
@@ -144,39 +145,36 @@ public class ProcessWatcher extends Thread {
         while (!isStopped()) {
 
             // [pid][detailed title with file name]
-            HashMap processesList = Processes.GetSystemProcesses(this.file, this.OS, false); // all current processes
-            Boolean onlyFileHasClosed = false;
+            String[] processesList = WmicProcesses.GetSystemProcesses(this.file, this.OS); // all current processes
+            String filenameWithoutExtension = FilenameUtils.removeExtension(this.file.getName());
 
+            Boolean accessMask = true;
+
+            if(processesList[2].equals(filenameWithoutExtension)) {
+                accessMask = false;
+            }
             // [pid][detailed title with file name]
-            for (Object o : this.processIds.entrySet()) { // processIds is the small array
-                Map.Entry pair = (Map.Entry) o;
+//            for (Object o : this.processIds.entrySet()) { // processIds is the small array
+//                Map.Entry pair = (Map.Entry) o;
 
                 // contain only pid
-                List<String> allpIds = new ArrayList<String>();
+//                List<String> allpIds = new ArrayList<String>();
 
 //                logger.info("Actual process list values:");
-                for (Object processInfo : processesList.entrySet()) {
-                    Map.Entry processPair = (Map.Entry) processInfo;
+//                for (Object processInfo : processesList.entrySet()) {
+//                    Map.Entry processPair = (Map.Entry) processInfo;
 //                    logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
 
-                    allpIds.add(processPair.getKey().toString());
+//                    allpIds.add(processPair.getKey().toString());
 
-                }
+//                }
 
                 switch(this.OS) {
                     case "windows":
-                        // 2015_08_04_IMG_0082-uuu
-//                        logger.info("All Ids: "+allpIds.size()+" | First Process Id: "+Processes.getPid());
-//                        logger.info("titleDocument: "+Processes.getTitleDocument());
-//                        logger.info("titleNotAvailable: "+Processes.getTitleNotAvailable());
-//                        logger.info("titleOnlyFileClosed: "+Processes.getTitleOnlyFileClosed());
+//                        if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
+//                            File file = new File(pair.getValue().toString());
 
-                        // check also if process id is still there
 
-                        if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
-                            File file = new File(pair.getValue().toString());
-
-                            Boolean accessMask = false;
 
                             if (hasJsonBro(file) && accessMask) {
                                 if (this.uploadAsNewVersion(file, true)) {
@@ -187,24 +185,24 @@ public class ProcessWatcher extends Thread {
                                     stopThread();
                                 }
                             }
-                        }
+//                        }
                         break;
 
                     case "mac":
                         break;
 
                     case "linux":
-                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
-                            File file = new File(pair.getValue().toString());
+//                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
+//                            File file = new File(pair.getValue().toString());
                             if (hasJsonBro(file)) {
                                 if (this.uploadAsNewVersion(file, true)) {
                                     this.stopThread();
                                 }
                             }
-                        }
+//                        }
                         break;
                 }
-            }
+//            }
 
             try {
                 Thread.sleep(200L);
