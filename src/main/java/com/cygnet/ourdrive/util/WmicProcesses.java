@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -23,11 +26,12 @@ public class WmicProcesses {
      * @param OS
      * @return
      */
-    public static String[] GetSystemProcesses(File file, String OS) {
+    public static ArrayList<String[]> GetSystemProcesses(File file, String OS) {
 
         String process;
         Process p = null;
-        String[] processes = new String[9];
+        ArrayList<String[]> processes = new ArrayList<String[]>();
+        String[] processFile = new String[9];
 
         try {
 
@@ -37,19 +41,25 @@ public class WmicProcesses {
                     break;
                 case "windows":
 
+                    Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
+                    String pathName = downloadPath.toString().replace(downloadPath.getRoot().toString(), "");
+                    pathName = pathName.replace("\\", "\\\\");
                     String command = "cmd.exe /c wmic path cim_datafile " +
-                            "where \"path='\\\\Users\\\\%username%\\\\.ourdrive\\\\ourdrive_downloads\\\\' " +
-                            "and AccessMask is null\" get FileName,Extension,FileSize,Path,Readable,Status,System,Writeable /format:csv";
+                            "where \"path='\\\\"+pathName+"\\\\' " +
+                            "and AccessMask is not null\" get FileName,Extension,FileSize,Path,Readable,Status,System,Writeable /format:csv";
 
-//                    System.out.println(command);
+                    // System.out.println(command);
                     p = Runtime.getRuntime().exec(command);
 
                     p.waitFor();
 
                     BufferedReader winput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    Integer i = 0;
                     while ((process = winput.readLine()) != null) {
                         if(!process.equals("") && !process.startsWith("Node,")) {
-                            processes = process.split(",");
+                            processFile = process.split(",");
+                            processes.add(i, processFile);
+                            i++;
                         }
                     }
                     winput.close();

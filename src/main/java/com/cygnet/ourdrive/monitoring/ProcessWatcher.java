@@ -33,7 +33,7 @@ public class ProcessWatcher extends Thread {
 
 //    private  Path downloadPath;
 
-    private String[] processIds;
+    private ArrayList processIds;
     private AtomicBoolean stop = new AtomicBoolean(false);
     private Process process;
 //    private Long sfwThreadId;
@@ -42,7 +42,7 @@ public class ProcessWatcher extends Thread {
 
     }
 
-    public ProcessWatcher(File file, String[] processIds, Process process, WebSocketClient socketClient, String OS) {
+    public ProcessWatcher(File file, ArrayList processIds, Process process, WebSocketClient socketClient, String OS) {
 //    public ProcessWatcher(File file, HashMap processIds, Process process, WebSocketClient socketClient, String OS, Path downloadPath) {
         this.processIds = processIds;
         this.process = process;
@@ -56,6 +56,41 @@ public class ProcessWatcher extends Thread {
 
     public boolean isStopped() {
         return stop.get();
+    }
+
+    /**
+     * @param file
+     * @return
+     */
+    private boolean shouldIgnoreFile(File file) {
+
+        if(file.isDirectory()) {
+            return true;
+        }
+
+        if(file.isHidden()) {
+            return true;
+        }
+
+        String filename = file.getName();
+        String extension = "";
+        extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+
+        if(extension.equals("")) {
+            return true;
+        }
+
+        boolean ignore = filename.toLowerCase().startsWith("#");
+        ignore = ignore || filename.toLowerCase().startsWith("~");
+        ignore = ignore || filename.toLowerCase().startsWith(".");
+        ignore = ignore || filename.toLowerCase().startsWith("$");
+        ignore = ignore || filename.toLowerCase().endsWith(".swp");
+        ignore = ignore || filename.toLowerCase().endsWith(".swap");
+        ignore = ignore || filename.toLowerCase().endsWith(".tmp");
+        ignore = ignore || filename.toLowerCase().endsWith(".temp");
+        ignore = ignore || filename.toLowerCase().endsWith(".json");
+        ignore = ignore || filename.endsWith("#");
+        return ignore;
     }
 
     /**
@@ -145,64 +180,50 @@ public class ProcessWatcher extends Thread {
         while (!isStopped()) {
 
             // [pid][detailed title with file name]
-            String[] processesList = WmicProcesses.GetSystemProcesses(this.file, this.OS); // all current processes
-            String filenameWithoutExtension = FilenameUtils.removeExtension(this.file.getName());
+            ArrayList<String[]> processesList = WmicProcesses.GetSystemProcesses(this.file, this.OS); // all current processes
+            // String filenameWithoutExtension = FilenameUtils.removeExtension(this.file.getName());
 
-            Boolean accessMask = true;
+            Boolean hasAccessMask = false;
 
-            if(processesList[2].equals(filenameWithoutExtension)) {
-                accessMask = false;
-            }
-            // [pid][detailed title with file name]
-//            for (Object o : this.processIds.entrySet()) { // processIds is the small array
-//                Map.Entry pair = (Map.Entry) o;
+            /*
+            1 extension
+            2 filename
+            4 path
+             */
 
-                // contain only pid
-//                List<String> allpIds = new ArrayList<String>();
-
-//                logger.info("Actual process list values:");
-//                for (Object processInfo : processesList.entrySet()) {
-//                    Map.Entry processPair = (Map.Entry) processInfo;
-//                    logger.info("Key: "+processPair.getKey().toString()+", -> Value: "+processPair.getValue().toString());
-
-//                    allpIds.add(processPair.getKey().toString());
-
-//                }
-
-                switch(this.OS) {
-                    case "windows":
-//                        if (allpIds.size() == 0 || !Processes.getTitleOnlyFileClosed().equals("")) {
-//                            File file = new File(pair.getValue().toString());
-
-
-
-                            if (hasJsonBro(file) && accessMask) {
-                                if (this.uploadAsNewVersion(file, true)) {
-                                    Processes.setTitleDocument("");
-                                    Processes.setTitleNotAvailable("");
-                                    Processes.setTitleOnlyFileClosed("");
-//                                    Thread fileWatcher = getThreadById(sfwThreadId);
-                                    stopThread();
-                                }
-                            }
-//                        }
-                        break;
-
-                    case "mac":
-                        break;
-
-                    case "linux":
-//                        if (!allpIds.contains(pair.getKey().toString()) || allpIds.size() < this.processIds.size()) {
-//                            File file = new File(pair.getValue().toString());
-                            if (hasJsonBro(file)) {
-                                if (this.uploadAsNewVersion(file, true)) {
-                                    this.stopThread();
-                                }
-                            }
-//                        }
-                        break;
+            for (String[] content: processesList) {
+                File accessMaskFile = new File(content[2]+"."+content[1]);
+//                System.out.println(accessMaskFile.getName());
+//                System.out.println(this.file.getName());
+                if(!shouldIgnoreFile(accessMaskFile) && accessMaskFile.getName().equals(this.file.getName())) {
+                    hasAccessMask = true;
                 }
-//            }
+            }
+
+            switch(this.OS) {
+                case "windows":
+                    if (hasJsonBro(this.file) && hasAccessMask) {
+                        if (this.uploadAsNewVersion(this.file, true)) {
+                            Processes.setTitleDocument("");
+                            Processes.setTitleNotAvailable("");
+                            Processes.setTitleOnlyFileClosed("");
+//                                    Thread fileWatcher = getThreadById(sfwThreadId);
+                            stopThread();
+                        }
+                    }
+                    break;
+
+                case "mac":
+                    break;
+
+                case "linux":
+                    if (hasJsonBro(file)) {
+                        if (this.uploadAsNewVersion(file, true)) {
+                            this.stopThread();
+                        }
+                    }
+                    break;
+            }
 
             try {
                 Thread.sleep(200L);

@@ -2,6 +2,7 @@ package com.cygnet.ourdrive.monitoring;
 
 import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
+import com.cygnet.ourdrive.util.WmicProcesses;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -26,27 +28,38 @@ public class SingleFileWatcher extends Thread {
 
     boolean overflowTriggeredFlag = false;
 
+    boolean justDownloaded = false;
+
     private static SingleFileWatcher instance;
 
-    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient)
+    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient, Boolean justDownloaded)
     {
         if (instance == null) {
-            instance = new SingleFileWatcher(downloadPath, socketClient);
+            instance = new SingleFileWatcher(downloadPath, socketClient, justDownloaded);
         }
         return instance;
     }
 
-//    private SingleFileWatcher() {}
+    public boolean isJustDownloaded() {
+        return justDownloaded;
+    }
+
+    public void setJustDownloaded(boolean justDownloaded) {
+        this.justDownloaded = justDownloaded;
+    }
+
+    //    private SingleFileWatcher() {}
 
     /**
      * @param downloadPath
      * @param socketClient
      */
-    public SingleFileWatcher(Path downloadPath, WebSocketClient socketClient) {
+    public SingleFileWatcher(Path downloadPath, WebSocketClient socketClient, Boolean justDownloaded) {
         this.downloadPath = downloadPath;
         this.socketClient = socketClient;
+        this.justDownloaded = justDownloaded;
 //        this.downloadedFile = downloadedFile;
-//        this.setName("DownloadFileWatcher");
+        this.setName("SingleFileWatcher");
     }
 
     /**
@@ -159,6 +172,16 @@ public class SingleFileWatcher extends Thread {
                         logger.warn("File listener received an overflow event.  You should probably check into this");
                         overflowTriggeredFlag = true;
                     } else if (kind == StandardWatchEventKinds.ENTRY_MODIFY) {
+
+
+//                        Boolean hasAccessMask = false;
+//                        ArrayList<String[]> processesList = WmicProcesses.GetSystemProcesses(file, "windows"); // all current processes
+//                        for (String[] content: processesList) {
+//                            File tmpFile = new File(content[2]+"."+content[1]);
+//                            if(!shouldIgnoreFile(tmpFile) && tmpFile.getName().equals(file.getName())) {
+//                                hasAccessMask = true;
+//                            }
+//                        }
 
                         if (!shouldIgnoreFile(file) && !isJsonFile(file.getName())) {
 

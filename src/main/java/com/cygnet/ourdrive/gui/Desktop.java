@@ -91,9 +91,19 @@ public class Desktop extends Thread {
 
         // add file to watcher
         logger.info("Set file watcher service to: "+downloadPath.toString());
-        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient);
-        sfw.start();
-        logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
+
+        Thread sfwThread = null;
+        sfwThread = getThreadByName("SingleFileWatcher");
+        SingleFileWatcher sfw = new SingleFileWatcher(downloadPath, socketClient, true);
+
+        if(sfwThread == null) {
+            sfw.start();
+            logger.info("Started file watcher service: "+sfw.getName()+" with ID: "+sfw.getId());
+        } else {
+//            sfw.start();
+            logger.info("Use current file watcher service: "+sfwThread.getName()+" with ID: "+sfwThread.getId());
+        }
+
 
 
         if (isLinux()) {
@@ -151,7 +161,7 @@ public class Desktop extends Thread {
                     logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
 
                     try {
-                        String[] processIds = WmicProcesses.GetSystemProcesses(file, "linux"); //Processes.getProcessIdsByFile(file, "windows");
+                        ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "linux"); //Processes.getProcessIdsByFile(file, "windows");
 //                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
                         this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "linux"));
                         this.pwt.get().run();
@@ -219,7 +229,7 @@ public class Desktop extends Thread {
             }
 
             try {
-                String[] processIds = WmicProcesses.GetSystemProcesses(file, "mac"); //Processes.getProcessIdsByFile(file, "mac");
+                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "mac"); //Processes.getProcessIdsByFile(file, "mac");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "mac"));
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "mac"));
                 this.pwt.get().run();
@@ -293,7 +303,7 @@ public class Desktop extends Thread {
 //            }
 
             try {
-                String[] processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
+                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
 //                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
                 this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
                 this.pwt.get().run();
@@ -369,10 +379,9 @@ public class Desktop extends Thread {
 
             try {
 
-//                HashMap processIds = Processes.GetSystemProcesses(file, "windows", false); //Processes.getProcessIdsByFile(file, "windows");
-                String[] processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
-//                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+//                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
+//                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+                this.pwt.set(new ProcessWatcher(file, null, process, this.socketClient, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.warn("Get process information failed: ProcessWatcher has been stopped");
