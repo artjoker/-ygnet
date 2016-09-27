@@ -14,6 +14,7 @@ import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.upload.UploadDirectoryHandler;
 import com.cygnet.ourdrive.upload.UploadFileHandler;
 import com.cygnet.ourdrive.upload.UploadServiceException;
+import com.cygnet.ourdrive.util.RandomGUID;
 import com.cygnet.ourdrive.websocket.LocalSSLWebServer;
 import com.cygnet.ourdrive.websocket.LocalWebServer;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
@@ -294,8 +295,11 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
         createUUID();
 
-        LocalWebServer localWebServer = new LocalWebServer();
-//        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
+        System.out.println(RandomGUID.sha1("Hell no").toLowerCase());
+
+
+//        LocalWebServer localWebServer = new LocalWebServer();
+        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
         localWebServer.start();
 
         boolean configure = false;
