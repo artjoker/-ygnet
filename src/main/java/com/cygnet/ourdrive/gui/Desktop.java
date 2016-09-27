@@ -379,9 +379,9 @@ public class Desktop extends Thread {
 
             try {
 
-//                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
-//                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
-                this.pwt.set(new ProcessWatcher(file, null, process, this.socketClient, "windows"));
+                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
+                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
+//                this.pwt.set(new ProcessWatcher(file, null, process, this.socketClient, "windows"));
                 this.pwt.get().run();
             } catch (Exception e) {
                 logger.warn("Get process information failed: ProcessWatcher has been stopped");

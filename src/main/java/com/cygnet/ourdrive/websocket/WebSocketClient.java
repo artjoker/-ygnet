@@ -2,6 +2,7 @@ package com.cygnet.ourdrive.websocket;
 
 import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.gui.Desktop;
+import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.settings.ReadProperties;
 import com.cygnet.ourdrive.util.StringDecoder;
@@ -305,6 +306,15 @@ public class WebSocketClient {
 
                 try {
 
+                    Thread sfwThread = null;
+                    sfwThread = getThreadByName("SingleFileWatcher");
+
+                    if(sfwThread != null) {
+                        SingleFileWatcher sfw = SingleFileWatcher.getInstance(downloadPath, this, true);
+                        sfw.stopThread();
+                        logger.info("STOP: "+sfwThread.getName()+" with ID: "+sfwThread.getId());
+                    }
+
                     String absolutFileName = downloadPath.toAbsolutePath().toString() + File.separator + obj.getString("file_name");
                     OutputStream stream = new FileOutputStream(absolutFileName);
                     stream.write(valueDecoded);
@@ -328,6 +338,10 @@ public class WebSocketClient {
                             logger.info("Successfully saved JSON Object to: " + downloadPath.toAbsolutePath().toString() + File.separator + "." + obj.getString("file_name") + ".json");
 
                             emitDownloadSuccessful();
+
+//                            if(sfwThread != null) {
+//                                sfwThread.notify();
+//                            }
 
                             /*
                              * try to open file with appropriate local application
@@ -357,6 +371,13 @@ public class WebSocketClient {
                 logger.error("JSON OurdriveFileDownload failed: "+e.getMessage());
             }
         }
+    }
+
+    private Thread getThreadByName(String threadName) {
+        for (Thread t : Thread.getAllStackTraces().keySet()) {
+            if (t.getName().equals(threadName)) return t;
+        }
+        return null;
     }
 
     public void disconnect() {
