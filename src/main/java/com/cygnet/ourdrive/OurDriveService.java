@@ -298,8 +298,8 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         System.out.println(RandomGUID.sha1("Hell no").toLowerCase());
 
 
-//        LocalWebServer localWebServer = new LocalWebServer();
-        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
+        LocalWebServer localWebServer = new LocalWebServer();
+//        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
         localWebServer.start();
 
         boolean configure = false;
