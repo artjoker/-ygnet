@@ -176,7 +176,7 @@ public class WebSocketClient {
     /**
      *
      */
-    public boolean emitDownloadSuccessful() {
+    public boolean emitDownloadSuccessful(String instance_to) {
 
         Boolean response = false;
         try {
@@ -186,7 +186,7 @@ public class WebSocketClient {
 
             client.put("id", OurDriveService.getOurdriveId());
             client.put("name", OurDriveService.getOurdriveId());
-            client.put("room", OurDriveService.getOurdriveId());
+            client.put("room", OurDriveService.getOurdriveId()+"-"+instance_to);
 
             JsonObj.put("client", client);
             JsonObj.put("message", "Download of file to Ourdrive was successful.");
@@ -241,11 +241,12 @@ public class WebSocketClient {
                         JSONObject client = new JSONObject();
                         try {
 
+                            JsonObj = new JSONObject(targetFileStr);
+
                             client.put("id", OurDriveService.getOurdriveId());
                             client.put("name", OurDriveService.getOurdriveId());
-                            client.put("room", OurDriveService.getOurdriveId());
+                            client.put("room", OurDriveService.getOurdriveId()+"-"+JsonObj.getJSONObject("file_data").getString("instance_to"));
 
-                            JsonObj = new JSONObject(targetFileStr);
                             JsonObj.getJSONObject("file_data").remove("client");
                             JsonObj.getJSONObject("file_data").put("content", new String(dataFileStr, "UTF-8"));
                             JsonObj.getJSONObject("file_data").put("unlock", unlock);
@@ -337,7 +338,7 @@ public class WebSocketClient {
                             FileUtils.writeStringToFile(new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + obj.getString("file_name") + ".json"), fileData.toString());
                             logger.info("Successfully saved JSON Object to: " + downloadPath.toAbsolutePath().toString() + File.separator + "." + obj.getString("file_name") + ".json");
 
-                            emitDownloadSuccessful();
+                            emitDownloadSuccessful(obj.getString("instance_to"));
 
 //                            if(sfwThread != null) {
 //                                sfwThread.notify();
