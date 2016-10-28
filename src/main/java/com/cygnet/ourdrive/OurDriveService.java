@@ -7,13 +7,18 @@ import com.cygnet.ourdrive.gui.SytrayInitializationException;
 import com.cygnet.ourdrive.monitoring.FolderMonitor;
 import com.cygnet.ourdrive.monitoring.FolderMonitorListener;
 import com.cygnet.ourdrive.monitoring.FolderMonitorTask;
-import com.cygnet.ourdrive.monitoring.exceptions.FileVisitException;
+import com.cygnet.ourdrive.monitoring.SingleFileWatcher;
 import com.cygnet.ourdrive.monitoring.exceptions.OurdriveException;
 import com.cygnet.ourdrive.settings.FolderSettings;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.upload.UploadDirectoryHandler;
 import com.cygnet.ourdrive.upload.UploadFileHandler;
 import com.cygnet.ourdrive.upload.UploadServiceException;
+import com.cygnet.ourdrive.util.RandomGUID;
+import com.cygnet.ourdrive.websocket.LocalSSLWebServer;
+import com.cygnet.ourdrive.websocket.LocalWebServer;
+import com.cygnet.ourdrive.websocket.WebSocketClient;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +26,10 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.Timer;
 
@@ -29,7 +38,9 @@ import java.util.Timer;
  */
 public final class OurDriveService implements GlobalSettings.SettingsListener<GlobalSettings>, FolderMonitorListener {
 
-    public static final String VERSION = "2.0.2";
+    public static final String VERSION = "3.0.0";
+
+    private static String ourdriveId = "";
 
     private static final long TIMER_PERIOD = 1000L;
 
@@ -47,6 +58,13 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     private boolean dialogDismissedForever = false;
 
+    private WebSocketClient socketClient;
+
+    private SingleFileWatcher singleFileWatcher;
+
+
+    private static String download_folder_name = "ourdrive_downloads";
+
     static {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -60,6 +78,21 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             instance = new OurDriveService();
         }
         return instance;
+    }
+
+    /**
+     * @return
+     */
+    private static void createUUID() {
+        String uniqueID = UUID.randomUUID().toString();
+        ourdriveId = uniqueID;
+    }
+
+    /**
+     * @return
+     */
+    public static String getOurdriveId() {
+        return ourdriveId;
     }
 
     /**
@@ -77,9 +110,24 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      * Stop this service instance
      */
     public void stop() {
+
+        logger.info("Closing application and cleanup " + getUserDataDirectory() + "/" + download_folder_name);
+        deleteDownloadFolderContent(new File(getUserDataDirectory() + "/" + download_folder_name));
+
         running = false;
         synchronized (this) {
             notify();
+        }
+    }
+
+    /**
+     * @param folder
+     */
+    private static void deleteDownloadFolderContent(File folder) {
+        try {
+            FileUtils.deleteDirectory(folder);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -94,7 +142,41 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         } catch (SytrayInitializationException e) {
             logger.warn("Could not initialize systray item", e);
         }
+
+        try {
+            // open websocket
+            socketClient = new WebSocketClient();
+            socketClient.connect();
+
+        } catch (InterruptedException ex) {
+            logger.error("InterruptedException exception: " + ex.getMessage());
+        } catch (URISyntaxException ex) {
+            logger.error("URISyntaxException exception: " + ex.getMessage());
+        } catch (Exception e) {
+            logger.error("Websocket Exception: " + e.getMessage());
+        }
+
+        /*
+        start the download folder watcher to chekc file changes
+         */
+        Path downloadPath = Paths.get(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName());
+        Boolean folderCheck = checkDownloadFolder(globalSettings);
+
+        logger.info("Folder check: " + folderCheck);
+
+//        if(folderCheck) {
+//            // add file to watcher
+//            logger.info("Set file watcher service to: "+downloadPath.toString());
+//
+//            singleFileWatcher = new SingleFileWatcher(downloadPath, socketClient);
+//            Thread fileWatcher = new Thread(singleFileWatcher::startWatching, "DownloadFileWatcher");
+//            fileWatcher.start();
+//        }
+
+
         logger.info("OurDrive service started");
+
+        // now configure
         if (configure) {
             GeneralSettingsDialog.showDialog();
         }
@@ -124,6 +206,41 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             //Start timer task for this folder
             startTimer(folderSettings);
         }
+    }
+
+    /**
+     * @param settings
+     */
+    private boolean checkDownloadFolder(GlobalSettings settings) {
+        Path userDirPath = Paths.get(getUserDataDirectory());
+        Path downloadPath = Paths.get(getUserDataDirectory() + "/" + download_folder_name);
+
+        logger.info("Checking download folder path: " + downloadPath.toAbsolutePath().toString());
+
+        if (!Files.exists(userDirPath)) {
+            try {
+                Files.createDirectory(userDirPath);
+                Files.createDirectory(downloadPath);
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(0);
+            }
+        } else {
+            if (!Files.exists(downloadPath)) {
+                try {
+                    Files.createDirectory(downloadPath);
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.exit(0);
+                }
+            } else {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -166,9 +283,25 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
                 settings.addFolderSettings(folderSettings);
             }
         }
+
+        try {
+            settings.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
+
+        createUUID();
+
+        System.out.println(RandomGUID.sha1("Hell no").toLowerCase());
+
+
+        LocalWebServer localWebServer = new LocalWebServer();
+//        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
+        localWebServer.start();
+
         boolean configure = false;
         boolean start = true;
 
@@ -223,12 +356,16 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     //Private methods
 
-    private static String getUserDataDirectory() {
+    public static String getUserDataDirectory() {
         return System.getProperty("user.home") + File.separator + ".ourdrive" + File.separator;
     }
 
+    /**
+     *
+     * @param folderSettings
+     */
     private void startTimer(FolderSettings folderSettings) {
-        if(isSettingsValid(folderSettings)) {
+        if (isSettingsValid(folderSettings)) {
             final File folder = folderSettings.getFolder();
             Timer t = timers.get(folder);
             if (t == null && folder != null) {
@@ -272,24 +409,27 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
      * @return validation result
      */
     private boolean isSettingsValid(FolderSettings settings) {
-        if(StringUtils.isBlank(settings.getServerBaseUrl())) {
+        if (StringUtils.isBlank(settings.getServerBaseUrl())) {
             showWarningDialog(String.format("Folder '%s' configuration error.\n\"%s\" cannot be empty.", settings.getFolder(), "Server base url"));
             return false;
         }
 
-        if(StringUtils.isBlank(settings.getUsername())) {
+        if (StringUtils.isBlank(settings.getUsername())) {
             showWarningDialog(String.format("Folder '%s' configuration error.\n\"%s\" cannot be empty.", settings.getFolder(), "Username"));
             return false;
         }
 
-        if(StringUtils.isBlank(settings.getPassword())) {
+        if (StringUtils.isBlank(settings.getPassword())) {
             showWarningDialog(String.format("Folder '%s' configuration error.\n\"%s\" cannot be empty.", settings.getFolder(), "Password"));
             return false;
         }
         return true;
     }
 
-
+    /**
+     *
+     * @param message
+     */
     private void showWarningDialog(String message) {
         if (!dialogDismissedForever) {
             Icon icon = OurDriveGUI.getLargeIcon();
@@ -309,6 +449,47 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
                 default:
             }
 
+        }
+    }
+
+    /**
+     *
+     */
+    public static void showAllThreads()
+    {
+        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+
+        System.out.println("Found "+threadSet.size()+" Threads = = = = =");
+        for(Thread ts:threadSet){
+            System.out.println(ts.getName());
+        }
+        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = =");
+    }
+
+    /**
+     * @return
+     */
+    public static String getDownloadFolderName() {
+        return download_folder_name;
+    }
+
+    /**
+     * @return
+     */
+    private static boolean lock() {
+        try {
+            final File file = new File("ourdrive.lock");
+            if (file.exists()) {
+                return true;
+            } else {
+                if (file.createNewFile()) {
+                    file.deleteOnExit();
+                    return false;
+                }
+                return true;
+            }
+        } catch (IOException e) {
+            return false;
         }
     }
 }

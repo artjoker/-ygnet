@@ -4,7 +4,7 @@
 
     <groupId>com.cygnet.ourdrive</groupId>
     <artifactId>ourdrive</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>ourdrive</name>
@@ -59,6 +59,39 @@
         	<version>7.0.3</version>
         </dependency>
 
+        <!--Socket io-->
+        <dependency>
+            <groupId>io.socket</groupId>
+            <artifactId>socket.io-client</artifactId>
+            <version>0.7.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jprocesses/jProcesses -->
+        <dependency>
+            <groupId>org.jprocesses</groupId>
+            <artifactId>jProcesses</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+
+
+        <!--https://github.com/TooTallNate/Java-WebSocket-->
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20080701</version>
+        </dependency>
         <!-- Test -->
 
         <dependency>
@@ -107,8 +140,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
@@ -137,24 +170,24 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>ideauidesigner-maven-plugin</artifactId>
-                <version>1.0-beta-1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>javac2</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>ideauidesigner-maven-plugin</artifactId>-->
+                <!--<version>1.0-beta-1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>javac2</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
 
-                <configuration>
-                    <fork>true</fork>
-                    <debug>true</debug>
-                    <failOnError>true</failOnError>
-                </configuration>
-            </plugin>
+                <!--<configuration>-->
+                    <!--<fork>true</fork>-->
+                    <!--<debug>true</debug>-->
+                    <!--<failOnError>true</failOnError>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

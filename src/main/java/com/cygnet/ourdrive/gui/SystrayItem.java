@@ -61,7 +61,7 @@ public class SystrayItem {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     Icon icon = OurDriveGUI.getXLIcon();
-                    String message = "Cygnet Ourdrive\nversion " + version + "\nwww.cygnet-ecm.com";
+                    String message = "Cygnet Ourdrive\nversion " + version + "\nwww.cygnetcloud.com";
                     JOptionPane.showConfirmDialog(null, message, "Cygnet Ourdrive",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE,
                             icon);

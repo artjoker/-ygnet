@@ -30,7 +30,7 @@ Var ourdriveIntrayFolder
 !define DESCRIPTION "Cygnet ECM Hot folder synchronization"
 
 # These three must be integers
-!define VERSIONMAJOR 1
+!define VERSIONMAJOR 3
 !define VERSIONMINOR 0
 !define VERSIONBUILD 0
 !define VERSION "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}"
@@ -42,16 +42,16 @@ Var ourdriveIntrayFolder
 !define ABOUTURL "http://www.cygnet-ecm.com" # "Publisher" link
 
 # This is the size (in kB) of all the files copied into "Program Files"
-!define INSTALLSIZE 7233
+!define INSTALLSIZE 7598
 
-!define JRE_VERSION "1.6"
-!define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=52252"
+!define JRE_VERSION "1.8"
+!define JRE_URL "http://javadl.sun.com/webapps/download/AutoDL?BundleId=211996"
 !include "JREDyna_Inetc.nsh"
 
   ;Name and file
   Name "${COMPANYNAME} - ${APPNAME}"
   Icon "ourdrive.ico"
-  OutFile "..\target\ourdrive-setup.exe"
+  OutFile "..\ourdrive-${VERSION}-setup.exe"
 
   Caption "${DESCRIPTION}"
   VIProductVersion "${VERSION}.0"
@@ -123,7 +123,9 @@ Section "Install" SecDummy
   	# Files added here should be removed by the uninstaller (see section "uninstall")
   	file "ourdrive.exe"
   	file "ourdrive.ico"
-  	file /oname=ourdrive.jar "..\target\ourdrive-*-with-dependencies.jar"
+  	file /oname=ourdrive.jar "..\target\ourdrive-*-SNAPSHOT-jar-with-dependencies.jar"
+
+
   	file "ourdrive.ini"
   	# Add any other files for the install directory (license files, app data, etc) here
 
@@ -185,6 +187,7 @@ Section "Uninstall"
   	delete $INSTDIR\ourdrive.ico
   	delete $INSTDIR\ourdrive.jar
   	delete $INSTDIR\ourdrive.ini
+  	delete $INSTDIR\settings.xml
 
   	rmDir /r $INSTDIR\log
 
@@ -194,12 +197,13 @@ Section "Uninstall"
   	# Try to remove the install directory - this will only happen if it is empty
   	rmDir $INSTDIR
 
-        # Remove the default folders
-        rmDir "$DESKTOP\Cygnet Cloud Intray"
+    # Remove the default folders
+    rmDir "$DESKTOP\Cygnet Cloud Intray"
   	rmDir "$DESKTOP\Cygnet Cloud Folder Upload"
 
   	# Remove uninstaller information from the registry
   	DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}\${APPNAME}"
+    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\StartupFolder\OurDrive.lnk"
 
   	DeleteRegKey /ifempty HKCU "Software\${COMPANYNAME}\${APPNAME}"
   	DeleteRegKey /ifempty HKCU "Software\${COMPANYNAME}"
@@ -216,6 +220,28 @@ Function .onInit
   InitPluginsDir
   File /oname=$PLUGINSDIR\installtype.ini "installtype.ini"
   File /oname=$PLUGINSDIR\ourdriveparams.ini "ourdriveparams.ini"
+
+    ; ReadRegStr $R0 HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME}\${APPNAME}" "DisplayVersion"    ; "UninstallString"
+    ; StrCmp $R0 "" done
+
+    ; MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION
+    ; "${COMPANYNAME}\${APPNAME} is already installed. $\n$\nClick `OK` to remove the previous version or `Cancel` to cancel ; this upgrade."
+    ; IDOK uninst
+    ; Abort
+
+  ;Run the uninstaller
+  ; uninst:
+  ;   ClearErrors
+  ;   ExecWait '$R0 _?=$INSTDIR' ;Do not copy the uninstaller to a temp file
+
+  ;   IfErrors no_remove_uninstaller done
+  ;     ;You can either use Delete /REBOOTOK in the uninstaller or add some code
+  ;     ;here to remove the uninstaller. Use a registry key to check
+  ;     ;whether the user has chosen to uninstall. If you are using an uninstaller
+  ;     ;components page, make sure all sections are uninstalled.
+  ;   no_remove_uninstaller:
+
+  ; done:
  
 FunctionEnd
 
@@ -299,10 +325,31 @@ Function LeaveEnterOurdriveParams
 validate:
 
   ReadINIStr $ourdriveUrl "$PLUGINSDIR\ourdriveparams.ini" "Field 2" "State"
-  ReadINIStr $ourdriveUsername "$PLUGINSDIR\ourdriveparams.ini" "Field 4" "State"
-  ReadINIStr $ourdrivePassword "$PLUGINSDIR\ourdriveparams.ini" "Field 6" "State"
+  StrCmp $ourdriveUrl "" urlMBox checkUsername
 
-  ; MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL: " + $ourdriveUrl
+  urlMBox:
+    MessageBox MB_ICONEXCLAMATION|MB_OK "Ourdrive URL can't be empty" IDOK StartAgainWithParameter
+
+
+
+  checkUsername:
+    ReadINIStr $ourdriveUsername "$PLUGINSDIR\ourdriveparams.ini" "Field 4" "State"
+    StrCmp $ourdriveUsername "" usernameMBox checkPassword
+
+    usernameMBox:
+      MessageBox MB_ICONEXCLAMATION|MB_OK "Username can't be empty" IDOK StartAgainWithParameter
+
+
+
+  checkPassword:
+    ReadINIStr $ourdrivePassword "$PLUGINSDIR\ourdriveparams.ini" "Field 6" "State"
+    StrCmp $ourdrivePassword "" passwordMBox done
+
+    passwordMBox:
+      MessageBox MB_ICONEXCLAMATION|MB_OK "Password can't be empty" IDOK StartAgainWithParameter
+
+  StartAgainWithParameter:
+    Abort
 
 done:
 
