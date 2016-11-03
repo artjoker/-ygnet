@@ -14,9 +14,6 @@ import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.upload.UploadDirectoryHandler;
 import com.cygnet.ourdrive.upload.UploadFileHandler;
 import com.cygnet.ourdrive.upload.UploadServiceException;
-import com.cygnet.ourdrive.util.RandomGUID;
-import com.cygnet.ourdrive.websocket.LocalSSLWebServer;
-import com.cygnet.ourdrive.websocket.LocalWebServer;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -83,9 +80,17 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
     /**
      * @return
      */
-    private static void createUUID() {
-        String uniqueID = UUID.randomUUID().toString();
-        ourdriveId = uniqueID;
+    private static void getUUID() {
+
+        GlobalSettings globalSettings = GlobalSettings.getInstance();
+        String tmpId = globalSettings.getOurdriveId();
+
+        if(tmpId == null) {
+            ourdriveId = UUID.randomUUID().toString();
+            globalSettings.setOurdriveId(ourdriveId);
+        } else {
+            ourdriveId = tmpId;
+        }
     }
 
     /**
@@ -163,17 +168,6 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
         Boolean folderCheck = checkDownloadFolder(globalSettings);
 
         logger.info("Folder check: " + folderCheck);
-
-//        if(folderCheck) {
-//            // add file to watcher
-//            logger.info("Set file watcher service to: "+downloadPath.toString());
-//
-//            singleFileWatcher = new SingleFileWatcher(downloadPath, socketClient);
-//            Thread fileWatcher = new Thread(singleFileWatcher::startWatching, "DownloadFileWatcher");
-//            fileWatcher.start();
-//        }
-
-
         logger.info("OurDrive service started");
 
         // now configure
@@ -293,14 +287,7 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
 
     public static void main(String[] args) {
 
-        createUUID();
-
-        System.out.println(RandomGUID.sha1("Hell no").toLowerCase());
-
-
-        LocalWebServer localWebServer = new LocalWebServer();
-//        LocalSSLWebServer localWebServer = new LocalSSLWebServer();
-        localWebServer.start();
+        getUUID();
 
         boolean configure = false;
         boolean start = true;
@@ -450,20 +437,6 @@ public final class OurDriveService implements GlobalSettings.SettingsListener<Gl
             }
 
         }
-    }
-
-    /**
-     *
-     */
-    public static void showAllThreads()
-    {
-        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-
-        System.out.println("Found "+threadSet.size()+" Threads = = = = =");
-        for(Thread ts:threadSet){
-            System.out.println(ts.getName());
-        }
-        System.out.println("= = = = = = = = = = = = = = = = = = = = = = = = = = =");
     }
 
     /**

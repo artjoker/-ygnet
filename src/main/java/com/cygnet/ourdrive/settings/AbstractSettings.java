@@ -26,6 +26,7 @@ public class AbstractSettings implements Serializable {
     protected String uploadUri;
     protected String targetContainer;
     protected String apiKey;
+    protected String ourdriveId;
     protected UploadMethod uploadMethod;
     protected Boolean moveFilesToTrash;
     protected AbstractSettings parentSettings;
@@ -88,6 +89,14 @@ public class AbstractSettings implements Serializable {
 
     public String getApiKey() {
         return getProperty("apiKey", String.class);
+    }
+
+    public String getOurdriveId() {
+        return getProperty("ourdriveId", String.class);
+    }
+
+    public void setOurdriveId(String ourdriveId) {
+        setProperty("ourdriveId", String.class, ourdriveId);
     }
 
 
