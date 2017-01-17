@@ -2,16 +2,14 @@ package com.cygnet.ourdrive.monitoring;
 
 import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
+import com.cygnet.ourdrive.util.DirUtils;
 import com.cygnet.ourdrive.util.Processes;
 import com.cygnet.ourdrive.util.WmicProcesses;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -202,6 +200,12 @@ public class ProcessWatcher extends Thread {
 
             switch(this.OS) {
                 case "windows":
+
+                   if(isFileLocked(this.file)) {
+                        deleteCurrentFile(this.file);
+                        stopThread();
+                    }
+
                     if (hasJsonBro(this.file) && hasAccessMask) {
                         if (this.uploadAsNewVersion(this.file, true)) {
                             Processes.setTitleDocument("");
@@ -234,6 +238,19 @@ public class ProcessWatcher extends Thread {
         }
     }
 
+    private void deleteCurrentFile(File file) {
+
+        File jsonFile = new File(file.getParent() + File.separator + "." + file.getName() + ".json");
+        DirUtils.deleteFile(jsonFile);
+        logger.info(jsonFile.getAbsoluteFile()+" has been deleted!");
+        DirUtils.deleteFile(file);
+        logger.info(file.getAbsoluteFile()+" has been deleted!");
+
+    }
+
+    private boolean isFileLocked(File file) {
+        return file.renameTo(file);
+    }
     /**
      *
      * @param threadId

@@ -130,46 +130,11 @@ public class Desktop extends Thread {
                     errorMsg += line;
                 }
 
-                process.waitFor(); // Wait for the process to finish.
+                process.waitFor(); // Wait for the process to finish.++
 
-                if(process.exitValue() != 0) {
-                    logger.error("Open file with application failed: "+errorMsg);
-                    File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
-                    if(jsonFile.exists()) {
-                        Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
-                        if(isJsonDeleted) {
-                            logger.info("Because of previous error, "+jsonFile.getAbsoluteFile()+" has been deleted!");
-                        } else {
-                            logger.error("Could not delete "+jsonFile.getAbsoluteFile()+" because of previous error!");
-                        }
-                    } else {
-                        logger.info("Could not find "+jsonFile.getAbsoluteFile()+"!");
-                    }
+                checkProcess(file, downloadPath, process, errorMsg);
 
-                    if(file.exists()) {
-                        Boolean isDeleted = file.getAbsoluteFile().delete();
-                        if(isDeleted) {
-                            logger.info("Because of previous error, "+file.getAbsoluteFile()+" has been deleted!");
-                        } else {
-                            logger.error("Could not delete "+file.getAbsoluteFile()+" because of previous error!");
-                        }
-                    } else {
-                        logger.info("Could not find "+file.getAbsoluteFile()+"!");
-                    }
-
-                } else {
-                    logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
-
-                    try {
-                        ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "linux"); //Processes.getProcessIdsByFile(file, "windows");
-//                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "linux"));
-                        this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "linux"));
-                        this.pwt.get().run();
-                    } catch (Exception e) {
-                        logger.warn("Get process information failed: ProcessWatcher has been stopped");
-                    }
-
-                }
+                runProcessWatcher(file, "linux");
 
             } catch (Exception e) {
                 logger.error("Open file with application failed: "+e.getMessage());
@@ -228,14 +193,7 @@ public class Desktop extends Thread {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
 
-            try {
-                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "mac"); //Processes.getProcessIdsByFile(file, "mac");
-//                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "mac"));
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "mac"));
-                this.pwt.get().run();
-            } catch (Exception e) {
-                logger.warn("Get process information failed: ProcessWatcher has been stopped");
-            }
+            runProcessWatcher(file, "mac");
 
         } else if (isWindows() && isWindows9X()) {
 
@@ -264,33 +222,7 @@ public class Desktop extends Thread {
 
                 process.waitFor(); // Wait for the process to finish.
 
-                if(process.exitValue() != 0) {
-                    logger.error("Open file with application failed: "+errorMsg);
-                    File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
-                    if(jsonFile.exists()) {
-                        Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
-                        if(isJsonDeleted) {
-                            logger.info("Because of previous error, "+jsonFile.getAbsoluteFile()+" has been deleted!");
-                        } else {
-                            logger.error("Could not delete "+jsonFile.getAbsoluteFile()+" because of previous error!");
-                        }
-                    } else {
-                        logger.info("Could not find "+jsonFile.getAbsoluteFile()+"!");
-                    }
-
-                    if(file.exists()) {
-                        Boolean isDeleted = file.getAbsoluteFile().delete();
-                        if(isDeleted) {
-                            logger.info("Because of previous error, "+file.getAbsoluteFile()+" has been deleted!");
-                        } else {
-                            logger.error("Could not delete "+file.getAbsoluteFile()+" because of previous error!");
-                        }
-                    } else {
-                        logger.info("Could not find "+file.getAbsoluteFile()+"!");
-                    }
-                } else {
-                    logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
-                }
+                checkProcess(file, downloadPath, process, errorMsg);
 
             } catch (Exception e) {
                 logger.error("Open file with application failed: "+e.getMessage());
@@ -302,14 +234,7 @@ public class Desktop extends Thread {
 //                e.printStackTrace();
 //            }
 
-            try {
-                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
-//                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, sfw, "windows"));
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
-                this.pwt.get().run();
-            } catch (Exception e) {
-                logger.warn("Get process information failed: ProcessWatcher has been stopped");
-            }
+            runProcessWatcher(file, "windows");
 
         } else if (isWindows()) {
 
@@ -338,56 +263,56 @@ public class Desktop extends Thread {
 
                 process.waitFor(); // Wait for the process to finish.
 
-                if(process.exitValue() != 0) {
-                    logger.error("Open file with application failed: "+errorMsg);
-                    File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
-                    if(jsonFile.exists()) {
-                        Boolean isJsonDeleted = jsonFile.getAbsoluteFile().delete();
-                        if(isJsonDeleted) {
-                            logger.info("Because of previous error, "+jsonFile.getAbsoluteFile()+" has been deleted!");
-                        } else {
-                            logger.error("Could not delete "+jsonFile.getAbsoluteFile()+" because of previous error!");
-                        }
-                    } else {
-                        logger.info("Could not find "+jsonFile.getAbsoluteFile()+"!");
-                    }
-
-                    if(file.exists()) {
-                        Boolean isDeleted = file.getAbsoluteFile().delete();
-                        if(isDeleted) {
-                            logger.info("Because of previous error, "+file.getAbsoluteFile()+" has been deleted!");
-                        } else {
-                            logger.error("Could not delete "+file.getAbsoluteFile()+" because of previous error!");
-                        }
-                    } else {
-                        logger.info("Could not find "+file.getAbsoluteFile()+"!");
-                    }
-
-                } else {
-                    logger.info("Opening file "+file.getAbsoluteFile()+" with an application was successful.");
-                }
+                checkProcess(file, downloadPath, process, errorMsg);
 
             } catch (Exception e) {
                 logger.error("Open file with application failed: "+e.getMessage());
             }
 
-            try {
+/*            try {
                 Thread.sleep(2000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
 
-            try {
+            runProcessWatcher(file, "windows");
 
-                ArrayList processIds = WmicProcesses.GetSystemProcesses(file, "windows"); //Processes.getProcessIdsByFile(file, "windows");
-                this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, "windows"));
-//                this.pwt.set(new ProcessWatcher(file, null, process, this.socketClient, "windows"));
-                this.pwt.get().run();
-            } catch (Exception e) {
-                logger.warn("Get process information failed: ProcessWatcher has been stopped");
-            }
         } else {
             logger.warn("No OS given?");
+        }
+    }
+
+    private void runProcessWatcher(File file, String os) {
+        try {
+
+            ArrayList processIds = WmicProcesses.GetSystemProcesses(file, os); //Processes.getProcessIdsByFile(file, "windows");
+            this.pwt.set(new ProcessWatcher(file, processIds, process, this.socketClient, os));
+//                this.pwt.set(new ProcessWatcher(file, null, process, this.socketClient, os));
+            this.pwt.get().run();
+        } catch (Exception e) {
+            logger.warn("Get process information failed: ProcessWatcher has been stopped");
+        }
+    }
+
+    private void checkProcess(File file, Path downloadPath, Process process, String errorMsg) {
+        if(process.exitValue() != 0) {
+            logger.info("The file with application is closed!");
+            File jsonFile = new File(downloadPath.toAbsolutePath().toString() + File.separator + "." + file.getName() + ".json");
+            deleteFile(jsonFile);
+            deleteFile(file);
+        }
+    }
+
+    private void deleteFile(File file) {
+        if(file.exists()) {
+            Boolean isDeleted = file.getAbsoluteFile().delete();
+            if(isDeleted) {
+                logger.info(file.getAbsoluteFile()+" has been deleted!");
+            } else {
+                logger.error("Could not delete "+file.getAbsoluteFile()+"!");
+            }
+        } else {
+            logger.info("Could not find "+file.getAbsoluteFile()+"!");
         }
     }
 

@@ -4,15 +4,15 @@ import com.cygnet.ourdrive.OurDriveService;
 import com.cygnet.ourdrive.settings.GlobalSettings;
 import com.cygnet.ourdrive.util.WmicProcesses;
 import com.cygnet.ourdrive.websocket.WebSocketClient;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.OverlappingFileLockException;
 import java.nio.file.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -32,8 +32,7 @@ public class SingleFileWatcher extends Thread {
 
     private static SingleFileWatcher instance;
 
-    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient, Boolean justDownloaded)
-    {
+    public static SingleFileWatcher getInstance(Path downloadPath, WebSocketClient socketClient, Boolean justDownloaded) {
         if (instance == null) {
             instance = new SingleFileWatcher(downloadPath, socketClient, justDownloaded);
         }
@@ -68,11 +67,11 @@ public class SingleFileWatcher extends Thread {
      */
     private boolean shouldIgnoreFile(File file) {
 
-        if(file.isDirectory()) {
+        if (file.isDirectory()) {
             return true;
         }
 
-        if(file.isHidden()) {
+        if (file.isHidden()) {
             return true;
         }
 
@@ -80,7 +79,7 @@ public class SingleFileWatcher extends Thread {
         String extension = "";
         extension = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
 
-        if(extension.equals("")) {
+        if (extension.equals("")) {
             return true;
         }
 
@@ -94,6 +93,7 @@ public class SingleFileWatcher extends Thread {
         ignore = ignore || filename.toLowerCase().endsWith(".temp");
         ignore = ignore || filename.toLowerCase().endsWith(".json");
         ignore = ignore || filename.endsWith("#");
+        ignore = ignore || !filename.contains(".");
         return ignore;
     }
 
@@ -155,6 +155,7 @@ public class SingleFileWatcher extends Thread {
             while (!isStopped()) {
                 WatchKey key;
                 try {
+                    Thread.sleep(1000);
                     key = watcher.take();
                 } catch (InterruptedException e) {
                     return;
@@ -163,10 +164,14 @@ public class SingleFileWatcher extends Thread {
                 for (WatchEvent<?> event : key.pollEvents()) {
                     WatchEvent.Kind<?> kind = event.kind();
 
+                    System.out.println(event.context() + ", count: " + event.count() + ", event: " + event.kind());
+
+
                     @SuppressWarnings("unchecked")
                     WatchEvent<Path> ev = (WatchEvent<Path>) event;
-                    Path filename = ev.context();
                     File file = new File(OurDriveService.getUserDataDirectory() + "/" + OurDriveService.getDownloadFolderName() + "/" + ev.context());
+                    if(shouldIgnoreFile(file)) continue;
+
 
                     if (kind == StandardWatchEventKinds.OVERFLOW) {
                         logger.warn("File listener received an overflow event.  You should probably check into this");
@@ -201,13 +206,12 @@ public class SingleFileWatcher extends Thread {
                         }
 
                     } else if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-//                        logger.info("Created file: " + file.getAbsoluteFile().toString());
+                        logger.info("Created file: " + file.getAbsoluteFile().toString());
 //                        this.stopThread();
                     } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
-//                        logger.info("Deleted file: " + file.getAbsoluteFile().toString());
+                        logger.info("Deleted file: " + file.getAbsoluteFile().toString());
                     }
                 }
-
                 boolean valid = key.reset();
                 if (!valid) {
                     break;
@@ -216,7 +220,7 @@ public class SingleFileWatcher extends Thread {
             }
 
         } catch (IOException e) {
-            logger.error("Creating single file watcher process failed: "+e.getMessage());
+            logger.error("Creating single file watcher process failed: " + e.getMessage());
         }
 
     }

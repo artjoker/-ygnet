@@ -69,4 +69,13 @@ public class DirUtils {
         }
         return files;
     }
+
+
+    public static boolean deleteFile(File file) {
+        if(file.exists()) {
+            Boolean isDeleted = file.getAbsoluteFile().delete();
+            if (isDeleted) return true;
+        }
+        return false;
+    }
 }
